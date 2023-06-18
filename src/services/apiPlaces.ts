@@ -32,22 +32,22 @@ export const deletePlaces = async (id: number) => {
   return places;
 };
 
-export const createNewPlace = async (place: FormValuesApi, id: number) => {
+export const createNewPlace = async (place?: FormValuesApi, id?: number) => {
   console.log(place, id);
 
   let imageName;
   let hasImagePath;
 
-  if (typeof place.image === "string") {
+  if (typeof place?.image === "string") {
     hasImagePath = place.image?.startsWith?.(import.meta.env.VITE_SUPABASE_URL);
   }
 
-  if (typeof place.image !== "string") {
-    imageName = `${Math.random()}-${place.image.name}`.replaceAll("/", "");
+  if (typeof place?.image !== "string") {
+    imageName = `${Math.random()}-${place?.image.name}`.replaceAll("/", "");
   }
 
   const imagePath = hasImagePath
-    ? place.image
+    ? place?.image
     : `${
         import.meta.env.VITE_SUPABASE_URL
       }/storage/v1/object/public/place-images/${imageName}`;
@@ -73,7 +73,7 @@ export const createNewPlace = async (place: FormValuesApi, id: number) => {
 
   const { error: imageError } = await supabase.storage
     .from("place-images")
-    .upload(imageName as string, place.image);
+    .upload(imageName as string, place?.image as string);
 
   if (imageError) {
     await supabase.from("places").delete().eq("id", data.id);

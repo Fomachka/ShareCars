@@ -5,6 +5,7 @@ import { FormValuesApi, createNewPlace } from "../../services/apiPlaces";
 import { PlaceProps } from "./CabinRow";
 
 type FormValues = {
+  id?: number;
   name: string;
   maxPeople: number;
   price: number;
@@ -13,8 +14,7 @@ type FormValues = {
   image: FileList | string;
 };
 
-// eslint-disable-next-line react/prop-types
-const Form = ({ editPlace = {} }) => {
+const Form = ({ editPlace = {} }: { editPlace: FormValues | Record<string, never> }) => {
   const { id: editId, ...editValues } = editPlace;
   const isEditSession = Boolean(editId);
   const queryClient = useQueryClient();
@@ -59,7 +59,7 @@ const Form = ({ editPlace = {} }) => {
           ...data,
           image,
         },
-        id: editId,
+        id: editId as number,
       });
     } else {
       createPlace({ ...data, image: image });
