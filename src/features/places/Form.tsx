@@ -18,7 +18,7 @@ const Form = ({ editPlace = {} }: { editPlace: FormValues | Record<string, never
   const { id: editId, ...editValues } = editPlace;
   const isEditSession = Boolean(editId);
   const queryClient = useQueryClient();
-  const { register, handleSubmit, reset, getValues, formState } = useForm<FormValues>({
+  const { register, handleSubmit, reset, getValues, formState } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
   const { errors } = formState;
@@ -30,7 +30,6 @@ const Form = ({ editPlace = {} }: { editPlace: FormValues | Record<string, never
       queryClient.invalidateQueries({
         queryKey: ["places"],
       });
-      reset();
     },
     onError: (error: Error) => toast.error(error.message),
   });
@@ -43,7 +42,6 @@ const Form = ({ editPlace = {} }: { editPlace: FormValues | Record<string, never
       queryClient.invalidateQueries({
         queryKey: ["places"],
       });
-      reset();
     },
     onError: (error: Error) => toast.error(error.message),
   });
@@ -54,15 +52,41 @@ const Form = ({ editPlace = {} }: { editPlace: FormValues | Record<string, never
     const image = typeof data.image === "string" ? data.image : data.image[0];
 
     if (isEditSession) {
-      newPlace({
-        newPlaceData: {
-          ...data,
-          image,
+      newPlace(
+        {
+          newPlaceData: {
+            ...data,
+            image,
+          },
+          id: editId as number,
         },
-        id: editId as number,
-      });
+        {
+          onSuccess: () => {
+            reset({
+              name: "",
+              maxPeople: 0,
+              price: 0,
+              discountPrice: 0,
+              description: "",
+            });
+          },
+        }
+      );
     } else {
-      createPlace({ ...data, image: image });
+      createPlace(
+        { ...data, image: image },
+        {
+          onSuccess: () => {
+            reset({
+              name: "",
+              maxPeople: 0,
+              price: 0,
+              discountPrice: 0,
+              description: "",
+            });
+          },
+        }
+      );
     }
   };
 

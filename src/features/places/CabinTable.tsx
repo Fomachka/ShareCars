@@ -2,16 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { getPlaces } from "../../services/apiPlaces";
 import { Loading } from "../../ui/Loading";
 import { CabinRow } from "./CabinRow";
+import useQueryData from "../../hooks/useQueryData";
 
 export const CabinTable = () => {
-  const {
-    isLoading,
-    data: places,
-    error,
-  } = useQuery({
-    queryKey: ["places"],
-    queryFn: getPlaces,
-  });
+  const { isLoading, places, error } = useQueryData();
 
   if (isLoading) return <Loading />;
 
