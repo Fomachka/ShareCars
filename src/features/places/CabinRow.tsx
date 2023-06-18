@@ -46,7 +46,7 @@ export const CabinRow = ({ place }: { place: PlaceProps }) => {
         <p>Fits up to {place.maxPeople} guests</p>
         <p className="font-semibold">{formatCurrency(place.price)}</p>
         <p className="font-medium text-green-700">
-          {formatCurrency(place.discountPrice)}
+          {place.discountPrice ? formatCurrency(place.discountPrice) : "--"}
         </p>
         <div className="flex space-x-2">
           <button

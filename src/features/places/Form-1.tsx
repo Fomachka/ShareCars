@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
-import { FormValuesApi, createNewPlace } from "../../services/apiPlaces";
+import { createPlace } from "../../services/apiPlaces";
 import { PlaceProps } from "./CabinRow";
 
 type FormValues = {
@@ -10,21 +10,16 @@ type FormValues = {
   price: number;
   discountPrice: number;
   description: string;
-  image: FileList | string;
+  image: FileList;
 };
 
-// eslint-disable-next-line react/prop-types
-const Form = ({ editPlace = {} }) => {
-  const { id: editId, ...editValues } = editPlace;
-  const isEditSession = Boolean(editId);
+const Form = () => {
   const queryClient = useQueryClient();
-  const { register, handleSubmit, reset, getValues, formState } = useForm<FormValues>({
-    defaultValues: isEditSession ? editValues : {},
-  });
+  const { register, handleSubmit, reset, getValues, formState } = useForm<FormValues>();
   const { errors } = formState;
 
-  const { mutate: createPlace, isLoading: isCreating } = useMutation({
-    mutationFn: createNewPlace,
+  const { mutate, isLoading } = useMutation({
+    mutationFn: createPlace,
     onSuccess: () => {
       toast.success("New place successfully created");
       queryClient.invalidateQueries({
@@ -35,35 +30,9 @@ const Form = ({ editPlace = {} }) => {
     onError: (error: Error) => toast.error(error.message),
   });
 
-  const { mutate: newPlace, isLoading: isEditing } = useMutation({
-    mutationFn: ({ newPlaceData, id }: { newPlaceData: FormValuesApi; id: number }) =>
-      createNewPlace(newPlaceData, id),
-    onSuccess: () => {
-      toast.success("Place successfully created");
-      queryClient.invalidateQueries({
-        queryKey: ["places"],
-      });
-      reset();
-    },
-    onError: (error: Error) => toast.error(error.message),
-  });
-
-  const isWorking = isCreating || isEditing;
-
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const image = typeof data.image === "string" ? data.image : data.image[0];
-
-    if (isEditSession) {
-      newPlace({
-        newPlaceData: {
-          ...data,
-          image,
-        },
-        id: editId,
-      });
-    } else {
-      createPlace({ ...data, image: image });
-    }
+    console.log(data.image[0]);
+    mutate({ ...data, image: data.image[0] });
   };
 
   return (
@@ -78,7 +47,7 @@ const Form = ({ editPlace = {} }) => {
         <input
           type="text"
           id="name"
-          disabled={isWorking}
+          disabled={isLoading}
           {...register("name", {
             required: "This field is required",
           })}
@@ -98,7 +67,7 @@ const Form = ({ editPlace = {} }) => {
         <input
           type="number"
           id="capacity"
-          disabled={isWorking}
+          disabled={isLoading}
           {...register("maxPeople", {
             required: "This field is required",
             min: {
@@ -119,7 +88,7 @@ const Form = ({ editPlace = {} }) => {
         <input
           type="number"
           id="price"
-          disabled={isWorking}
+          disabled={isLoading}
           {...register("price", {
             required: "This field is required",
             min: {
@@ -144,7 +113,7 @@ const Form = ({ editPlace = {} }) => {
         <input
           type="number"
           id="discount"
-          disabled={isWorking}
+          disabled={isLoading}
           defaultValue={0}
           {...register("discountPrice", {
             required: "This field is required",
@@ -190,9 +159,9 @@ const Form = ({ editPlace = {} }) => {
         <input
           id="image"
           type="file"
-          disabled={isWorking}
+          disabled={isLoading}
           {...register("image", {
-            required: isEditSession ? false : "This field is required",
+            required: "This field is required",
           })}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
         />
@@ -201,9 +170,9 @@ const Form = ({ editPlace = {} }) => {
       <button
         type="submit"
         className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1"
-        disabled={isWorking}
+        disabled={isLoading}
       >
-        {isEditSession ? "Edit Place" : "Add Place"}
+        Submit
       </button>
       <button
         type="reset"

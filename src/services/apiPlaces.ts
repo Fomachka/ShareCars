@@ -1,12 +1,13 @@
 import supabase from "./supabase";
 
-type FormValues = {
+export type FormValuesApi = {
+  id?: number;
   name: string;
   maxPeople: number;
   price: number;
   discountPrice: number;
   description: string;
-  image: File;
+  image: File | string;
 };
 
 export const getPlaces = async () => {
@@ -31,32 +32,53 @@ export const deletePlaces = async (id: number) => {
   return places;
 };
 
-export const createPlace = async (place: FormValues) => {
-  // https://edqnukrdncmpiykalqyu.supabase.co/storage/v1/object/public/place-images/cabin-001.jpg
+export const createNewPlace = async (place: FormValuesApi, id: number) => {
+  console.log(place, id);
 
-  const imageName = `${Math.random()}-${place?.image.name}`.replaceAll("/", "");
+  let imageName;
+  let hasImagePath;
 
-  const imagePath = `${
-    import.meta.env.VITE_SUPABASE_URL
-  }/storage/v1/object/public/place-images/${imageName}`;
+  if (typeof place.image === "string") {
+    hasImagePath = place.image?.startsWith?.(import.meta.env.VITE_SUPABASE_URL);
+  }
 
-  const { data: places, error } = await supabase
-    .from("places")
-    .insert([{ ...place, image: imagePath }]);
+  if (typeof place.image !== "string") {
+    imageName = `${Math.random()}-${place.image.name}`.replaceAll("/", "");
+  }
+
+  const imagePath = hasImagePath
+    ? place.image
+    : `${
+        import.meta.env.VITE_SUPABASE_URL
+      }/storage/v1/object/public/place-images/${imageName}`;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let query = supabase.from("places") as any;
+
+  if (!id) {
+    query = query.insert([{ ...place, image: imagePath }]);
+  }
+
+  if (id) {
+    query = query.update({ ...place, image: imagePath }).eq("id", id);
+  }
+  const { data, error } = await query.select().single();
 
   if (error) {
     console.error(error);
     throw new Error("Place could not be created");
   }
 
+  if (hasImagePath) return data;
+
   const { error: imageError } = await supabase.storage
     .from("place-images")
-    .upload(imageName, place.image);
+    .upload(imageName as string, place.image);
 
   if (imageError) {
-    await supabase.from("places").delete().eq("id", places?.["id"]);
+    await supabase.from("places").delete().eq("id", data.id);
     throw new Error("Place image couldn't be uploaded");
   }
 
-  return places;
+  return data;
 };
