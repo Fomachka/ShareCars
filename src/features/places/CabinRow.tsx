@@ -4,7 +4,9 @@ import { deletePlaces } from "../../services/apiPlaces.ts";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import Form from "./Form.tsx";
-import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
+import { HiPencil, HiTrash } from "react-icons/hi2";
+import DeleteModal from "../../ui/modals/DeleteModal.tsx";
+import Modal from "../../ui/modals/Modal.tsx";
 
 export interface PlaceProps {
   created_at: string;
@@ -19,6 +21,7 @@ export interface PlaceProps {
 
 export const CabinRow = ({ place }: { place: PlaceProps }) => {
   const [showForm, setShowForm] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const queryClient = useQueryClient();
 
   const { isLoading, mutate } = useMutation({
@@ -31,6 +34,11 @@ export const CabinRow = ({ place }: { place: PlaceProps }) => {
     },
     onError: (err: Error) => toast.error(err.message),
   });
+
+  const handleDeleteModal = () => {
+    setShowModal((prev) => !prev);
+    // () => mutate(place.id)
+  };
 
   return (
     <>
@@ -58,7 +66,7 @@ export const CabinRow = ({ place }: { place: PlaceProps }) => {
             <HiPencil />
           </button>
           <button
-            onClick={() => mutate(place.id)}
+            onClick={handleDeleteModal}
             disabled={isLoading}
             className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 "
           >
@@ -66,7 +74,17 @@ export const CabinRow = ({ place }: { place: PlaceProps }) => {
           </button>
         </div>
       </div>
-      {showForm && <Form editPlace={place} />}
+      {showForm && (
+        <Modal closeModal={() => setShowForm(false)}>
+          <Form editPlace={place} onCloseModal={() => setShowForm(false)} />
+        </Modal>
+      )}
+      {showModal && (
+        <DeleteModal
+          closeModal={() => setShowModal(false)}
+          deleteConfirmation={() => mutate(place.id)}
+        />
+      )}
     </>
   );
 };

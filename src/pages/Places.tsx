@@ -1,7 +1,7 @@
 import { CabinTable } from "../features/places/CabinTable.js";
 import Form from "../features/places/Form.js";
 import { useState } from "react";
-import Modal from "../ui/Modal.js";
+import Modal from "../ui/modals/Modal.js";
 
 function Cabins() {
   const [showModal, setShowModal] = useState(false);
