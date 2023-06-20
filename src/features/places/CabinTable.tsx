@@ -3,15 +3,17 @@ import { getPlaces } from "../../services/apiPlaces";
 import { Loading } from "../../ui/Loading";
 import { CabinRow } from "./CabinRow";
 import useQueryData from "../../hooks/useQueryData";
+import { useState } from "react";
 
 export const CabinTable = () => {
   const { isLoading, places, error } = useQueryData();
+  const [currentMenu, setCurrentMenu] = useState(0);
 
   if (isLoading) return <Loading />;
 
   return (
     <div
-      className="border border-gray-400 text-2xl bg-white rounded-lg overflow-hidden"
+      className="border border-gray-400 text-2xl bg-white rounded-lg  overflow-auto"
       role="table"
     >
       <header
@@ -26,7 +28,13 @@ export const CabinTable = () => {
         <div></div>
       </header>
       {places?.map((place, index) => (
-        <CabinRow key={index} place={place} />
+        <CabinRow
+          key={index}
+          index={index}
+          place={place}
+          setCurrentMenu={setCurrentMenu}
+          currentMenu={currentMenu}
+        />
       ))}
     </div>
   );

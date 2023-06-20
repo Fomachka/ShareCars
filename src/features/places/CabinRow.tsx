@@ -4,7 +4,7 @@ import { deletePlaces } from "../../services/apiPlaces.ts";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import Form from "./Form.tsx";
-import { HiPencil, HiTrash } from "react-icons/hi2";
+import { HiPencil, HiTrash, HiListBullet } from "react-icons/hi2";
 import DeleteModal from "../../ui/modals/DeleteModal.tsx";
 import Modal from "../../ui/modals/Modal.tsx";
 
@@ -19,9 +19,20 @@ export interface PlaceProps {
   price: number;
 }
 
-export const CabinRow = ({ place }: { place: PlaceProps }) => {
+export const CabinRow = ({
+  setCurrentMenu,
+  currentMenu,
+  place,
+  index,
+}: {
+  index: number;
+  setCurrentMenu: (number: number) => void;
+  currentMenu: number;
+  place: PlaceProps;
+}) => {
   const [showForm, setShowForm] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showSidemenu, setShowSidemenu] = useState(false);
   const queryClient = useQueryClient();
 
   const { isLoading, mutate } = useMutation({
@@ -38,6 +49,15 @@ export const CabinRow = ({ place }: { place: PlaceProps }) => {
   const handleDeleteModal = () => {
     setShowModal((prev) => !prev);
     // () => mutate(place.id)
+  };
+
+  const handleSideMenu = () => {
+    setCurrentMenu(index);
+    if (currentMenu !== index) {
+      setShowSidemenu(true);
+    } else {
+      setShowSidemenu((prev) => !prev);
+    }
   };
 
   return (
@@ -57,21 +77,49 @@ export const CabinRow = ({ place }: { place: PlaceProps }) => {
         <p className="font-medium text-green-700">
           {place.discountPrice ? formatCurrency(place.discountPrice) : "--"}
         </p>
-        <div className="flex space-x-2">
+        <div className="relative text-right">
           <button
-            onClick={() => setShowForm((prev) => !prev)}
-            disabled={isLoading}
-            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5"
+            className={`${
+              currentMenu === index && showSidemenu
+                ? "border-2 rounded-sm border-blue-500"
+                : "border-2 border-transparent"
+            } hover:bg-gray-100 align-middle h-full`}
           >
-            <HiPencil />
+            <HiListBullet onClick={handleSideMenu} className="w-8 h-full text-gray-600" />
           </button>
-          <button
-            onClick={handleDeleteModal}
-            disabled={isLoading}
-            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 "
-          >
-            <HiTrash />
-          </button>
+          {currentMenu === index && showSidemenu && (
+            <div className="w-48 text-gray-900 bg-white border border-gray-200 rounded-lg absolute right-10 top-0">
+              <button
+                type="button"
+                className="relative inline-flex items-center w-full px-5 py-3 text-sm font-medium hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-1 focus:ring-blue-700 focus:text-blue-700 focus:rounded-t-lg"
+                onClick={() => {
+                  setShowForm((prev) => !prev);
+                  setShowSidemenu(false);
+                }}
+                disabled={isLoading}
+              >
+                <span className="mr-2">
+                  <HiPencil />
+                </span>
+                Edit
+              </button>
+
+              <button
+                type="button"
+                className="relative inline-flex items-center w-full px-5 py-3 text-sm font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-1 focus:ring-blue-700 focus:text-blue-700"
+                onClick={() => {
+                  handleDeleteModal();
+                  setShowSidemenu(false);
+                }}
+                disabled={isLoading}
+              >
+                <span className="mr-2">
+                  <HiTrash />
+                </span>
+                Delete
+              </button>
+            </div>
+          )}
         </div>
       </div>
       {showForm && (
