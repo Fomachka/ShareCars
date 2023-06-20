@@ -2,7 +2,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FormValuesApi, createNewPlace } from "../../services/apiPlaces";
-import { PlaceProps } from "./CabinRow";
 
 type FormValues = {
   id?: number;
@@ -14,7 +13,13 @@ type FormValues = {
   image: FileList | string;
 };
 
-const Form = ({ editPlace = {} }: { editPlace: FormValues | Record<string, never> }) => {
+const Form = ({
+  editPlace = {},
+  onCloseModal,
+}: {
+  editPlace: FormValues | Record<string, never>;
+  onCloseModal?: () => void;
+}) => {
   const { id: editId, ...editValues } = editPlace;
   const isEditSession = Boolean(editId);
   const queryClient = useQueryClient();
@@ -69,6 +74,7 @@ const Form = ({ editPlace = {} }: { editPlace: FormValues | Record<string, never
               discountPrice: 0,
               description: "",
             });
+            onCloseModal?.();
           },
         }
       );
@@ -84,6 +90,7 @@ const Form = ({ editPlace = {} }: { editPlace: FormValues | Record<string, never
               discountPrice: 0,
               description: "",
             });
+            onCloseModal?.();
           },
         }
       );
@@ -91,7 +98,10 @@ const Form = ({ editPlace = {} }: { editPlace: FormValues | Record<string, never
   };
 
   return (
-    <form className="bg-white py-8 px-6 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={`${onCloseModal ? "p-4 w-[50vw]" : "py-8 px-6"} space-y-6`}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div>
         <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">
           Name{" "}
@@ -232,8 +242,9 @@ const Form = ({ editPlace = {} }: { editPlace: FormValues | Record<string, never
       <button
         type="reset"
         className="text-gray-900 bg-gray-100 ml-5 hover:bg-gray-200 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1"
+        onClick={() => onCloseModal?.()}
       >
-        Reset Form
+        {onCloseModal ? "Close" : "Reset Form"}
       </button>
     </form>
   );

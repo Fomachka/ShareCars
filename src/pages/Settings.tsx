@@ -1,5 +1,11 @@
+import UpdateSettingsForm from "../features/settings/UpdateSettingsForm";
+
 function Settings() {
-  return <div>Settings</div>;
+  return (
+    <div>
+      <UpdateSettingsForm />
+    </div>
+  );
 }
 
 export default Settings;

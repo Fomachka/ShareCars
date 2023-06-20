@@ -4,6 +4,7 @@ import { deletePlaces } from "../../services/apiPlaces.ts";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import Form from "./Form.tsx";
+import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 
 export interface PlaceProps {
   created_at: string;
@@ -54,14 +55,14 @@ export const CabinRow = ({ place }: { place: PlaceProps }) => {
             disabled={isLoading}
             className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5"
           >
-            Edit
+            <HiPencil />
           </button>
           <button
             onClick={() => mutate(place.id)}
             disabled={isLoading}
             className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 "
           >
-            Delete
+            <HiTrash />
           </button>
         </div>
       </div>

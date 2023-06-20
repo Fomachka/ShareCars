@@ -1,9 +1,10 @@
 import { CabinTable } from "../features/places/CabinTable.js";
 import Form from "../features/places/Form.js";
 import { useState } from "react";
+import Modal from "../ui/Modal.js";
 
 function Cabins() {
-  const [showForm, setShowForm] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <>
@@ -16,11 +17,15 @@ function Cabins() {
         <button
           type="button"
           className="my-6 w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:outline-none  dark:focus:ring-blue-800 font-medium rounded-lg text-base py-4 text-center"
-          onClick={() => setShowForm((prev) => !prev)}
+          onClick={() => setShowModal((prev) => !prev)}
         >
           Add new place
         </button>
-        {showForm && <Form />}
+        {showModal && (
+          <Modal closeModal={() => setShowModal(false)}>
+            <Form editPlace={{}} onCloseModal={() => setShowModal(false)} />
+          </Modal>
+        )}
       </section>
     </>
   );
