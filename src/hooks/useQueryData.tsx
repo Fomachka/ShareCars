@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPlaces } from "../services/apiPlaces";
+import { getPlaces } from "../api/apiPlaces";
 
 const useQueryData = () => {
   const {

@@ -2,6 +2,7 @@ import { CabinTable } from "../features/places/CabinTable.js";
 import Form from "../features/places/Form.js";
 import { useState } from "react";
 import Modal from "../ui/modals/Modal.js";
+import { Filter } from "../features/places/Filter.js";
 
 function Cabins() {
   const [showModal, setShowModal] = useState(false);
@@ -9,8 +10,15 @@ function Cabins() {
   return (
     <>
       <header className="flex justify-between items-center">
-        <h1 className="text-4xl font-semibold">All places</h1>
-        <p>Filter / Sort</p>
+        <h1 className="text-4xl font-semibold text-gray-700">All places</h1>
+        <Filter
+          currentFilter="discount"
+          allFilters={[
+            { value: "all", category: "All" },
+            { value: "no-discount", category: "No Discount" },
+            { value: "with-discount", category: "With Discount" },
+          ]}
+        />
       </header>
       <section>
         <CabinTable />

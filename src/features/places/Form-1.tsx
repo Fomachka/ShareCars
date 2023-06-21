@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
-import { createPlace } from "../../services/apiPlaces";
+import { createPlace } from "../../api/apiPlaces";
 import { PlaceProps } from "./CabinRow";
 
 type FormValues = {

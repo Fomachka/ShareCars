@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { formatCurrency } from "../../utils/helpers.ts";
-import { deletePlaces } from "../../services/apiPlaces.ts";
+import { deletePlaces } from "../../api/apiPlaces.ts";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import Form from "./Form.tsx";
@@ -63,7 +63,7 @@ export const CabinRow = ({
   return (
     <>
       <div
-        className="grid grid-cols-[0.6fr_1.8fr_2.2fr_1fr_1fr_1fr] gap-10 items-center py-6 px-10 [&:not(:last-child)]:border-b-1 [&:not(:last-child)]:border-gray-100 "
+        className="grid grid-cols-[0.6fr_1.8fr_2.2fr_1fr_1fr_1fr] gap-10 items-center py-6 px-10 [&:not(:last-child)]:border-b-2 [&:not(:last-child)]:border-gray-100 "
         role="row"
       >
         <img
