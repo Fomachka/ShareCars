@@ -9,9 +9,11 @@ export interface AllFilters {
 export const Filter = ({
   currentFilter,
   allFilters,
+  allSorting,
 }: {
   currentFilter: string;
   allFilters: AllFilters[];
+  allSorting: AllFilters[];
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentlyActive = searchParams.get(currentFilter || allFilters[0].value);
@@ -47,14 +49,7 @@ export const Filter = ({
       <FilterCriteria
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) => handleChange(event)}
         currentSelectFilter={selectFilterActive}
-        allFilters={[
-          { value: "name-asc", category: "Sort by: name (A-Z)" },
-          { value: "name-desc", category: "Sort by name (Z-A)" },
-          { value: "price-asc", category: "Sort by lowest price" },
-          { value: "price-desc", category: "Sort by highest price" },
-          { value: "maxPeople-asc", category: "Sort by capacity (low)" },
-          { value: "maxPeople-desc", category: "Sort by capacity (high)" },
-        ]}
+        allFilters={allSorting}
       />
     </div>
   );

@@ -18,6 +18,14 @@ function Cabins() {
             { value: "no-discount", category: "No Discount" },
             { value: "with-discount", category: "With Discount" },
           ]}
+          allSorting={[
+            { value: "name-asc", category: "Sort by: name (A-Z)" },
+            { value: "name-desc", category: "Sort by name (Z-A)" },
+            { value: "price-asc", category: "Sort by lowest price" },
+            { value: "price-desc", category: "Sort by highest price" },
+            { value: "maxPeople-asc", category: "Sort by capacity (low)" },
+            { value: "maxPeople-desc", category: "Sort by capacity (high)" },
+          ]}
         />
       </header>
       <section>

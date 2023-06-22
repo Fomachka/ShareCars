@@ -1,5 +1,6 @@
 import useBookingsData from "../../hooks/useBookingsData";
 import { Loading } from "../../ui/Loading";
+import { Pagination } from "../../ui/Pagination";
 import { BookingRow } from "../bookings/BookingRow";
 
 export type Places = {
@@ -30,8 +31,7 @@ export interface Booking {
 }
 
 export const BookingTable = () => {
-  const { bookings, isLoading }: { bookings: Booking[] | undefined; isLoading: boolean } =
-    useBookingsData();
+  const { bookings, isLoading, count } = useBookingsData();
 
   if (isLoading) return <Loading />;
 
@@ -56,6 +56,7 @@ export const BookingTable = () => {
       {bookings?.map((booking, index) => (
         <BookingRow key={index} booking={booking} />
       ))}
+      {typeof count === "number" && <Pagination numOfResults={count} />}
     </div>
   );
 };
