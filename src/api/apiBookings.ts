@@ -1,4 +1,5 @@
 import { AllFilters } from "../features/places/Filter";
+import { itemsPerPage } from "../utils/globalValues";
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
 
@@ -10,9 +11,11 @@ interface Sort {
 export async function getBookings({
   filter,
   sort,
+  activePage,
 }: {
   filter: AllFilters | null;
   sort: Sort | null;
+  activePage: number | null;
 }) {
   let query = supabase
     .from("bookings")
@@ -24,6 +27,12 @@ export async function getBookings({
     query = query.order(sort.sortingType, {
       ascending: sort.ascOrDesc === "asc",
     });
+
+  if (activePage) {
+    const from = (activePage - 1) * itemsPerPage;
+    const to = from + itemsPerPage - 1;
+    query = query.range(from, to);
+  }
 
   const { data, error, count } = await query;
 

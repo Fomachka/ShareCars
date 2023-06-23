@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import { useSearchParams } from "react-router-dom";
+import { itemsPerPage } from "../utils/globalValues";
 
 export const Pagination = ({ numOfResults }: { numOfResults: number }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   // Magic number
-  const [itemsPerPage, setItemsPerPage] = useState(10);
   const currentPage = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
   const pageCount = Math.ceil(numOfResults / itemsPerPage);
 

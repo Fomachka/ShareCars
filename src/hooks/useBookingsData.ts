@@ -15,9 +15,11 @@ const useBookingsData = () => {
   const [sortingType, ascOrDesc] = filterSelect.split("-");
   const sort = { sortingType, ascOrDesc };
 
+  const activePage = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+
   const { isLoading, data, error } = useQuery({
-    queryKey: ["bookings", filter, sort],
-    queryFn: () => getBookings({ filter, sort }),
+    queryKey: ["bookings", filter, sort, activePage],
+    queryFn: () => getBookings({ filter, sort, activePage }),
   });
 
   if (data !== undefined) {
