@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import { useSearchParams } from "react-router-dom";
 import { itemsPerPage } from "../utils/globalValues";
@@ -7,10 +6,10 @@ export const Pagination = ({ numOfResults }: { numOfResults: number }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   // Magic number
   const currentPage = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
-  const pageCount = Math.ceil(numOfResults / itemsPerPage);
+  const numOfPages = Math.ceil(numOfResults / itemsPerPage);
 
   const nextPage = () => {
-    const next = currentPage === pageCount ? currentPage : currentPage + 1;
+    const next = currentPage === numOfPages ? currentPage : currentPage + 1;
     searchParams.set("page", next.toString());
     setSearchParams(searchParams);
   };
@@ -21,7 +20,7 @@ export const Pagination = ({ numOfResults }: { numOfResults: number }) => {
     setSearchParams(searchParams);
   };
 
-  if (pageCount <= 1) {
+  if (numOfPages <= 1) {
     return null;
   }
 
@@ -32,7 +31,7 @@ export const Pagination = ({ numOfResults }: { numOfResults: number }) => {
           Showing{" "}
           <span className="font-medium">{(currentPage - 1) * itemsPerPage + 1}</span> to{" "}
           <span className="font-medium">
-            {currentPage === pageCount ? numOfResults : currentPage * itemsPerPage}
+            {currentPage === numOfPages ? numOfResults : currentPage * itemsPerPage}
           </span>{" "}
           of <span className="font-medium">{numOfResults}</span> results
         </p>
@@ -49,7 +48,7 @@ export const Pagination = ({ numOfResults }: { numOfResults: number }) => {
         <button
           className="rounded-md font-medium text-xl flex items-center justify-center gap-1.5 py-2.5 px-3.5 transition-all border-none  enabled:hover:bg-blue-500 enabled:hover:text-white disabled:cursor-not-allowed disabled:active:text-red-500 disabled:active:bg-transparent"
           onClick={nextPage}
-          disabled={currentPage === pageCount}
+          disabled={currentPage === numOfPages}
         >
           <span>Next</span>
           <HiChevronRight className="w-6 h-6" />

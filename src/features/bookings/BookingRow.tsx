@@ -1,7 +1,10 @@
+import { HiOutlineInformationCircle } from "react-icons/hi2";
 import { Booking, Guests, Places } from "./BookingTable";
+import { useNavigate } from "react-router-dom";
 
 export const BookingRow = ({ booking }: { booking: Booking }) => {
   const { places, guests }: { places: Places; guests: Guests } = booking;
+  const navigate = useNavigate();
 
   return (
     <div
@@ -19,6 +22,10 @@ export const BookingRow = ({ booking }: { booking: Booking }) => {
         {booking.status}
       </p>
       <div className="">$ {booking.totalPrice}</div>
+
+      <button onClick={() => navigate(`/bookings/${booking.id}`)}>
+        <HiOutlineInformationCircle className="w-8 h-full text-gray-600 hover:text-gray-800 " />
+      </button>
     </div>
   );
 };

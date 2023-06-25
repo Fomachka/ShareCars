@@ -44,10 +44,10 @@ export async function getBookings({
   return { data, count };
 }
 
-export async function getBooking(id) {
+export async function getBooking(id: number) {
   const { data, error } = await supabase
     .from("bookings")
-    .select("*, cabins(*), guests(*)")
+    .select("*, places(*), guests(*)")
     .eq("id", id)
     .single();
 
