@@ -1,3 +1,4 @@
+import { useState } from "react";
 import useBookingsData from "../../hooks/useBookingsData";
 import { Loading } from "../../ui/Loading";
 import { Pagination } from "../../ui/Pagination";
@@ -32,6 +33,7 @@ export interface Booking {
 
 export const BookingTable = () => {
   const { bookings, isLoading, count } = useBookingsData();
+  const [currentMenu, setCurrentMenu] = useState(0);
 
   if (isLoading) return <Loading />;
 
@@ -54,7 +56,13 @@ export const BookingTable = () => {
         <div>Amount</div>
       </header>
       {bookings?.map((booking, index) => (
-        <BookingRow key={index} booking={booking} />
+        <BookingRow
+          key={index}
+          index={index}
+          booking={booking}
+          setCurrentMenu={setCurrentMenu}
+          currentMenu={currentMenu}
+        />
       ))}
       {typeof count === "number" && <Pagination numOfResults={count} />}
     </div>
