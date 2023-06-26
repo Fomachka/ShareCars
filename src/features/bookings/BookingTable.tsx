@@ -42,11 +42,11 @@ export const BookingTable = () => {
   }
   return (
     <div
-      className="border border-gray-400 text-2xl bg-white rounded-lg  overflow-auto"
+      className="border border-gray-400 text-2xl bg-white rounded-lg overflow-auto"
       role="table"
     >
       <header
-        className="grid grid-cols-[0.6fr_2fr_2.4fr_1.4fr_1fr_3.2rem] gap-10 items-center bg-gray-50 border-b-1 border-gray-100 uppercase tracking-wide font-semibold text-gray-600 py-6 px-10"
+        className="grid grid-cols-[0.6fr_2fr_2.4fr_1.4fr_1fr_3.2rem] gap-10 items-center bg-gray-50 uppercase tracking-wide font-semibold text-gray-600 py-6 px-10 rounded-t-lg"
         role="row"
       >
         <div>Place</div>

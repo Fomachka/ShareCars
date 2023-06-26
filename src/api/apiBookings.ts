@@ -1,4 +1,5 @@
 import { AllFilters } from "../features/places/Filter";
+import { UpdatedBooking } from "../hooks/useCheckinData";
 import { itemsPerPage } from "../utils/globalValues";
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
@@ -113,7 +114,7 @@ export async function getStaysTodayActivity() {
   return data;
 }
 
-export async function updateBooking(id, obj) {
+export async function updateBooking(id: number, obj: UpdatedBooking) {
   const { data, error } = await supabase
     .from("bookings")
     .update(obj)
@@ -128,7 +129,7 @@ export async function updateBooking(id, obj) {
   return data;
 }
 
-export async function deleteBooking(id) {
+export async function deleteBooking(id: number) {
   // REMEMBER RLS POLICIES
   const { data, error } = await supabase.from("bookings").delete().eq("id", id);
 

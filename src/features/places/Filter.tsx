@@ -21,6 +21,10 @@ export const Filter = ({
 
   const handleClick = (value: string) => {
     searchParams.set(currentFilter, value);
+    if (searchParams.get("page")) {
+      searchParams.set("page", "1");
+    }
+
     setSearchParams(searchParams);
   };
 
@@ -36,7 +40,7 @@ export const Filter = ({
         {allFilters.map((filter, index) => (
           <button
             key={index}
-            className={`bg-white border-none rounded-md font-medium text-2xl py-2 px-4 transition-all hover:bg-blue-500 hover:text-white disabled:cursor-no-drop ${
+            className={`border-none rounded-md font-medium text-2xl py-2 px-4 transition-all text-gray-900 hover:bg-blue-500 hover:text-white disabled:cursor-no-drop ${
               filter.value === currentlyActive && "bg-blue-500 text-white"
             }`}
             onClick={() => handleClick(filter.value)}

@@ -77,7 +77,7 @@ export const CabinRow = ({
         <p className="font-medium text-green-700">
           {place.discountPrice ? formatCurrency(place.discountPrice) : "--"}
         </p>
-        <div className="relative text-right">
+        <div className="text-right">
           <button
             className={`${
               currentMenu === index && showSidemenu
@@ -88,7 +88,11 @@ export const CabinRow = ({
             <HiListBullet onClick={handleSideMenu} className="w-8 h-full text-gray-600" />
           </button>
           {currentMenu === index && showSidemenu && (
-            <div className="w-48 text-gray-900 bg-white border border-gray-200 rounded-lg absolute right-10 top-0">
+            <div
+              className={`w-48 text-gray-900 bg-white border border-gray-200 rounded-lg absolute right-20 top-${
+                15 * (index + 1)
+              } `}
+            >
               <button
                 type="button"
                 className="relative inline-flex items-center w-full px-5 py-3 text-sm font-medium hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-1 focus:ring-blue-700 focus:text-blue-700 focus:rounded-t-lg"
@@ -131,6 +135,7 @@ export const CabinRow = ({
         <DeleteModal
           closeModal={() => setShowModal(false)}
           deleteConfirmation={() => mutate(place.id)}
+          deleteMessage="Are you sure you want to delete this product?"
         />
       )}
     </>

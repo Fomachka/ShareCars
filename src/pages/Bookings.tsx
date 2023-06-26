@@ -25,7 +25,7 @@ function Bookings() {
           ]}
         />
       </header>
-      <section>
+      <section className="relative">
         <BookingTable />
       </section>
     </>

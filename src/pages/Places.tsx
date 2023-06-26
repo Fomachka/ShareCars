@@ -4,7 +4,7 @@ import { useState } from "react";
 import Modal from "../ui/modals/Modal.js";
 import { Filter } from "../features/places/Filter.js";
 
-function Cabins() {
+function Places() {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -28,7 +28,7 @@ function Cabins() {
           ]}
         />
       </header>
-      <section>
+      <section className="relative">
         <CabinTable />
         <button
           type="button"
@@ -47,4 +47,4 @@ function Cabins() {
   );
 }
 
-export default Cabins;
+export default Places;

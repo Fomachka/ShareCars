@@ -25,7 +25,7 @@ export const Pagination = ({ numOfResults }: { numOfResults: number }) => {
   }
 
   return (
-    <footer className="bg-gray-100 flex justify-center p-6 [&:not(:has(*)):hidden]">
+    <footer className="bg-gray-100 flex justify-center p-6 [&:not(:has(*))]:hidden">
       <div className="w-full flex items-center justify-between">
         <p className="text-xl ml-3">
           Showing{" "}

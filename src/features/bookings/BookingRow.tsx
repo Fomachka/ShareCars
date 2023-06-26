@@ -1,12 +1,20 @@
 import {
   HiArrowDownOnSquare,
+  HiArrowUpOnSquare,
   HiEye,
   HiListBullet,
   HiOutlineInformationCircle,
+  HiTrash,
 } from "react-icons/hi2";
 import { Booking, Guests, Places } from "./BookingTable";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import useCheckoutData from "../../hooks/useCheckoutData";
+import DeleteModal from "../../ui/modals/DeleteModal";
+import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteBooking } from "../../api/apiBookings";
+import useDeleteBooking from "./hooks/useDeleteBooking";
 
 export const BookingRow = ({
   booking,
@@ -20,8 +28,13 @@ export const BookingRow = ({
   index: number;
 }) => {
   const { places, guests }: { places: Places; guests: Guests } = booking;
+  const [showModal, setShowModal] = useState(false);
   const [showSidemenu, setShowSidemenu] = useState(false);
   const navigate = useNavigate();
+  const { checkOut, isCheckingOut } = useCheckoutData();
+  const queryClient = useQueryClient();
+
+  const { isLoading: isDeleting, mutate: deleteBooking } = useDeleteBooking();
 
   const handleSideMenu = () => {
     setCurrentMenu(index);
@@ -30,6 +43,11 @@ export const BookingRow = ({
     } else {
       setShowSidemenu((prev) => !prev);
     }
+  };
+
+  const handleDeleteModal = () => {
+    setShowModal((prev) => !prev);
+    // () => mutate(place.id)
   };
 
   return (
@@ -52,7 +70,7 @@ export const BookingRow = ({
       {/* <button onClick={() => navigate(`/bookings/${booking.id}`)}>
         <HiOutlineInformationCircle className="w-8 h-full text-gray-600 hover:text-gray-800 " />
       </button> */}
-      <div className="relative text-right">
+      <div className="text-right">
         <button
           className={`${
             currentMenu === index && showSidemenu
@@ -63,7 +81,11 @@ export const BookingRow = ({
           <HiListBullet onClick={handleSideMenu} className="w-8 h-full text-gray-600" />
         </button>
         {currentMenu === index && showSidemenu && (
-          <div className="w-48 text-gray-900 bg-white border border-gray-200 rounded-lg absolute right-10 top-0">
+          <div
+            className={`w-48 text-gray-900 bg-white border border-gray-200 rounded-lg absolute right-20 top-${
+              20 * (index + 1)
+            } `}
+          >
             <button
               type="button"
               className="relative inline-flex items-center w-full px-5 py-3 text-sm font-medium hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-1 focus:ring-blue-700 focus:text-blue-700 focus:rounded-t-lg"
@@ -78,11 +100,28 @@ export const BookingRow = ({
               See Details
             </button>
 
+            {booking?.status === "checked-in" && (
+              <button
+                type="button"
+                className="relative inline-flex items-center w-full px-5 py-3 text-sm font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-1 focus:ring-blue-700 focus:text-blue-700"
+                disabled={isCheckingOut}
+                onClick={() => {
+                  setShowSidemenu(false);
+                  if (booking.id) checkOut(booking?.id);
+                }}
+              >
+                <span className="mr-2">
+                  <HiArrowUpOnSquare />
+                </span>
+                Check Out
+              </button>
+            )}
             {booking?.status === "unconfirmed" && (
               <button
                 type="button"
                 className="relative inline-flex items-center w-full px-5 py-3 text-sm font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-1 focus:ring-blue-700 focus:text-blue-700"
                 onClick={() => {
+                  navigate(`/checkin/${booking.id}`);
                   setShowSidemenu(false);
                 }}
               >
@@ -92,9 +131,31 @@ export const BookingRow = ({
                 Check In
               </button>
             )}
+            <button
+              type="button"
+              className="relative inline-flex items-center w-full px-5 py-3 text-sm font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-1 focus:ring-blue-700 focus:text-blue-700"
+              onClick={() => {
+                handleDeleteModal();
+                setShowSidemenu(false);
+              }}
+            >
+              <span className="mr-2">
+                <HiTrash />
+              </span>
+              Delete
+            </button>
           </div>
         )}
       </div>
+      {showModal && (
+        <DeleteModal
+          closeModal={() => setShowModal(false)}
+          deleteConfirmation={() => {
+            if (booking.id) deleteBooking(booking.id);
+          }}
+          deleteMessage="Are you sure you want to delete this booking?"
+        />
+      )}
     </div>
   );
 };

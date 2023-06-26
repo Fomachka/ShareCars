@@ -5,9 +5,13 @@ import { HiXMark } from "react-icons/hi2";
 const DeleteModal = ({
   closeModal,
   deleteConfirmation,
+  deleteMessage,
+  navigateTo,
 }: {
   closeModal: () => void;
   deleteConfirmation: () => void;
+  deleteMessage: string;
+  navigateTo?: () => void;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -53,7 +57,7 @@ const DeleteModal = ({
             ></path>
           </svg>
           <h3 className="mb-6 text-lg font-normal text-gray-500 dark:text-gray-400 ">
-            Are you sure you want to delete this product?
+            {deleteMessage}
           </h3>
           <button
             type="button"
@@ -61,6 +65,7 @@ const DeleteModal = ({
             onClick={() => {
               deleteConfirmation();
               closeModal();
+              if (navigateTo) navigateTo();
             }}
           >
             Yes, I&apos;m sure
