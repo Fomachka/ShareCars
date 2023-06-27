@@ -4,7 +4,7 @@ import { useState } from "react";
 import Modal from "../ui/modals/Modal.js";
 import { Filter } from "../features/places/Filter.js";
 
-function Places() {
+const Places = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -45,6 +45,6 @@ function Places() {
       </section>
     </>
   );
-}
+};
 
 export default Places;

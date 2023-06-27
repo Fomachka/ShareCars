@@ -1,7 +1,7 @@
 import { BookingTable } from "../features/bookings/BookingTable";
 import { Filter } from "../features/places/Filter";
 
-function Bookings() {
+const Bookings = () => {
   return (
     <>
       <header className="flex justify-between items-center">
@@ -30,6 +30,6 @@ function Bookings() {
       </section>
     </>
   );
-}
+};
 
 export default Bookings;

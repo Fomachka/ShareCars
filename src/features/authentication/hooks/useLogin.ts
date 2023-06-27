@@ -12,11 +12,11 @@ const useLogin = () => {
       Login({ email, password }),
 
     onSuccess: (user) => {
-      queryClient.setQueriesData(["user"], user);
+      queryClient.setQueryData(["user"], user.user);
       navigate("/dashboard");
     },
 
-    onError: (error) => {
+    onError: () => {
       toast.error("Incorrect login credentials");
     },
   });
