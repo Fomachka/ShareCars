@@ -14,6 +14,7 @@ const CheckinBooking = () => {
   const [addBreakfast, setAddBreakfast] = useState(false);
   const { checkIn, isLoading: isCheckingIn } = useCheckinData();
   const { settings, isLoading: isLoadingSettings } = useSettings();
+  const navigate = useNavigate();
   //   setPayConfirm(booking?.isPaid || false);
   //   console.log(payConfirm);
   // }, [booking]);

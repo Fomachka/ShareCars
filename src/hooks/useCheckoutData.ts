@@ -12,7 +12,8 @@ const useCheckoutData = () => {
       }),
     onSuccess: (data) => {
       toast.success(`Booking #${data.id} successfully checked out`);
-      queryClient.invalidateQueries({ queryKey: ["bookings"] });
+      // {active: true} works
+      queryClient.invalidateQueries({ queryKey: ["booking", `${data.id}`] });
     },
 
     onError: () => toast.error("There was an error checking out"),

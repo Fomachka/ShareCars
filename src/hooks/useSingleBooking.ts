@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPlaces } from "../api/apiPlaces";
 import { getBooking } from "../api/apiBookings";
 import { useParams } from "react-router-dom";
 

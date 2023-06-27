@@ -29,7 +29,7 @@ const useCheckinData = () => {
     onSuccess: (data) => {
       toast.success(`Booking #${data.id} successfully checked in`);
       queryClient.invalidateQueries({ queryKey: ["bookings"] });
-      navigate("/");
+      navigate(`/bookings/${data.id}`);
     },
 
     onError: () => toast.error("There was an error checking in"),
