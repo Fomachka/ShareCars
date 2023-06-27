@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
+import useSignup from "../authentication/hooks/useSignup";
 
 type FormValues = {
   firstName?: string;
@@ -9,11 +10,27 @@ type FormValues = {
 };
 
 const CreateUser = () => {
-  const { register, formState, getValues, handleSubmit } = useForm();
+  const { register, formState, getValues, handleSubmit, reset } = useForm();
+  const { signup, isLoading } = useSignup();
   const { errors } = formState;
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = ({
+    firstName,
+    lastName,
+    email,
+    password,
+  }) => {
+    signup(
+      {
+        firstName: firstName as string,
+        lastName: lastName as string,
+        email: email as string,
+        password: password as string,
+      },
+      {
+        onSettled: () => reset(),
+      }
+    );
   };
 
   return (
@@ -31,6 +48,7 @@ const CreateUser = () => {
         <input
           type="text"
           id="firstName"
+          disabled={isLoading}
           {...register("firstName", {
             required: "This field is required",
           })}
@@ -51,6 +69,7 @@ const CreateUser = () => {
         <input
           type="text"
           id="lastName"
+          disabled={isLoading}
           {...register("lastName", {
             required: "This field is required",
           })}
@@ -68,6 +87,7 @@ const CreateUser = () => {
         <input
           type="text"
           id="email"
+          disabled={isLoading}
           {...register("email", {
             required: "This field is required",
             pattern: {
@@ -93,6 +113,7 @@ const CreateUser = () => {
         <input
           type="password"
           id="password"
+          disabled={isLoading}
           {...register("password", {
             required: "This field is required",
             minLength: {
@@ -118,6 +139,7 @@ const CreateUser = () => {
         <input
           type="password"
           id="confirmPassword"
+          disabled={isLoading}
           {...register("confirmPassword", {
             required: "This field is required",
             validate: (value) =>
@@ -138,7 +160,6 @@ const CreateUser = () => {
       <button
         type="reset"
         className="text-gray-900 bg-gray-100 ml-5 hover:bg-gray-200 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1"
-        // onClick={() => onCloseModal?.()}
       >
         Cancel
       </button>
