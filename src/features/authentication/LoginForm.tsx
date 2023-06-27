@@ -1,13 +1,29 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import useLogin from "./hooks/useLogin";
+import { BiLoaderAlt } from "react-icons/bi";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("test@mail.com");
+  const [password, setPassword] = useState("123456");
+  const { login, isLogin } = useLogin();
 
-  const handleSubmit = () => {};
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!email || !password) return;
+    login(
+      { email, password },
+      {
+        onSettled: () => {
+          setEmail("");
+          setPassword("");
+        },
+      }
+    );
+  };
 
   return (
-    <form className="w-[500px] p-8 bg-white rounded-lg" onSubmit={handleSubmit}>
+    <form className="w-[500px] p-8 bg-white rounded-lg" onSubmit={(e) => handleSubmit(e)}>
       <div className="mb-6">
         <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">
           Your email
@@ -21,6 +37,7 @@ function LoginForm() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="name@flowbite.com"
           required
+          disabled={isLogin}
         />
       </div>
       <div className="mb-6">
@@ -38,14 +55,16 @@ function LoginForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          disabled={isLogin}
         />
       </div>
 
       <button
         type="submit"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base w-full px-5 py-2.5 text-center"
+        className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-base w-full px-5 py-3 text-center flex justify-center items-center"
+        disabled={isLogin}
       >
-        Login
+        {!isLogin ? "Login" : <BiLoaderAlt className="w-6 h-6 animate-spin" />}
       </button>
     </form>
   );
