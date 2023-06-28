@@ -1,4 +1,4 @@
-import { SubmitHandler } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import useUser from "../authentication/hooks/useUser";
 import { FormEvent, useState } from "react";
 import { User } from "@supabase/supabase-js";
@@ -17,6 +17,8 @@ const userSettings = () => {
   const { email, user_metadata } = user as User;
   const { firstName: firstNameData, lastName: lastNameData } = user_metadata;
 
+  const { reset } = useForm();
+
   const [firstName, setFirstName] = useState(firstNameData);
   const [lastName, setLastName] = useState(lastNameData);
   const { updateUser, isUpdating } = useUpdateUser();
@@ -25,7 +27,14 @@ const userSettings = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!firstName) return;
-    updateUser({ firstName, lastName, avatar });
+    updateUser(
+      { firstName, lastName, avatar },
+      {
+        onSuccess: () => {
+          (event.target as HTMLFormElement).reset();
+        },
+      }
+    );
   };
 
   return (
