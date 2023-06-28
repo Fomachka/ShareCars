@@ -23,7 +23,7 @@ function LoginForm() {
   };
 
   return (
-    <form className="w-[500px] p-8 bg-white rounded-lg" onSubmit={(e) => handleSubmit(e)}>
+    <form className="w-[500px] p-8 bg-white rounded-lg" onSubmit={handleSubmit}>
       <div className="mb-6">
         <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">
           Your email

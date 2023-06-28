@@ -2,7 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Dashboard from "./pages/Dashboard";
 import Bookings from "./pages/Bookings.jsx";
-import Account from "./pages/Account.js";
+import Account from "./pages/UserSettings.js";
 import Login from "./pages/Login.js";
 import PageNotFound from "./pages/PageNotFound.js";
 import Settings from "./pages/Settings.js";
@@ -14,6 +14,7 @@ import { Toaster } from "react-hot-toast";
 import { SingleBooking } from "./pages/SingleBooking.js";
 import Places from "./pages/Places.js";
 import { CheckIn } from "./pages/CheckIn.js";
+import UserSettings from "./pages/UserSettings.js";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,7 +40,7 @@ function App() {
               <Route path="checkin/:id" element={<CheckIn />} />
               <Route path="users" element={<Users />} />
               <Route path="settings" element={<Settings />} />
-              <Route path="account" element={<Account />} />
+              <Route path="user/:id" element={<UserSettings />} />
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="*" element={<PageNotFound />} />

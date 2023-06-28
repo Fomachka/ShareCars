@@ -4,6 +4,7 @@ import { deleteBooking } from "../../../api/apiBookings";
 
 const useDeleteBooking = () => {
   const queryClient = useQueryClient();
+
   const { isLoading, mutate } = useMutation({
     mutationFn: (id: number) => deleteBooking(id),
     onSuccess: () => {
