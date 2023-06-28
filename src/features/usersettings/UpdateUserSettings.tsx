@@ -1,23 +1,12 @@
-import { SubmitHandler, useForm } from "react-hook-form";
 import useUser from "../authentication/hooks/useUser";
 import { FormEvent, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import useUpdateUser from "./hooks/useUpdateUser";
 
-interface UserData {
-  email: string;
-  user_metadata: {
-    firstName: string;
-    lastName: string;
-  };
-}
-
 const userSettings = () => {
   const { user } = useUser();
   const { email, user_metadata } = user as User;
   const { firstName: firstNameData, lastName: lastNameData } = user_metadata;
-
-  const { reset } = useForm();
 
   const [firstName, setFirstName] = useState(firstNameData);
   const [lastName, setLastName] = useState(lastNameData);
