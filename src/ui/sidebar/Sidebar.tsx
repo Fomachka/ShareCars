@@ -1,50 +1,50 @@
 import { NavLink } from "react-router-dom";
-import {
-  HiOutlineCalendarDays,
-  HiOutlineCog6Tooth,
-  HiOutlineHome,
-  HiOutlineHomeModern,
-  HiOutlineUsers,
-} from "react-icons/hi2";
 
-export const Sidebar = () => {
+import { MdPieChart, MdCalendarMonth, MdBed, MdGroup, MdSettings } from "react-icons/md";
+
+const Sidebar = ({ toggleMenu }: { toggleMenu: boolean }) => {
   return (
-    <aside className="flex flex-col gap-12 bg-white py-12 px-10 border-r-1 border-gray-400 row-span-full ">
-      <img className="w-auto h-36 mx-auto" src="/images/logo-light.png" alt="Logo" />
-      <nav>
-        <ul className="flex flex-col gap-3">
+    <aside
+      id="logo-sidebar"
+      className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${
+        toggleMenu && "-translate-x-full"
+      } bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
+      aria-label="Sidebar"
+    >
+      <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+        <ul className="space-y-4 font-medium">
           <li>
             <NavLink className="navigation-menu" to="/dashboard">
-              <HiOutlineHome />
-              <span>Home</span>
+              <MdPieChart className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+              <span>Dashboard</span>
             </NavLink>
           </li>
           <li>
             <NavLink className="navigation-menu" to="/bookings">
-              <HiOutlineCalendarDays />
+              <MdCalendarMonth className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
               <span>Bookings</span>
             </NavLink>
           </li>
           <li>
             <NavLink className="navigation-menu" to="/places">
-              <HiOutlineHomeModern />
+              <MdBed className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
               <span>Places</span>
             </NavLink>
           </li>
           <li>
             <NavLink className="navigation-menu" to="/users">
-              <HiOutlineUsers />
-              <span>Users</span>
+              <MdGroup className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+              <span>Members</span>
             </NavLink>
           </li>
           <li>
             <NavLink className="navigation-menu" to="/settings">
-              <HiOutlineCog6Tooth />
+              <MdSettings className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
               <span>Settings</span>
             </NavLink>
           </li>
         </ul>
-      </nav>
+      </div>
     </aside>
   );
 };
@@ -93,3 +93,5 @@ export const Sidebar = () => {
 //     color: var(--color-brand-600);
 //   }
 // `;
+
+export default Sidebar;
