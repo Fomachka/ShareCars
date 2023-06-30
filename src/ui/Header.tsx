@@ -2,6 +2,8 @@ import useUser from "../features/authentication/hooks/useUser";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import useLogout from "../features/authentication/hooks/useLogout";
+import { MdOutlineToggleOn, MdToggleOff } from "react-icons/md";
+import useDarkMode from "../hooks/useDarkMode";
 
 export default function Headers({
   setToggleMenu,
@@ -11,7 +13,17 @@ export default function Headers({
   const { user } = useUser();
   const { avatar, firstName, lastName } = user?.user_metadata || {};
   const { logout, isLoginOut } = useLogout();
+
+  const [colorTheme, setTheme] = useDarkMode();
+  const [toggleDarkMode, setToggleDarkMode] = useState(
+    colorTheme === "light" ? true : false
+  );
   const [toggleAvatarMenu, setToggleAvatarMenu] = useState(false);
+
+  const handleDarkMode = () => {
+    setTheme(colorTheme);
+    setToggleDarkMode((prev) => !prev);
+  };
 
   return (
     <header>
@@ -101,6 +113,16 @@ export default function Headers({
                       >
                         Settings
                       </NavLink>
+                    </li>
+                    <li>
+                      <button
+                        onClick={handleDarkMode}
+                        disabled={isLoginOut}
+                        className="px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 w-full dark:hover:bg-gray-600 dark:hover:text-white flex items-center justify-between"
+                      >
+                        Switch Mode
+                        {toggleDarkMode ? <MdToggleOff /> : <MdOutlineToggleOn />}
+                      </button>
                     </li>
                     <li>
                       <button
