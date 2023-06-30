@@ -74,9 +74,9 @@ export const updateUserSettings = async ({
   avatar,
 }: {
   password?: string;
-  firstName: string;
-  lastName: string;
-  avatar: File | null;
+  firstName?: string;
+  lastName?: string;
+  avatar?: File | null;
 }) => {
   let updateData;
 
@@ -89,7 +89,7 @@ export const updateUserSettings = async ({
   if (!avatar) return data;
 
   // upload avatar image
-  const fileName = `avatar-${data.user.id}-${Math.random()}`;
+  const fileName = `${data.user.email}-${data.user.id}-${Math.random()}`;
 
   const { error: uploadingError } = await supabase.storage
     .from("avatars")
