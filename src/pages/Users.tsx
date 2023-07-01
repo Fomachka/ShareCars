@@ -1,11 +1,13 @@
 import CreateUser from "../features/users/CreateUser";
+import PageHeader from "../ui/headers/PageHeader";
 
 const NewUsers = () => {
   return (
     <>
-      <header>
-        <h1 className="text-4xl font-semibold text-gray-700">All users</h1>
-      </header>
+      <PageHeader
+        header="Members"
+        paragraph="Create new users for your managing your business."
+      />
       <section>
         <CreateUser />
       </section>

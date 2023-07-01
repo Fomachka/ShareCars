@@ -1,9 +1,9 @@
-import useUser from "../features/authentication/hooks/useUser";
+import useUser from "../../features/authentication/hooks/useUser";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import useLogout from "../features/authentication/hooks/useLogout";
+import useLogout from "../../features/authentication/hooks/useLogout";
 import { MdOutlineToggleOn, MdToggleOff } from "react-icons/md";
-import useDarkMode from "../hooks/useDarkMode";
+import useDarkMode from "../../hooks/useDarkMode";
 
 export default function Headers({
   setToggleMenu,
@@ -27,7 +27,7 @@ export default function Headers({
 
   return (
     <header>
-      <nav className="fixed top-0 z-50 w-full bg-white border-b  border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+      <nav className="fixed top-0 z-50 w-full bg-white border-b  border-gray-200 dark:bg-gray-900 dark:border-gray-700">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
@@ -35,7 +35,7 @@ export default function Headers({
                 onClick={() => setToggleMenu((prev) => !prev)}
                 aria-controls="logo-sidebar"
                 type="button"
-                className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               >
                 <span className="sr-only">Open sidebar</span>
                 <svg
@@ -60,7 +60,7 @@ export default function Headers({
                   alt="FlowBite Logo"
                 />
                 <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                  Flowbite
+                  ShareCars
                 </span>
               </a>
             </div>
@@ -82,7 +82,7 @@ export default function Headers({
                 </div>
                 <div
                   className={`z-50 ${
-                    toggleAvatarMenu ? "absolute top-12 sm:top-10" : "hidden"
+                    toggleAvatarMenu ? "absolute top-12 md:top-10" : "hidden"
                   } right-5 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600`}
                   id="dropdown-user"
                 >

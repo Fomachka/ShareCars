@@ -28,7 +28,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <div className="text-3xl">
+      <div className="font-roboto ">
         <BrowserRouter>
           <Routes>
             <Route element={<Layout />}>

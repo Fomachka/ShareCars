@@ -8,21 +8,21 @@ const Sidebar = ({ toggleMenu }: { toggleMenu: boolean }) => {
       id="logo-sidebar"
       className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${
         toggleMenu && "-translate-x-full"
-      } bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
+      } bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-900 dark:border-gray-700`}
       aria-label="Sidebar"
     >
-      <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-        <ul className="space-y-4 font-medium">
+      <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-900">
+        <ul className="space-y-5">
           <li>
             <NavLink className="navigation-menu" to="/dashboard">
               <MdPieChart className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-              <span>Dashboard</span>
+              <span className="mt-0.5">Dashboard</span>
             </NavLink>
           </li>
           <li>
             <NavLink className="navigation-menu" to="/bookings">
               <MdCalendarMonth className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-              <span>Bookings</span>
+              <span className="">Bookings</span>
             </NavLink>
           </li>
           <li>

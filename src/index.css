@@ -4,6 +4,19 @@
 
 @layer components {
   .navigation-menu {
-    @apply flex items-center gap-3 text-gray-700 dark:text-gray-100 text-[1.625rem] font-medium py-2.5 px-3 hover:[&:not(.active)]:bg-gray-200/50  dark:hover:[&:not(.active)]:bg-gray-700  hover:rounded-md  [&.active]:bg-gray-200 dark:[&.active]:bg-gray-600 [&.active]:rounded-md dark:transition-colors;
+    @apply flex items-center gap-4 text-gray-700 dark:text-gray-100 text-[1.625rem]  py-3 px-4 hover:[&:not(.active)]:bg-gray-200/50  dark:hover:[&:not(.active)]:bg-gray-700  hover:rounded-md  [&.active]:bg-gray-200 dark:[&.active]:bg-gray-600 [&.active]:rounded-md dark:transition-colors text-xl;
   }
+}
+@font-face {
+  font-family: "Roboto", sans-serif;
+  src: url("/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto", sans-serif;
+  src: url("/fonts/Roboto/Roboto-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
 }

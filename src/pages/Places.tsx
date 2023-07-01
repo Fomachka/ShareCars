@@ -3,14 +3,18 @@ import Form from "../features/places/Form.js";
 import { useState } from "react";
 import Modal from "../ui/modals/Modal.js";
 import { Filter } from "../features/places/Filter.js";
+import PageHeader from "../ui/headers/PageHeader.js";
 
 const Places = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <header className="flex justify-between items-center">
-        <h1 className="text-4xl font-semibold text-gray-700">All places</h1>
+      <PageHeader
+        header="All places"
+        paragraph="See and manage schedule bookings of all guests."
+      />
+      <section className="relative">
         <Filter
           currentFilter="discount"
           allFilters={[
@@ -27,8 +31,6 @@ const Places = () => {
             { value: "maxPeople-desc", category: "Sort by capacity (high)" },
           ]}
         />
-      </header>
-      <section className="relative">
         <CabinTable />
         <button
           type="button"

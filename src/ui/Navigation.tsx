@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Header from "./Header";
+import Header from "./headers/Header";
 import Sidebar from "./sidebar/Sidebar";
 
 export const Navigation = () => {

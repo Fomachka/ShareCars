@@ -35,13 +35,14 @@ export const Filter = ({
   };
 
   return (
-    <div className="flex items-center gap-6">
-      <div className="border-1 border-gray-100 bg-white shadow-sm rounded-md p-2 flex gap-2">
+    <div className="flex items-center gap-6 mb-8">
+      <div className="bg-white shadow-sm rounded-md p-2 flex gap-2">
         {allFilters.map((filter, index) => (
           <button
             key={index}
-            className={`border-none rounded-md font-medium text-2xl py-2 px-4 transition-all text-gray-900 hover:bg-blue-500 hover:text-white disabled:cursor-no-drop ${
-              filter.value === currentlyActive && "bg-blue-500 text-white"
+            className={`border-none rounded-md font-semi text-lg py-1 px-4 transition-all text-slate-400 hover:bg-blue-700 dark:hover:bg-blue-600 hover:text-white disabled:cursor-no-drop  ${
+              filter.value === currentlyActive &&
+              "bg-blue-700 dark:bg-blue-600 !text-white"
             }`}
             onClick={() => handleClick(filter.value)}
             disabled={filter.value === currentlyActive}
