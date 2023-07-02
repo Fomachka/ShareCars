@@ -12,7 +12,7 @@ export const FilterCriteria = ({
   return (
     <select
       onChange={onChange}
-      className="text-2xl py-3 px-5 border rounded-md bg-white font-medium shadow-sm"
+      className="text-lg p-3.5  rounded-md bg-white text-slate-400 font-medium shadow-sm"
       value={currentSelectFilter}
     >
       {allFilters.map((filter, index) => (
