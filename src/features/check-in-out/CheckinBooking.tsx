@@ -56,7 +56,7 @@ const CheckinBooking = () => {
           <div className="flex gap-8">
             <HiOutlineHomeModern />
             <p className="text-2xl">
-              {booking?.numOfNights} in place {booking?.places?.name}
+              {booking?.numOfNights} in place {booking?.cars?.name}
             </p>
           </div>
           {booking && (

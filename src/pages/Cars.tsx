@@ -1,36 +1,39 @@
-import { CabinTable } from "../features/places/CabinTable.js";
-import Form from "../features/places/Form.js";
+import { CabinTable } from "../features/cars/CabinTable.js";
+import Form from "../features/cars/Form.js";
 import { useState } from "react";
 import Modal from "../ui/modals/Modal.js";
-import { Filter } from "../features/places/Filter.js";
+import { Filter } from "../features/cars/Filter.js";
 import PageHeader from "../ui/headers/PageHeader.js";
 
-const Places = () => {
+const Cars = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
       <PageHeader
-        header="All places"
+        header="Available cars"
         paragraph="See and manage schedule bookings of all guests."
       />
       <section className="relative">
         <Filter
-          currentFilter="discount"
+          currentFilter="type"
           allFilters={[
             { value: "all", category: "All" },
-            { value: "no-discount", category: "No Discount" },
-            { value: "with-discount", category: "With Discount" },
+            { value: "auto", category: "Auto" },
+            { value: "manual", category: "Manual" },
           ]}
           allSorting={[
             { value: "name-asc", category: "Sort by: name (A-Z)" },
             { value: "name-desc", category: "Sort by name (Z-A)" },
             { value: "price-asc", category: "Sort by lowest price" },
             { value: "price-desc", category: "Sort by highest price" },
-            { value: "maxPeople-asc", category: "Sort by capacity (low)" },
-            { value: "maxPeople-desc", category: "Sort by capacity (high)" },
+            { value: "capacity-asc", category: "Sort by capacity (low)" },
+            { value: "capacity-desc", category: "Sort by capacity (high)" },
           ]}
         />
+        <h3 className="pl-2 text-sm text-gray-400 dark:text-gray-400 xl:text-base mb-4">
+          Active Cars (4 Cars)
+        </h3>
         <CabinTable />
         <button
           type="button"
@@ -41,7 +44,7 @@ const Places = () => {
         </button>
         {showModal && (
           <Modal closeModal={() => setShowModal(false)}>
-            <Form editPlace={{}} onCloseModal={() => setShowModal(false)} />
+            <Form editCar={{}} onCloseModal={() => setShowModal(false)} />
           </Modal>
         )}
       </section>
@@ -49,4 +52,4 @@ const Places = () => {
   );
 };
 
-export default Places;
+export default Cars;

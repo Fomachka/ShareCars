@@ -1,16 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPlaces } from "../api/apiPlaces";
+import { getCars } from "../api/apiCars";
 
 const useQueryData = () => {
   const {
     isLoading,
-    data: places,
+    data: cars,
     error,
   } = useQuery({
-    queryKey: ["places"],
-    queryFn: getPlaces,
+    queryKey: ["cars"],
+    queryFn: getCars,
   });
-  return { isLoading, places, error };
+  return { isLoading, cars, error };
 };
 
 export default useQueryData;

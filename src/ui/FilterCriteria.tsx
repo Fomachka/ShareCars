@@ -1,4 +1,4 @@
-import { AllFilters } from "../features/places/Filter";
+import { AllFilters } from "../features/cars/Filter";
 
 export const FilterCriteria = ({
   allFilters,
@@ -12,7 +12,7 @@ export const FilterCriteria = ({
   return (
     <select
       onChange={onChange}
-      className="text-lg p-3.5  rounded-md bg-white text-slate-400 font-medium shadow-sm"
+      className="2xl:text-lg py-3.5 px-4 sm:py-3 rounded-md bg-white text-slate-400 font-medium shadow-sm w-full sm:w-[250px] bg-[url('/images/icons/arrow-down.svg')] bg-no-repeat bg-[length:26px_26px] bg-[calc(100%-10px)]"
       value={currentSelectFilter}
     >
       {allFilters.map((filter, index) => (

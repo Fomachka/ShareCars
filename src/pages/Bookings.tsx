@@ -1,11 +1,16 @@
 import { BookingTable } from "../features/bookings/BookingTable";
-import { Filter } from "../features/places/Filter";
+import { Filter } from "../features/cars/Filter";
+import Headers from "../ui/headers/Header";
+import PageHeader from "../ui/headers/PageHeader";
 
 const Bookings = () => {
   return (
     <>
-      <header className="flex justify-between items-center">
-        <h1 className="text-4xl font-semibold text-gray-700">Bookings</h1>
+      <PageHeader
+        header="Reservations"
+        paragraph="Check all of the currently active and inactive reservations"
+      />
+      <section className="relative">
         <Filter
           currentFilter="status"
           allFilters={[
@@ -24,8 +29,8 @@ const Bookings = () => {
             { value: "totalPrice-asc", category: "Sort by amount (low first)" },
           ]}
         />
-      </header>
-      <section className="relative">
+      </section>
+      <section className="overflow-x-auto">
         <BookingTable />
       </section>
     </>

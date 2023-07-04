@@ -1,4 +1,4 @@
-import { AllFilters } from "../features/places/Filter";
+import { AllFilters } from "../features/cars/Filter";
 import { UpdatedBooking } from "../hooks/useCheckinData";
 import { itemsPerPage } from "../utils/globalValues";
 import { getToday } from "../utils/helpers";
@@ -20,7 +20,7 @@ export async function getBookings({
 }) {
   let query = supabase
     .from("bookings")
-    .select("*, places(name),guests(firstName, lastName, email)", { count: "exact" });
+    .select("*, cars(name),guests(firstName, lastName, email)", { count: "exact" });
 
   if (filter) query = query.eq(filter.value, filter.category);
 
@@ -48,7 +48,7 @@ export async function getBookings({
 export async function getBooking(id: number) {
   const { data, error } = await supabase
     .from("bookings")
-    .select("*, places(*), guests(*)")
+    .select("*, cars(*), guests(*)")
     .eq("id", id)
     .single();
 

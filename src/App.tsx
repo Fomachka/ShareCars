@@ -12,7 +12,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import { SingleBooking } from "./pages/SingleBooking.js";
-import Places from "./pages/Places.js";
+import Cars from "./pages/Cars.js";
 import { CheckIn } from "./pages/CheckIn.js";
 import UserSettings from "./pages/UserSettings.js";
 
@@ -36,7 +36,7 @@ function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="bookings" element={<Bookings />} />
               <Route path="bookings/:id" element={<SingleBooking />} />
-              <Route path="places" element={<Places />} />
+              <Route path="cars" element={<Cars />} />
               <Route path="checkin/:id" element={<CheckIn />} />
               <Route path="users" element={<Users />} />
               <Route path="settings" element={<Settings />} />

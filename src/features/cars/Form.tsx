@@ -1,26 +1,27 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
-import { FormValuesApi, createNewPlace } from "../../api/apiPlaces";
+import { FormValuesApi, createNewCar } from "../../api/apiCars";
 
 type FormValues = {
   id?: number;
   name: string;
-  maxPeople: number;
   price: number;
-  discountPrice: number;
-  description: string;
+  capacity: number;
+  modelName: string;
   image: FileList | string;
+  type: string;
+  litres: number;
 };
 
 const Form = ({
-  editPlace = {},
+  editCar = {},
   onCloseModal,
 }: {
-  editPlace: FormValues | Record<string, never>;
+  editCar: FormValues | Record<string, never>;
   onCloseModal?: () => void;
 }) => {
-  const { id: editId, ...editValues } = editPlace;
+  const { id: editId, ...editValues } = editCar;
   const isEditSession = Boolean(editId);
   const queryClient = useQueryClient();
   const { register, handleSubmit, reset, getValues, formState } = useForm({
@@ -28,24 +29,24 @@ const Form = ({
   });
   const { errors } = formState;
 
-  const { mutate: createPlace, isLoading: isCreating } = useMutation({
-    mutationFn: createNewPlace,
+  const { mutate: createCar, isLoading: isCreating } = useMutation({
+    mutationFn: createNewCar,
     onSuccess: () => {
       toast.success("New place successfully created");
       queryClient.invalidateQueries({
-        queryKey: ["places"],
+        queryKey: ["cars"],
       });
     },
     onError: (error: Error) => toast.error(error.message),
   });
 
-  const { mutate: newPlace, isLoading: isEditing } = useMutation({
-    mutationFn: ({ newPlaceData, id }: { newPlaceData: FormValuesApi; id: number }) =>
-      createNewPlace(newPlaceData, id),
+  const { mutate: newCar, isLoading: isEditing } = useMutation({
+    mutationFn: ({ newCarData, id }: { newCarData: FormValuesApi; id: number }) =>
+      createNewCar(newCarData, id),
     onSuccess: () => {
-      toast.success("Place successfully created");
+      toast.success("Car successfully created");
       queryClient.invalidateQueries({
-        queryKey: ["places"],
+        queryKey: ["cars"],
       });
     },
     onError: (error: Error) => toast.error(error.message),
@@ -57,9 +58,9 @@ const Form = ({
     const image = typeof data.image === "string" ? data.image : data.image[0];
 
     if (isEditSession) {
-      newPlace(
+      newCar(
         {
-          newPlaceData: {
+          newCarData: {
             ...data,
             image,
           },
@@ -69,26 +70,24 @@ const Form = ({
           onSuccess: () => {
             reset({
               name: "",
-              maxPeople: 0,
               price: 0,
-              discountPrice: 0,
-              description: "",
+              capacity: 0,
+              modelName: "",
             });
             onCloseModal?.();
           },
         }
       );
     } else {
-      createPlace(
+      createCar(
         { ...data, image: image },
         {
           onSuccess: () => {
             reset({
               name: "",
-              maxPeople: 0,
+              capacity: 0,
               price: 0,
-              discountPrice: 0,
-              description: "",
+              modelName: "",
             });
             onCloseModal?.();
           },
@@ -99,11 +98,11 @@ const Form = ({
 
   return (
     <form
-      className={`${onCloseModal ? "p-4 w-[50vw]" : "py-8 px-6"} space-y-6`}
+      className={`${onCloseModal ? "p-4 w-[40vw]" : "py-8 px-6"} space-y-6 xl:space-y-8`}
       onSubmit={handleSubmit(onSubmit)}
     >
       <div>
-        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">
+        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">
           Name{" "}
           <span className="float-right text-red-700 ">
             {errors?.name?.message && errors.name.message}
@@ -121,19 +120,37 @@ const Form = ({
       </div>
       <div>
         <label
+          htmlFor="modelName"
+          className="block mb-2 text-sm font-medium text-gray-900 "
+        >
+          Model name
+          <span className="float-right text-red-700 ">
+            {errors?.modelName?.message && errors.modelName.message}
+          </span>
+        </label>
+        <input
+          id="modelName"
+          {...register("modelName", {
+            required: "This field is required",
+          })}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+        ></input>
+      </div>
+      <div>
+        <label
           htmlFor="capacity"
           className="block mb-2 text-sm font-medium text-gray-900 "
         >
           Maximum capacity
           <span className="float-right text-red-700 ">
-            {errors?.maxPeople?.message && errors.maxPeople.message}
+            {errors?.capacity?.message && errors.capacity.message}
           </span>
         </label>
         <input
           type="number"
           id="capacity"
           disabled={isWorking}
-          {...register("maxPeople", {
+          {...register("capacity", {
             required: "This field is required",
             min: {
               value: 1,
@@ -142,6 +159,26 @@ const Form = ({
           })}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
         />
+      </div>
+      <div>
+        <label htmlFor="type" className="block mb-2 text-sm font-medium text-gray-900 ">
+          Transmission type
+          <span className="float-right text-red-700 ">
+            {errors?.capacity?.message && errors.capacity.message}
+          </span>
+        </label>
+        <select
+          id="type"
+          disabled={isWorking}
+          {...register("type", {
+            required: "This field is required",
+          })}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2 bg-[url('/images/icons/arrow-down.svg')] bg-no-repeat bg-[length:26px_26px] bg-[calc(100%-6px)]
+          "
+        >
+          <option value="auto">Auto</option>
+          <option value="manual">Manual</option>
+        </select>
       </div>
       <div>
         <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 ">
@@ -166,55 +203,6 @@ const Form = ({
       </div>
 
       <div>
-        <label
-          htmlFor="discount"
-          className="block mb-2 text-sm font-medium text-gray-900 "
-        >
-          Discount
-          <span className="float-right text-red-700 ">
-            {errors?.discountPrice?.message && errors.discountPrice.message}
-          </span>
-        </label>
-        <input
-          type="number"
-          id="discount"
-          disabled={isWorking}
-          defaultValue={0}
-          {...register("discountPrice", {
-            required: "This field is required",
-
-            validate: (value: number) => {
-              if (+value <= +getValues().price && value >= 0) return true;
-              if (+value < 0) return "Discount can't be less than 0";
-              if (+value > +getValues().price) {
-                return "Discount can't exceed the price";
-              }
-            },
-          })}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
-        />
-      </div>
-      <div>
-        <label
-          htmlFor="description"
-          className="block mb-2 text-sm font-medium text-gray-900 "
-        >
-          Description of a place
-          <span className="float-right text-red-700 ">
-            {errors?.description?.message && errors.description.message}
-          </span>
-        </label>
-        <textarea
-          id="description"
-          rows={4}
-          {...register("description", {
-            required: "This field is required",
-          })}
-          className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-          placeholder="Write your thoughts here..."
-        ></textarea>
-      </div>
-      <div>
         <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900 ">
           Image
           <span className="float-right text-red-700 ">
@@ -232,20 +220,22 @@ const Form = ({
         />
       </div>
 
-      <button
-        type="submit"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1"
-        disabled={isWorking}
-      >
-        {isEditSession ? "Edit Place" : "Add Place"}
-      </button>
-      <button
-        type="reset"
-        className="text-gray-900 bg-gray-100 ml-5 hover:bg-gray-200 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1"
-        onClick={() => onCloseModal?.()}
-      >
-        {onCloseModal ? "Close" : "Reset Form"}
-      </button>
+      <div className="space-y-4">
+        <button
+          type="submit"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1"
+          disabled={isWorking}
+        >
+          {isEditSession ? "Edit Car" : "Add Car"}
+        </button>
+        <button
+          type="reset"
+          className="text-gray-900 bg-gray-100 sm:ml-5 hover:bg-gray-200 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1 "
+          onClick={() => onCloseModal?.()}
+        >
+          {onCloseModal ? "Close" : "Reset Form"}
+        </button>
+      </div>
     </form>
   );
 };

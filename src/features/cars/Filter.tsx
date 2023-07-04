@@ -35,12 +35,12 @@ export const Filter = ({
   };
 
   return (
-    <div className="flex items-center gap-6 mb-8">
-      <div className="bg-white shadow-sm rounded-md p-2 flex gap-2">
+    <div className="flex items-center gap-6 mb-8 ml-0 flex-wrap 2xl:mb-9">
+      <div className="bg-white shadow-sm rounded-md py-2 flex gap-2 w-full sm:w-fit justify-evenly px-3">
         {allFilters.map((filter, index) => (
           <button
             key={index}
-            className={`border-none rounded-md font-semi text-lg py-1 px-4 transition-all text-slate-400 hover:bg-blue-700 dark:hover:bg-blue-600 hover:text-white disabled:cursor-no-drop  ${
+            className={`border-none rounded-md font-semi 2xl:text-lg py-1 px-4 transition-all text-slate-400 hover:bg-blue-700 dark:hover:bg-blue-600 hover:text-white disabled:cursor-no-drop w-full whitespace-nowrap ${
               filter.value === currentlyActive &&
               "bg-blue-700 dark:bg-blue-600 !text-white"
             }`}

@@ -27,7 +27,7 @@ export interface Booking {
   details: string;
   placeId: number;
   guestId: number;
-  places: Places;
+  cars: Places;
   guests: Guests;
 }
 
@@ -41,30 +41,29 @@ export const BookingTable = () => {
     return <div className="text-2xl text-gray-700">No Bookings could be found.</div>;
   }
   return (
-    <div
-      className="border border-gray-400 text-2xl bg-white rounded-lg overflow-auto"
-      role="table"
-    >
-      <header
-        className="grid grid-cols-[0.6fr_2fr_2.4fr_1.4fr_1fr_3.2rem] gap-10 items-center bg-gray-50 uppercase tracking-wide font-semibold text-gray-600 py-6 px-10 rounded-t-lg"
-        role="row"
-      >
-        <div>Place</div>
-        <div>Guest</div>
-        <div>Dates</div>
-        <div>Status</div>
-        <div>Amount</div>
-      </header>
-      {bookings?.map((booking, index) => (
-        <BookingRow
-          key={index}
-          index={index}
-          booking={booking}
-          setCurrentMenu={setCurrentMenu}
-          currentMenu={currentMenu}
-        />
-      ))}
+    <table className=" bg-white rounded-md overflow-x-auto w-full table-auto">
+      <thead>
+        <tr className="grid grid-cols-[2fr_2fr_2.4fr_1.4fr_1fr_3.2rem] gap-20 items-center tracking-wide  text-slate-500 py-6 px-10 text-left">
+          <th className="min-w-[100px]">Name</th>
+          <th className="min-w-[100px]">Model</th>
+          <th className="min-w-[100px]">Reservation</th>
+          <th className="min-w-[100px]">Amount</th>
+          <th className="min-w-[100px]">Status</th>
+        </tr>
+      </thead>
+      <div className="bg-gray-200/60 w-full h-0.5"></div>
+      <tbody>
+        {bookings?.map((booking, index) => (
+          <BookingRow
+            key={index}
+            index={index}
+            booking={booking}
+            setCurrentMenu={setCurrentMenu}
+            currentMenu={currentMenu}
+          />
+        ))}
+      </tbody>
       {typeof count === "number" && <Pagination numOfResults={count} />}
-    </div>
+    </table>
   );
 };
