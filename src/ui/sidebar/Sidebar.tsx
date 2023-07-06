@@ -8,7 +8,13 @@ import {
   MdDirectionsCar,
 } from "react-icons/md";
 
-const Sidebar = ({ toggleMenu }: { toggleMenu: boolean }) => {
+const Sidebar = ({
+  toggleMenu,
+  setToggleMenu,
+}: {
+  toggleMenu: boolean;
+  setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   return (
     <aside
       id="logo-sidebar"
@@ -19,31 +25,31 @@ const Sidebar = ({ toggleMenu }: { toggleMenu: boolean }) => {
     >
       <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-900">
         <ul className="space-y-5">
-          <li>
+          <li onClick={() => setToggleMenu((prev) => !prev)}>
             <NavLink className="navigation-menu" to="/dashboard">
               <MdPieChart className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
               <span className="mt-0.5">Dashboard</span>
             </NavLink>
           </li>
-          <li>
+          <li onClick={() => setToggleMenu((prev) => !prev)}>
             <NavLink className="navigation-menu" to="/bookings">
               <MdCalendarMonth className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
               <span className="">Bookings</span>
             </NavLink>
           </li>
-          <li>
+          <li onClick={() => setToggleMenu((prev) => !prev)}>
             <NavLink className="navigation-menu" to="/cars">
               <MdDirectionsCar className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
               <span>Cars</span>
             </NavLink>
           </li>
-          <li>
+          <li onClick={() => setToggleMenu((prev) => !prev)}>
             <NavLink className="navigation-menu" to="/users">
               <MdGroup className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
               <span>Members</span>
             </NavLink>
           </li>
-          <li>
+          <li onClick={() => setToggleMenu((prev) => !prev)}>
             <NavLink className="navigation-menu" to="/settings">
               <MdSettings className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75" />
               <span>Settings</span>

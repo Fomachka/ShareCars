@@ -102,7 +102,10 @@ const Form = ({
       onSubmit={handleSubmit(onSubmit)}
     >
       <div>
-        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">
+        <label
+          htmlFor="name"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100 "
+        >
           Name{" "}
           <span className="float-right text-red-700 ">
             {errors?.name?.message && errors.name.message}
@@ -121,7 +124,7 @@ const Form = ({
       <div>
         <label
           htmlFor="modelName"
-          className="block mb-2 text-sm font-medium text-gray-900 "
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100"
         >
           Model name
           <span className="float-right text-red-700 ">
@@ -139,7 +142,7 @@ const Form = ({
       <div>
         <label
           htmlFor="capacity"
-          className="block mb-2 text-sm font-medium text-gray-900 "
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100"
         >
           Maximum capacity
           <span className="float-right text-red-700 ">
@@ -161,7 +164,10 @@ const Form = ({
         />
       </div>
       <div>
-        <label htmlFor="type" className="block mb-2 text-sm font-medium text-gray-900 ">
+        <label
+          htmlFor="type"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+        >
           Transmission type
           <span className="float-right text-red-700 ">
             {errors?.capacity?.message && errors.capacity.message}
@@ -181,7 +187,10 @@ const Form = ({
         </select>
       </div>
       <div>
-        <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 ">
+        <label
+          htmlFor="price"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+        >
           Regular price
           <span className="float-right text-red-700 ">
             {errors?.price?.message && errors.price.message}
@@ -203,7 +212,10 @@ const Form = ({
       </div>
 
       <div>
-        <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900 ">
+        <label
+          htmlFor="image"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+        >
           Image
           <span className="float-right text-red-700 ">
             {errors?.image?.message && errors.image.message}
@@ -223,7 +235,7 @@ const Form = ({
       <div className="space-y-4">
         <button
           type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1"
+          className="text-white bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1"
           disabled={isWorking}
         >
           {isEditSession ? "Edit Car" : "Add Car"}

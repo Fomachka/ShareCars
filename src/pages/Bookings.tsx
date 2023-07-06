@@ -15,9 +15,8 @@ const Bookings = () => {
           currentFilter="status"
           allFilters={[
             { value: "all", category: "All" },
-            { value: "checked-out", category: "Checked out" },
-            { value: "checked-in", category: "Checked in" },
-            { value: "unconfirmed", category: "Unconfirmed" },
+            { value: "paid", category: "Paid" },
+            { value: "not-paid", category: "Not Paid" },
           ]}
           allSorting={[
             { value: "checkInDate-desc", category: "Sort by date (recent first)" },
@@ -30,7 +29,7 @@ const Bookings = () => {
           ]}
         />
       </section>
-      <section className="overflow-x-auto">
+      <section className="overflow-x-auto h-full">
         <BookingTable />
       </section>
     </>

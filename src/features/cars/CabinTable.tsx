@@ -1,7 +1,7 @@
 import { Loading } from "../../ui/Loading";
 import { SingleCar } from "./SingleCar";
 import useQueryData from "../../hooks/useQueryData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export const CabinTable = () => {
@@ -50,31 +50,28 @@ export const CabinTable = () => {
   }
 
   return (
-    <div
-      // className="border border-gray-400 text-2xl bg-white rounded-lg  overflow-auto"
-      // role="table"
-      className="grid 2xl:grid-cols-3 md:grid-cols-2 gap-4"
-    >
-      {/* <header
-        className="grid grid-cols-[0.6fr_1.8fr_2.2fr_1fr_1fr_1fr] gap-10 items-center bg-gray-50 border-b-1 border-gray-100 tracking-wide text-gray-600 py-6 px-10 text-base"
-        role="row"
-      >
-        <div></div>
-        <div></div>
-        <div>Capacity</div>
-        <div>Price</div>
-        <div>Discount</div>
-        <div></div>
-      </header> */}
-      {selectedCars?.map((car, index) => (
-        <SingleCar
-          key={index}
-          index={index}
-          car={car}
-          setCurrentMenu={setCurrentMenu}
-          currentMenu={currentMenu}
-        />
-      ))}
-    </div>
+    <>
+      {selectedCars && selectedCars.length > 0 && (
+        <h3 className="pl-2 text-sm text-gray-400 dark:text-gray-400 xl:text-base mb-4">
+          Active Cars ({selectedCars.length} Cars)
+        </h3>
+      )}
+      {selectedCars?.length === 0 && (
+        <div className="text-slate-700 dark:text-gray-200 text-xl ml-1 font-medium m-10 xl:text-2xl">
+          No cars were found matching the criteria ...
+        </div>
+      )}
+      <div className="grid 2xl:grid-cols-3 md:grid-cols-2 gap-4">
+        {selectedCars?.map((car, index) => (
+          <SingleCar
+            key={index}
+            index={index}
+            car={car}
+            setCurrentMenu={setCurrentMenu}
+            currentMenu={currentMenu}
+          />
+        ))}
+      </div>
+    </>
   );
 };

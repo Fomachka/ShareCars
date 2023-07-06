@@ -65,7 +65,7 @@ export default function Headers({
               </a>
             </div>
             <div className="flex items-center ">
-              <div className="flex items-center ml-3">
+              <div className="flex items-center">
                 <div>
                   <button
                     type="button"
@@ -74,7 +74,7 @@ export default function Headers({
                   >
                     <span className="sr-only">Open user menu</span>
                     <img
-                      className="w-8 h-8 rounded-full"
+                      className="w-8 h-8 rounded-full active-none"
                       src={avatar || "/public/images/default-user.jpg"}
                       alt="current user photo"
                     />
@@ -82,7 +82,7 @@ export default function Headers({
                 </div>
                 <div
                   className={`z-50 ${
-                    toggleAvatarMenu ? "absolute top-12 md:top-10" : "hidden"
+                    toggleAvatarMenu ? "absolute top-12 lg:top-10" : "hidden"
                   } right-5 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600`}
                   id="dropdown-user"
                 >
@@ -98,7 +98,7 @@ export default function Headers({
                     </p>
                   </div>
                   <ul className="py-1" role="none">
-                    <li>
+                    <li onClick={() => setToggleAvatarMenu((prev) => !prev)}>
                       <NavLink
                         to="/dashboard"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -106,7 +106,7 @@ export default function Headers({
                         Dashboard
                       </NavLink>
                     </li>
-                    <li>
+                    <li onClick={() => setToggleAvatarMenu((prev) => !prev)}>
                       <NavLink
                         to={`/user/${firstName + "" + lastName}`}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -114,7 +114,7 @@ export default function Headers({
                         Settings
                       </NavLink>
                     </li>
-                    <li>
+                    <li onClick={() => setToggleAvatarMenu((prev) => !prev)}>
                       <button
                         onClick={handleDarkMode}
                         disabled={isLoginOut}

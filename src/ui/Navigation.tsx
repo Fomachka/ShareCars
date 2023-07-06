@@ -4,11 +4,10 @@ import Sidebar from "./sidebar/Sidebar";
 
 export const Navigation = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
-  console.log(toggleMenu);
   return (
     <>
       <Header setToggleMenu={setToggleMenu} />
-      <Sidebar toggleMenu={toggleMenu} />
+      <Sidebar toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
     </>
   );
 };

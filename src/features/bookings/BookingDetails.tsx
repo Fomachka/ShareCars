@@ -83,7 +83,7 @@ function BookingDetail() {
             )}
           </footer>
         </div>
-        {booking?.status !== "checked-in" && booking?.status !== "checked-out" && (
+        {booking?.status !== "not-paid" && booking?.status !== "paid" && (
           <button
             className="text-xl py-2 px-4 bg-blue-400 rounded-md text-white"
             onClick={() => navigate(`/checkin/${booking?.id}`)}
@@ -91,7 +91,7 @@ function BookingDetail() {
             Check In
           </button>
         )}
-        {booking?.status !== "checked-out" && booking?.status !== "unconfirmed" && (
+        {booking?.status !== "paid" && booking?.status !== "unconfirmed" && (
           <button
             className="text-xl py-2 px-4 bg-blue-400 rounded-md text-white"
             onClick={() => checkOut(booking?.id)}

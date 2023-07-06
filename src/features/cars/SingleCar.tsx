@@ -64,9 +64,9 @@ export const SingleCar = ({
   };
 
   return (
-    <article className="p-6 bg-white rounded-lg min-w-48 flex flex-col justify-between">
+    <article className="p-6 bg-white dark:bg-gray-900 rounded-lg min-w-48 flex flex-col justify-between shadow-sm">
       <div>
-        <div className="flex justify-between mb-1 text-gray-700 relative">
+        <div className="flex justify-between mb-1 text-gray-700 dark:text-gray-200 relative">
           <span className="text-2xl font-bold">{car?.name}</span>
           <div className="text-right">
             <button
@@ -74,18 +74,18 @@ export const SingleCar = ({
                 currentMenu === index && showSidemenu
                   ? "border-2 rounded-sm border-blue-500"
                   : "border-2 border-transparent"
-              } hover:bg-gray-100 align-middle h-full`}
+              } hover:bg-gray-100 dark:hover:bg-slate-700 align-middle h-full`}
             >
               <MdOutlineMoreVert
                 onClick={handleSideMenu}
-                className="w-6 h-6 text-gray-600"
+                className="w-6 h-6 text-gray-600 dark:text-gray-300"
               />
             </button>
             {currentMenu === index && showSidemenu && (
-              <div className="w-30 text-gray-900 bg-white border border-gray-200 rounded-lg absolute right-10 top-0 rounded-tr-none">
+              <div className="w-30 text-gray-900 bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-700 rounded-lg absolute right-10 top-0 rounded-tr-none">
                 <button
                   type="button"
-                  className="relative inline-flex items-center w-full px-5 py-3 text-sm font-medium hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-1 focus:ring-blue-700 focus:text-blue-700 focus:rounded-t-lg"
+                  className="relative inline-flex items-center w-full px-5 py-3 text-sm font-medium dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-700 focus:z-10 focus:ring-1 focus:ring-blue-700 focus:text-blue-700 focus:rounded-t-lg"
                   onClick={() => {
                     setShowForm((prev) => !prev);
                     setShowSidemenu(false);
@@ -93,13 +93,13 @@ export const SingleCar = ({
                   disabled={isLoading}
                 >
                   <span className="mr-2">
-                    <HiPencil />
+                    <HiPencil className="text-gray-500 dark:text-gray-200 hover:text-gray-800" />
                   </span>
                   Edit
                 </button>
                 <button
                   type="button"
-                  className="relative inline-flex items-center w-full px-5 py-3 text-sm font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-1 focus:ring-blue-700 focus:text-blue-700"
+                  className="relative inline-flex items-center w-full px-5 py-3 text-sm font-medium dark:text-gray-300 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-1 dark:hover:bg-gray-700 focus:ring-blue-700 focus:text-blue-700 focus:rounded-t-lg"
                   onClick={() => {
                     handleDeleteModal();
                     setShowSidemenu(false);
@@ -107,7 +107,7 @@ export const SingleCar = ({
                   disabled={isLoading}
                 >
                   <span className="mr-2">
-                    <HiTrash />
+                    <HiTrash className="text-gray-500 dark:text-gray-200 hover:text-gray-800" />
                   </span>
                   Delete
                 </button>
@@ -115,7 +115,7 @@ export const SingleCar = ({
             )}
           </div>
         </div>
-        <p className=" text-gray-500/70">{car?.modelName}</p>
+        <p className=" text-gray-500/70 dark:text-gray-400">{car?.modelName}</p>
       </div>
 
       <div>
@@ -124,27 +124,35 @@ export const SingleCar = ({
           src={car?.image}
           alt={car?.modelName}
         />
-        <div className="bg-gray-200/60 w-full h-0.5 mt-8"></div>
+        <div className="bg-gray-200/60 dark:bg-gray-200/10 w-full h-0.5 mt-8"></div>
       </div>
       <div className="flex items-center justify-between flex-wrap gap-6 text-gray-400 dark:text-gray-400 mt-6">
         <div className="flex gap-6">
           <div>
             <MdPerson className="w-6 h-6 inline-block mr-1  " />
-            <span className="text-sm text-gray-500/70">{car?.capacity}</span>
+            <span className="text-sm text-gray-500/70 dark:text-gray-400/80">
+              {car?.capacity}
+            </span>
           </div>
           <div>
             <MdSettings className="w-6 h-6 inline-block mr-1 " />
-            <span className="text-sm text-gray-500/70 capitalize">{car?.type}</span>
+            <span className="text-sm text-gray-500/70 dark:text-gray-400/80 capitalize">
+              {car?.type}
+            </span>
           </div>
           <div>
             <MdWaterDrop className="w-6 h-6 inline-block mr-1" />
-            <span className="text-sm text-gray-500/70">{car?.litres} L / 100 km</span>
+            <span className="text-sm text-gray-500/70 dark:text-gray-400/80">
+              {car?.litres} L / 100 km
+            </span>
           </div>
         </div>
         <div>
-          <p className="text-2xl text-gray-700 font-bold">
+          <p className="text-2xl text-gray-700 dark:text-gray-200 font-bold">
             {formatCurrency(car?.price)}
-            <span className="text-lg text-gray-500/70 font-normal">/day</span>
+            <span className="text-lg text-gray-500/70 dark:text-gray-400 font-normal">
+              /day
+            </span>
           </p>
         </div>
       </div>

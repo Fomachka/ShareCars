@@ -41,9 +41,9 @@ export const BookingTable = () => {
     return <div className="text-2xl text-gray-700">No Bookings could be found.</div>;
   }
   return (
-    <table className=" bg-white rounded-md overflow-x-auto w-full table-auto">
+    <table className=" bg-white dark:bg-slate-900 rounded-md overflow-x-auto w-full table-auto">
       <thead>
-        <tr className="grid grid-cols-[2fr_2fr_2.4fr_1.4fr_1fr_3.2rem] gap-20 items-center tracking-wide  text-slate-500 py-6 px-10 text-left">
+        <tr className="grid grid-cols-[2fr_2fr_2.4fr_1.4fr_1fr_3.2rem] gap-20 items-center tracking-wide text-slate-500 dark:text-gray-100  py-6 px-10 text-left m-2 xl:text-reg">
           <th className="min-w-[100px]">Name</th>
           <th className="min-w-[100px]">Model</th>
           <th className="min-w-[100px]">Reservation</th>
@@ -51,7 +51,7 @@ export const BookingTable = () => {
           <th className="min-w-[100px]">Status</th>
         </tr>
       </thead>
-      <div className="bg-gray-200/60 w-full h-0.5"></div>
+      <div className="bg-gray-200/60 dark:bg-gray-200/10 dark:bg- w-full h-0.5"></div>
       <tbody>
         {bookings?.map((booking, index) => (
           <BookingRow

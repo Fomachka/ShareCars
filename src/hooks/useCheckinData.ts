@@ -22,14 +22,14 @@ const useCheckinData = () => {
   const { mutate: checkIn, isLoading } = useMutation({
     mutationFn: ({ id, breakfast }: { id: number; breakfast: Breakfast }) =>
       updateBooking(id, {
-        status: "checked-in",
+        status: "not-paid",
         isPaid: true,
         ...breakfast,
       }),
     onSuccess: (data) => {
       toast.success(`Booking #${data.id} successfully checked in`);
       queryClient.invalidateQueries({ queryKey: ["bookings"] });
-      navigate(`/bookings/${data.id}`);
+      navigate(`/checkin/${data.id}`);
     },
 
     onError: () => toast.error("There was an error checking in"),

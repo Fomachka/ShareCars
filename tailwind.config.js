@@ -5,7 +5,12 @@ export default {
     fontFamily: {
       roboto: ["Roboto", "sans-serif"],
     },
-    extend: {},
+
+    extend: {
+      screens: {
+        xsm: "425px",
+      },
+    },
   },
   plugins: [],
 

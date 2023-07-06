@@ -41,7 +41,7 @@ const CreateUser = () => {
       <div>
         <label
           htmlFor="firstName"
-          className="block mb-2 text-sm xl:text-base font-medium text-gray-900 dark:text-gray-100"
+          className="block mb-2 text-sm xl:text-base font-medium text-gray-900 dark:text-gray-100 "
         >
           First name{" "}
           <span className="float-right text-red-700">
@@ -159,7 +159,7 @@ const CreateUser = () => {
       <div className="space-y-4">
         <button
           type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1 "
+          className="text-white bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1 "
           disabled={isLoading}
         >
           Create New User

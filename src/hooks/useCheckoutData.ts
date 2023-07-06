@@ -8,15 +8,15 @@ const useCheckoutData = () => {
   const { mutate: checkOut, isLoading: isCheckingOut } = useMutation({
     mutationFn: (id: number) =>
       updateBooking(id, {
-        status: "checked-out",
+        status: "paid",
       }),
     onSuccess: (data) => {
-      toast.success(`Booking #${data.id} successfully checked out`);
+      toast.success(`Payment for reservation #${data.id} was received successfully`);
       // {active: true} works
       queryClient.invalidateQueries({ queryKey: ["booking", `${data.id}`] });
     },
 
-    onError: () => toast.error("There was an error checking out"),
+    onError: () => toast.error("There was an error confirming the payment"),
   });
 
   return { checkOut, isCheckingOut };

@@ -7,6 +7,9 @@
     appearance: none;
     -webkit-appearance: none;
   }
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 @layer components {
