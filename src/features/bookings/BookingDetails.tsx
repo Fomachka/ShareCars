@@ -67,12 +67,12 @@ function BookingDetail() {
             Email : <span className="text-gray-500">{booking?.guests?.email}</span>
           </p>
           <div>
-            <span className="font-medium">Breakfast Included?</span>{" "}
+            <span className="font-medium">Gas Card Included?</span>{" "}
             {booking?.hasBreakfast ? "Yes" : "No"}
           </div>
           <p>
             Total price: ${booking?.totalPrice}{" "}
-            {booking?.hasBreakfast && " (with breakfast)"}
+            {booking?.hasBreakfast && " (with free gas card)"}
           </p>
           <p>Status: {booking?.isPaid ? "Paid" : "Will pay at property"}</p>
           <footer>
@@ -83,7 +83,7 @@ function BookingDetail() {
             )}
           </footer>
         </div>
-        {booking?.status !== "not-paid" && booking?.status !== "paid" && (
+        {booking?.status !== "not-paid" && (
           <button
             className="text-xl py-2 px-4 bg-blue-400 rounded-md text-white"
             onClick={() => navigate(`/checkin/${booking?.id}`)}
@@ -91,7 +91,7 @@ function BookingDetail() {
             Check In
           </button>
         )}
-        {booking?.status !== "paid" && booking?.status !== "unconfirmed" && (
+        {booking?.status !== "paid" && (
           <button
             className="text-xl py-2 px-4 bg-blue-400 rounded-md text-white"
             onClick={() => checkOut(booking?.id)}
@@ -99,7 +99,7 @@ function BookingDetail() {
             Check Out
           </button>
         )}
-        {booking?.status !== "unconfirmed" && (
+        {booking?.status && (
           <button
             className="text-xl py-2 px-4 bg-red-400 rounded-md text-white"
             onClick={handleDeleteModal}

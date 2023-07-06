@@ -11,7 +11,7 @@ import useSettings from "../../hooks/useSettingsData";
 const CheckinBooking = () => {
   const { booking, isLoading } = useBooking();
   const [payConfirm, setPayConfirm] = useState(booking?.isPaid || false);
-  const [addBreakfast, setAddBreakfast] = useState(false);
+  const [addGasCard, setAddGasCard] = useState(false);
   const { checkIn, isLoading: isCheckingIn } = useCheckinData();
   const { settings, isLoading: isLoadingSettings } = useSettings();
   const navigate = useNavigate();
@@ -26,22 +26,22 @@ const CheckinBooking = () => {
       return;
     }
 
-    if (addBreakfast) {
+    if (addGasCard) {
       checkIn({
         id,
-        breakfast: {
-          hasBreakfast: true,
-          extraPrice: optionalBreakfastPrice,
-          totalPrice: booking?.totalPrice + optionalBreakfastPrice,
+        extraDetails: {
+          addedGasCard: true,
+          extraPrice: choosesToBuyCard,
+          totalPrice: booking?.totalPrice + choosesToBuyCard,
         },
       });
     } else {
-      checkIn({ id, breakfast: {} });
+      checkIn({ id, extraDetails: {} });
     }
   };
 
-  const optionalBreakfastPrice =
-    settings?.breakfastPrice * booking?.numOfNights * booking?.numOfGuests;
+  const choosesToBuyCard =
+    settings?.gasCardPrice * booking?.numOfNights * booking?.numOfGuests;
 
   if (isLoading || isLoadingSettings) return <Loading />;
 
@@ -78,12 +78,12 @@ const CheckinBooking = () => {
             Email : <span className="text-gray-500">{booking?.guests?.email}</span>
           </p>
           <div>
-            <span className="font-medium">Breakfast Included?</span>{" "}
-            {booking?.hasBreakfast ? "Yes" : "No"}
+            <span className="font-medium">Gas Card Included?</span>{" "}
+            {booking?.addedGasCard ? "Yes" : "No"}
           </div>
           <p>
             Total price: ${booking?.totalPrice}
-            {booking?.hasBreakfast && " (with breakfast)"}
+            {booking?.addedGasCard && " (with added gas card)"}
           </p>
           <p>Status: {booking?.isPaid ? "Paid" : "Will pay at property"}</p>
           <footer>
@@ -95,22 +95,23 @@ const CheckinBooking = () => {
           </footer>
         </div>
         {/* Breakfast */}
-        {!booking?.hasBreakfast && (
+        {!booking?.addedGasCard && (
           <div className="flex gap-4">
             <input
               type="checkbox"
-              checked={addBreakfast}
-              id="breakfast"
+              checked={addGasCard}
+              id="gas"
               onChange={() => {
-                setAddBreakfast((prev: boolean) => !prev);
+                setAddGasCard((prev: boolean) => !prev);
                 setPayConfirm(false);
               }}
               className="w-5 h-auto checked:bg-blue-400 checked:accent-blue-600"
             />
-            <label className="text-2xl" htmlFor="breakfast">
-              Want to add breakfast for {formatCurrency(optionalBreakfastPrice)}{" "}
+            <label className="text-2xl" htmlFor="gas">
+              I confirm that client wants to add an additional gas card{" "}
+              {formatCurrency(choosesToBuyCard)}{" "}
               <span className="text-lg text-gray-500">
-                ({formatCurrency(settings.breakfastPrice)} per person *{" "}
+                ({formatCurrency(settings.gasCardPrice)} per person *{" "}
                 {booking?.numOfGuests} guests)
               </span>
             </label>
@@ -128,14 +129,12 @@ const CheckinBooking = () => {
           />
           <label className="text-2xl" htmlFor="confirm">
             I confirm that {booking?.guests?.firstName} has payed the total amount{" "}
-            {addBreakfast ? (
+            {addGasCard ? (
               <>
-                <span>
-                  {formatCurrency(booking?.totalPrice + optionalBreakfastPrice)}{" "}
-                </span>
+                <span>{formatCurrency(booking?.totalPrice + choosesToBuyCard)} </span>
                 <span className="text-lg text-gray-500">
                   ({formatCurrency(booking?.totalPrice)} +{" "}
-                  {formatCurrency(optionalBreakfastPrice)})
+                  {formatCurrency(choosesToBuyCard)})
                 </span>
               </>
             ) : (

@@ -11,7 +11,7 @@ const useCheckoutData = () => {
         status: "paid",
       }),
     onSuccess: (data) => {
-      toast.success(`Payment for reservation #${data.id} was received successfully`);
+      toast.success(`Payment for reservation #${data.id} successfully confirmed `);
       // {active: true} works
       queryClient.invalidateQueries({ queryKey: ["booking", `${data.id}`] });
     },

@@ -51,7 +51,9 @@ export const BookingTable = () => {
           <th className="min-w-[100px]">Status</th>
         </tr>
       </thead>
-      <div className="bg-gray-200/60 dark:bg-gray-200/10 dark:bg- w-full h-0.5"></div>
+      <>
+        <div className="bg-gray-200/60 dark:bg-gray-200/10 dark:bg- w-full h-0.5"></div>
+      </>
       <tbody>
         {bookings?.map((booking, index) => (
           <BookingRow

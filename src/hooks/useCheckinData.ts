@@ -5,12 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 export interface UpdatedBooking {
   status: string;
-  isPaid?: boolean;
-  breakfast?: Breakfast;
+  extraDetails?: ExtraDetails;
 }
 
-export interface Breakfast {
-  hasBreakfast?: true;
+export interface ExtraDetails {
+  addedGasCard?: true;
   extraPrice?: number;
   totalPrice?: number;
 }
@@ -20,19 +19,18 @@ const useCheckinData = () => {
   const navigate = useNavigate();
 
   const { mutate: checkIn, isLoading } = useMutation({
-    mutationFn: ({ id, breakfast }: { id: number; breakfast: Breakfast }) =>
+    mutationFn: ({ id, extraDetails }: { id: number; extraDetails: ExtraDetails }) =>
       updateBooking(id, {
         status: "not-paid",
-        isPaid: true,
-        ...breakfast,
+        ...extraDetails,
       }),
     onSuccess: (data) => {
-      toast.success(`Booking #${data.id} successfully checked in`);
+      toast.success(`Booking #${data.id} payment successfully confirmed`);
       queryClient.invalidateQueries({ queryKey: ["bookings"] });
-      navigate(`/checkin/${data.id}`);
+      navigate(`/confirmation/${data.id}`);
     },
 
-    onError: () => toast.error("There was an error checking in"),
+    onError: () => toast.error("There was an error confirming the payment"),
   });
 
   return { checkIn, isLoading };
