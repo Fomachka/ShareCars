@@ -1,17 +1,21 @@
 import { HiOutlineHomeModern } from "react-icons/hi2";
 import useBooking from "../../hooks/useSingleBooking";
 import { format, isToday } from "date-fns";
-import { formatDistanceFromNow } from "../../utils/helpers";
+import { formatCurrency, formatDistanceFromNow } from "../../utils/helpers";
 import useNavigateBack from "../../hooks/useNavigateBack";
 import { useNavigate } from "react-router-dom";
 import useCheckoutData from "../../hooks/useCheckoutData";
 import { useState } from "react";
 import DeleteModal from "../../ui/modals/DeleteModal";
 import useDeleteBooking from "./hooks/useDeleteBooking";
+import PageHeader from "../../ui/headers/PageHeader";
+import { MdAccessTimeFilled, MdCarRental, MdCheckCircle } from "react-icons/md";
+import useSettings from "../../hooks/useSettingsData";
 
 function BookingDetail() {
   const { booking, isLoading } = useBooking();
   const { checkOut, isCheckingOut } = useCheckoutData();
+  const { settings } = useSettings();
   const [showModal, setShowModal] = useState(false);
   // const navigateBack = useNavigateBack();
   console.log(booking);
@@ -35,86 +39,149 @@ function BookingDetail() {
   };
 
   return (
-    <div className="space-y-8">
-      <header className="flex gap-8">
-        <h1>Booking #{booking?.id}</h1>
-        <p className="text-lg py-2 px-3 bg-blue-400 rounded-md">{booking?.status}</p>
-      </header>
-      <section>
-        <div className="bg-blue-400 py-6 px-8 text-white rounded-md flex justify-between items-center">
-          <div className="flex gap-8">
-            <HiOutlineHomeModern />
+    <div>
+      <PageHeader header={`Invoice details #${booking?.id}`} paragraph={""} />
+      <section className="space-y-6">
+        <div className="p-8 bg-white dark:bg-slate-900 rounded-md ">
+          <div
+            className={`mb-8 ${
+              booking?.status !== "paid" ? "text-red-600" : "text-green-600"
+            }  rounded-md flex items-center gap-2`}
+          >
+            <MdCheckCircle className="w-8 h-8 " />
             <p className="text-2xl">
-              {booking?.numOfNights} in place {booking?.cars?.name}
+              {booking?.status === "paid" ? "Payment Confirmed" : "Payment not confirmed"}
             </p>
           </div>
-          {booking && (
-            <p className="text-xl">
-              {format(new Date(booking?.checkInDate), "EEE, MMM dd yyyy")} (
-              {isToday(new Date(booking?.checkInDate))
-                ? "Today"
-                : formatDistanceFromNow(booking?.checkInDate)}
-              ) &mdash; {format(new Date(booking?.checkOutDate), "EEE, MMM dd yyyy")}
-            </p>
-          )}
-        </div>
-        <div className="bg-white h-[500px] rounded-b-md py-8 px-10 text-xl space-y-8">
-          <p className="">
-            {booking?.guests?.firstName + " " + booking?.guests?.lastName} +{" "}
-            {booking?.numOfGuests - 1} guests
-          </p>
-          <p className="">
-            Email : <span className="text-gray-500">{booking?.guests?.email}</span>
-          </p>
-          <div>
-            <span className="font-medium">Gas Card Included?</span>{" "}
-            {booking?.hasBreakfast ? "Yes" : "No"}
+          <div className="bg-gray-200/60 dark:bg-gray-200/10 dark:bg- w-full h-0.5 mb-8"></div>
+          <div className="space-y-5">
+            <div className="">
+              <p className="text-gray-400 text-sm">Full name</p>
+              <p className="text-lg dark:text-gray-100 text-gray-600">
+                {booking?.guests?.firstName + " " + booking?.guests?.lastName}
+              </p>
+            </div>
+            <div>
+              <p className="text-gray-400 text-sm">Email</p>
+              <p className="text-lg dark:text-gray-100 text-gray-600">
+                {booking?.guests?.email}
+              </p>
+            </div>
+            <div>
+              <p className="text-gray-400 text-sm">Extra charges</p>
+              <p className="text-lg dark:text-gray-100 text-gray-600">
+                {booking?.addedGasCard ? "Gas card included" : "Gas card not included"}
+              </p>
+            </div>
           </div>
-          <p>
-            Total price: ${booking?.totalPrice}{" "}
-            {booking?.hasBreakfast && " (with free gas card)"}
-          </p>
-          <p>Status: {booking?.isPaid ? "Paid" : "Will pay at property"}</p>
-          <footer>
+          {/* <footer>
             {booking && (
               <p>
                 Booked on {format(new Date(booking?.checkInDate), "EEE, MMM dd yyyy, p")}
               </p>
             )}
-          </footer>
+          </footer> */}
         </div>
-        {booking?.status !== "not-paid" && (
-          <button
-            className="text-xl py-2 px-4 bg-blue-400 rounded-md text-white"
-            onClick={() => navigate(`/checkin/${booking?.id}`)}
-          >
-            Check In
-          </button>
-        )}
-        {booking?.status !== "paid" && (
-          <button
-            className="text-xl py-2 px-4 bg-blue-400 rounded-md text-white"
-            onClick={() => checkOut(booking?.id)}
-          >
-            Check Out
-          </button>
-        )}
-        {booking?.status && (
-          <button
-            className="text-xl py-2 px-4 bg-red-400 rounded-md text-white"
-            onClick={handleDeleteModal}
-            disabled={isDeleting}
-          >
-            Delete Booking
-          </button>
-        )}
+        <div className="bg-white dark:bg-slate-900 py-4 px-8 text-white rounded-md flex items-center gap-6 h-full">
+          <img
+            src={booking?.cars?.image}
+            alt={`${booking?.cars.name} car`}
+            className="w-24 h-24 object-contain "
+          />
+          <div className="border-[1px] dark:border-gray-700 border-gray-200 h-[100px] "></div>
+
+          <div className="flex flex-col h-[100px] justify-around">
+            <div className="flex gap-4 items-center">
+              <MdCarRental className="w-6 h-6 text-gray-500 dark:text-gray-300 " />
+              {booking && (
+                <p className=" text-sm lg:text-base dark:text-gray-100 text-gray-600">
+                  {booking?.cars?.name + " " + booking?.cars?.modelName}
+                </p>
+              )}
+            </div>
+            <div className="flex gap-4 items-center">
+              <MdAccessTimeFilled className="w-6 h-6 text-gray-500 dark:text-gray-300 " />
+              {booking && (
+                <p className="text-sm lg:text-base dark:text-gray-100 text-gray-600">
+                  {format(new Date(booking?.checkInDate), "EEE, MMM dd yyyy")} (
+                  {isToday(new Date(booking?.checkInDate))
+                    ? "Today"
+                    : formatDistanceFromNow(booking?.checkInDate)}
+                  ) &mdash; {format(new Date(booking?.checkOutDate), "EEE, MMM dd yyyy")}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-slate-900 py-6 px-8 rounded-md text-gray-600 text-xl">
+          <div className="space-y-4">
+            <div className="flex justify-between items-center text-lg">
+              <p className="text-gray-400">Subtotal:</p>
+              <p className="text-gray-500/70">
+                {formatCurrency(
+                  `${booking?.totalPrice - settings?.gasCardPrice * booking?.numOfNights}`
+                )}{" "}
+                {booking?.addedGasCard && "(including gas card)"}
+              </p>
+            </div>
+            <div className="flex justify-between items-center text-lg">
+              <p className="text-gray-400">Gas card:</p>
+              <p className="text-gray-500/70">
+                {formatCurrency(`${settings?.gasCardPrice * booking?.numOfNights}`)}{" "}
+                {booking?.addedGasCard &&
+                  `(${formatCurrency(settings?.gasCardPrice)} x ${
+                    booking?.numOfNights
+                  } days)`}
+              </p>
+            </div>
+          </div>
+          <div className="bg-gray-200/60 dark:bg-gray-200/10 dark:bg- w-full h-0.5 my-6"></div>
+          <div className="flex justify-between items-center ">
+            <p className="text-slate-700">Total price:</p>
+            <p>
+              {formatCurrency(`${booking?.totalPrice}`)}{" "}
+              {booking?.addedGasCard && "(including gas card)"}
+            </p>
+          </div>
+        </div>
+        <div className="bg-white dark:bg-slate-900 py-6 px-8 rounded-md flex items-center justify-between">
+          <p className="text-slate-800 text-xl">Final Confirmation</p>
+          <div>
+            {booking?.status !== "not-paid" && (
+              <button
+                className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:outline-none  dark:focus:ring-blue-800 font-medium rounded-md text-lg px-6 py-3 text-center mr-5"
+                onClick={() => navigate(`/confirmation/${booking?.id}`)}
+              >
+                Confirm Booking
+              </button>
+            )}
+            {booking?.status !== "paid" && (
+              <button
+                className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:outline-none  dark:focus:ring-blue-800 font-medium rounded-md text-lg px-6 py-3 text-center "
+                onClick={() => checkOut(booking?.id)}
+              >
+                Confirm Booking
+              </button>
+            )}
+            {booking?.status && (
+              <button
+                className="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:outline-none  dark:focus:ring-blue-800 font-medium rounded-md text-lg px-6 py-3 text-center "
+                onClick={handleDeleteModal}
+                disabled={isDeleting}
+              >
+                Cancel & Delete Booking
+              </button>
+            )}
+          </div>
+        </div>
         {showModal && (
           <DeleteModal
             closeModal={() => setShowModal(false)}
             deleteConfirmation={() => {
               if (booking.id) deleteBooking(booking.id);
             }}
-            deleteMessage="Are you sure you want to delete this booking?"
+            deleteMessage="Are you sure you want to deny reservation of this car?"
             navigateTo={() => navigate("/bookings")}
           />
         )}

@@ -94,7 +94,6 @@ const CheckinBooking = () => {
             )}
           </footer>
         </div>
-        {/* Breakfast */}
         {!booking?.addedGasCard && (
           <div className="flex gap-4">
             <input

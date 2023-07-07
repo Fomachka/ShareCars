@@ -77,7 +77,7 @@ export const BookingRow = ({
           $ {booking.totalPrice}
         </td>
         <td
-          className={`flex justify-center items-center gap-2 font-medium min-w-[100px] overflow-hidden text-ellipsis max-w-[100px] rounded-full py-1 px-2 text-gray-50 2xl:py-1.5 ${
+          className={`flex justify-center items-center gap-2 font-medium min-w-[100px] overflow-hidden text-ellipsis max-w-[100px] rounded-full py-1.5 px-2 text-gray-50  ${
             booking.status === "not-paid" && "bg-red-400"
           } ${booking.status === "paid" && "bg-green-500"}`}
         >
