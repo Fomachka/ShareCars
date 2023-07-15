@@ -158,7 +158,7 @@ const CheckinBooking = () => {
             </p>
           </div>
         </div>
-        <div className="bg-white dark:bg-slate-900 py-6 px-8 rounded-md text-gray-600  space-y-4 text-sm xsm:text-base xl:text-lg">
+        <div className="bg-white dark:bg-slate-900 py-6 px-8 rounded-md text-gray-600 dark:text-gray-200  space-y-4 text-sm xsm:text-base xl:text-lg">
           {!booking?.addedGasCard && (
             <div className="flex gap-4">
               <input
@@ -193,7 +193,7 @@ const CheckinBooking = () => {
               {addGasCard ? (
                 <>
                   <span>{formatCurrency(booking?.totalPrice + choosesToBuyCard)} </span>
-                  <span className=" text-gray-500">
+                  <span className=" text-gray-400">
                     ({formatCurrency(booking?.totalPrice)} +{" "}
                     {formatCurrency(choosesToBuyCard)})
                   </span>

@@ -5,7 +5,7 @@ import PageHeader from "../ui/headers/PageHeader";
 
 const Bookings = () => {
   return (
-    <>
+    <main>
       <PageHeader
         header="Reservations"
         paragraph="Check all of the currently active and inactive reservations"
@@ -29,10 +29,10 @@ const Bookings = () => {
           ]}
         />
       </section>
-      <section className="overflow-x-auto h-full">
+      <section className="overflow-x-auto pb-10">
         <BookingTable />
       </section>
-    </>
+    </main>
   );
 };
 

@@ -12,7 +12,9 @@ const useCheckoutData = () => {
       }),
     onSuccess: (data) => {
       toast.success(`Payment for reservation #${data.id} successfully confirmed `);
-      // {active: true} works
+      // {
+      //   active: true;
+      // }
       queryClient.invalidateQueries({ queryKey: ["booking", `${data.id}`] });
     },
 

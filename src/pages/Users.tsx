@@ -6,7 +6,7 @@ const NewUsers = () => {
     <>
       <PageHeader
         header="Members"
-        paragraph="Create new users for your managing your business."
+        paragraph="Create and manage new administrator users."
       />
       <section>
         <CreateUser />
