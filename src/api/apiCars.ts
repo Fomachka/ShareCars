@@ -51,7 +51,7 @@ export const createNewCar = async (car?: FormValuesApi, id?: number) => {
     ? car?.image
     : `${
         import.meta.env.VITE_SUPABASE_URL
-      }/storage/v1/object/public/place-images/${imageName}`;
+      }/storage/v1/object/public/car-images/${imageName}`;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let query = supabase.from("cars") as any;
@@ -73,7 +73,7 @@ export const createNewCar = async (car?: FormValuesApi, id?: number) => {
   if (hasImagePath) return data;
 
   const { error: imageError } = await supabase.storage
-    .from("place-images")
+    .from("car-images")
     .upload(imageName as string, car?.image as string);
 
   if (imageError) {

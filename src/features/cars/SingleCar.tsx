@@ -64,7 +64,11 @@ export const SingleCar = ({
   };
 
   return (
-    <article className="p-6 bg-white dark:bg-gray-900 rounded-lg min-w-48 flex flex-col justify-between shadow-sm">
+    <article
+      className={`p-6 bg-white dark:bg-gray-900 rounded-lg flex flex-col justify-between shadow-sm max-w-lg ${
+        isLoading && "dark:bg-gray-300"
+      }`}
+    >
       <div>
         <div className="flex justify-between mb-1 text-gray-700 dark:text-gray-200 relative">
           <span className="text-2xl font-bold">{car?.name}</span>
@@ -120,12 +124,14 @@ export const SingleCar = ({
 
       <div>
         <img
-          className="object-cover object-center w-full max-h-30 "
+          className="object-cover object-center w-full max-w-[240px] h-fit mx-auto mt-6"
           src={car?.image}
           alt={car?.modelName}
         />
-        <div className="bg-gray-200/60 dark:bg-gray-200/10 w-full h-0.5 mt-8"></div>
+
+        <div className="bg-gray-200/60 dark:bg-gray-200/10 w-full h-0.5 mt-6"></div>
       </div>
+
       <div className="flex items-center justify-between flex-wrap gap-6 text-gray-400 dark:text-gray-400 mt-6">
         <div className="flex gap-6">
           <div>

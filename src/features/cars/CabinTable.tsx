@@ -61,7 +61,7 @@ export const CabinTable = () => {
           No cars were found matching the criteria ...
         </div>
       )}
-      <div className="grid 2xl:grid-cols-3 md:grid-cols-2 gap-4">
+      <div className="grid 3xl:grid-cols-5 2xl:grid-cols-4 xl:grid-cols-3 sm:grid-cols-2 auto-cols-fr gap-4">
         {selectedCars?.map((car, index) => (
           <SingleCar
             key={index}

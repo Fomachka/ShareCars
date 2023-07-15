@@ -14,17 +14,15 @@ export type Guests = {
 };
 
 export interface Booking {
-  id?: number;
+  id: number;
   checkInDate: string;
+  checkOutDate: string;
   numOfNights: number;
-  numOfGuests: number;
   placePrice: number;
   extraPrice: number;
   totalPrice: number;
   status: string;
-  hasBreakfast: boolean;
-  isPaid: boolean;
-  details: string;
+  addedGasCard: boolean;
   placeId: number;
   guestId: number;
   cars: Places;

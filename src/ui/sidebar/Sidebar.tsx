@@ -7,6 +7,7 @@ import {
   MdSettings,
   MdDirectionsCar,
 } from "react-icons/md";
+import { Uploader } from "../../data/Uploader";
 
 const Sidebar = ({
   toggleMenu,
@@ -56,6 +57,7 @@ const Sidebar = ({
             </NavLink>
           </li>
         </ul>
+        <Uploader />
       </div>
     </aside>
   );
