@@ -5,6 +5,7 @@ import { subtractDates } from "../utils/helpers";
 import { bookings } from "./data-bookings";
 import { cars } from "./data-cabins";
 import { guests } from "./data-guests";
+import { MdCloudUpload, MdSettings } from "react-icons/md";
 
 // const originalSettings = {
 //   minBookingLength: 3,
@@ -33,7 +34,7 @@ async function createGuests() {
   if (error) console.log(error.message);
 }
 
-async function createCabins() {
+async function createCars() {
   const { error } = await supabase.from("cars").insert(cars);
   if (error) console.log(error.message);
 }
@@ -46,7 +47,6 @@ async function createBookings() {
   const allCabinIds = cabinsIds?.map((car) => car.id);
 
   console.log(allCabinIds, "cabins");
-  console.log(guestsIds.length, "guests");
 
   console.log(bookings, "bookings");
 
@@ -90,19 +90,17 @@ async function createBookings() {
   if (error) console.log(error.message);
 }
 
-export function Uploader() {
+export const Uploader = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   async function uploadAll() {
     setIsLoading(true);
-    // Bookings need to be deleted FIRST
     await deleteBookings();
     await deleteGuests();
     await deleteCabins();
 
-    // Bookings need to be created LAST
     await createGuests();
-    await createCabins();
+    await createCars();
     await createBookings();
 
     setIsLoading(false);
@@ -116,35 +114,23 @@ export function Uploader() {
   }
 
   return (
-    <div
-      style={{
-        marginTop: "auto",
-        backgroundColor: "#e0e7ff",
-        padding: "8px",
-        borderRadius: "5px",
-        textAlign: "center",
-      }}
-    >
-      <h3>DEV AREA</h3>
-
+    <div className="space-y-4">
       <button
         onClick={uploadAll}
-        // To prevent accidental clicks. Remove to run once!
         disabled={isLoading}
-        // disabled={true}
-        className="bg-red-400 p-2"
+        className="flex items-center gap-4 text-gray-100  py-3.5 px-4 bg-blue-500 rounded-md  bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:outline-none  dark:focus:ring-blue-800 w-full disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed"
       >
-        Upload ALL sample data
+        <MdCloudUpload className="flex-shrink-0 w-6 h-6 transition duration-75" />
+        <span className="">Upload Cars Info</span>
       </button>
-      <p>Only run this only once!</p>
-      <p>
-        <em>(Cabin images need to be uploaded manually)</em>
-      </p>
-      <hr />
-      <button onClick={uploadBookings} disabled={isLoading} className="bg-red-400 p-2">
-        Upload CURRENT bookings
+      <button
+        onClick={uploadBookings}
+        disabled={isLoading}
+        className="flex items-center gap-4 text-gray-100  py-3.5 px-4 bg-blue-500 rounded-md  bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:outline-none  dark:focus:ring-blue-800 w-full disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed"
+      >
+        <MdCloudUpload className="flex-shrink-0 w-6 h-6 transition duration-75" />
+        <span>Upload Bookings Info</span>
       </button>
-      <p>You can run this every day you develop the app</p>
     </div>
   );
-}
+};

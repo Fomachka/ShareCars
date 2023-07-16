@@ -133,9 +133,9 @@ export const SingleCar = ({
       </div>
 
       <div className="flex items-center justify-between flex-wrap gap-6 text-gray-400 dark:text-gray-400 mt-6">
-        <div className="flex gap-6">
+        <div className="flex gap-6 text-center lg:whitespace-nowrap">
           <div>
-            <MdPerson className="w-6 h-6 inline-block mr-1  " />
+            <MdPerson className="w-6 h-6 inline-block mr-1" />
             <span className="text-sm text-gray-500/70 dark:text-gray-400/80">
               {car?.capacity}
             </span>

@@ -1,5 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import { FilterCriteria } from "../../ui/FilterCriteria";
+import { useEffect } from "react";
 
 export interface AllFilters {
   value: string;
@@ -18,6 +19,10 @@ export const Filter = ({
   const [searchParams, setSearchParams] = useSearchParams();
   const currentlyActive = searchParams.get(currentFilter || allFilters[0].value);
   const selectFilterActive = searchParams.get("select") || "";
+
+  useEffect(() => {
+    handleClick(allFilters[0].value);
+  }, []);
 
   const handleClick = (value: string) => {
     searchParams.set(currentFilter, value);

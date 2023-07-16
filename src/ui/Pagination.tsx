@@ -43,8 +43,8 @@ export const Pagination = ({ numOfResults }: { numOfResults: number }) => {
             className="rounded-md font-medium text-base flex items-center justify-center gap-1.5 py-2.5 px-3.5 transition-all border-none dark:text-gray-200 active:bg-blue-400 active:text-gray-500 enabled:hover:bg-blue-700 dark:enabled:hover:bg-blue-600 enabled:hover:text-white disabled:cursor-not-allowed disabled:active:text-red-500 disabled:active:bg-transparent"
             onClick={prevPage}
           >
-            <MdOutlineChevronLeft className="w-6 h-6 text-slate-500 dark:text-gray-300" />
-            <span className="text-slate-700 dark:text-gray-200">Prev</span>
+            <MdOutlineChevronLeft className="w-6 h-6" />
+            <span className="">Prev</span>
           </button>
         )}
         {currentPage !== numOfPages && (
@@ -52,8 +52,8 @@ export const Pagination = ({ numOfResults }: { numOfResults: number }) => {
             className="rounded-md font-medium text-base flex items-center justify-center gap-1.5 py-2 px-3 transition-all border-none dark:text-gray-200  enabled:hover:bg-blue-700 dark:enabled:hover:bg-blue-600 enabled:hover:text-white disabled:cursor-not-allowed disabled:active:text-red-500 disabled:active:bg-transparent"
             onClick={nextPage}
           >
-            <span className="text-slate-700 dark:text-gray-200">Next</span>
-            <MdOutlineChevronRight className="w-6 h-6 text-slate-500 dark:text-gray-300" />
+            <span className="">Next</span>
+            <MdOutlineChevronRight className="w-6 h-6" />
           </button>
         )}
       </div>

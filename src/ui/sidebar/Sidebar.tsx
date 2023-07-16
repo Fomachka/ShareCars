@@ -24,7 +24,7 @@ const Sidebar = ({
       } bg-white border-r border-gray-200 lg:translate-x-0 dark:bg-gray-900 dark:border-gray-700`}
       aria-label="Sidebar"
     >
-      <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-900">
+      <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-900 flex flex-col justify-between">
         <ul className="space-y-5">
           <li onClick={() => setToggleMenu((prev) => !prev)}>
             <NavLink className="navigation-menu" to="/dashboard">

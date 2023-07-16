@@ -2,6 +2,8 @@ import { HiTrash } from "react-icons/hi2";
 import { Booking, Guests, Places } from "./BookingTable";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { format, isToday } from "date-fns";
+
 import useCheckoutData from "../../hooks/useCheckoutData";
 import DeleteModal from "../../ui/modals/DeleteModal";
 import toast from "react-hot-toast";
@@ -15,6 +17,7 @@ import {
   MdPriceCheck,
   MdRemoveRedEye,
 } from "react-icons/md";
+import { formatCurrency } from "../../utils/helpers";
 
 export const BookingRow = ({
   booking,
@@ -64,17 +67,21 @@ export const BookingRow = ({
     <>
       {/* // [&:not(:last-child)]:border-b-2 [&:not(:last-child)]:border-gray-100 */}
       <tr className="grid grid-cols-[2fr_2fr_2.4fr_1.4fr_1fr_3.2rem] gap-20 items-center tracking-wide text-gray-600 dark:text-gray-100 py-6 px-10 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-slate-900 border-spacing-[20px] m-2 hover:rounded-md 2xl:text-lg ">
-        <td className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px]">
-          {guests.firstName + " " + guests.lastName}
+        <td className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px]wordspace-none flex flex-col gap-2">
+          <span>{guests.firstName + " " + guests.lastName} </span>
+          <span className="text-sm text-gray-400/80 dark:text-gray-400 ">
+            {guests.email}
+          </span>
         </td>
-        <td className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px]">
+        <td className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px] ">
           {cars.name}
         </td>
-        <td className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px]">
-          {booking.numOfNights} Nights
+        <td className=" text-[0.85rem] whitespace-nowrap  w-fit rounded-md border-2 px-3 py-2">
+          {format(new Date(booking.checkInDate), "MMM dd yyyy")} &mdash;{" "}
+          {format(new Date(booking.checkOutDate), "MMM dd yyyy")}
         </td>
         <td className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px]">
-          $ {booking.totalPrice}
+          {formatCurrency(booking.totalPrice)}
         </td>
         <td
           className={`flex justify-center items-center gap-2 font-medium min-w-[100px] overflow-hidden text-ellipsis max-w-[100px] rounded-full py-1.5 px-2 text-gray-50  ${
