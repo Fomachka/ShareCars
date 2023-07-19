@@ -1,9 +1,10 @@
 import useUser from "../../features/authentication/hooks/useUser";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import useLogout from "../../features/authentication/hooks/useLogout";
 import { MdOutlineToggleOn, MdToggleOff } from "react-icons/md";
 import useDarkMode from "../../hooks/useDarkMode";
+import { ThemeContext } from "../../hooks/useContext";
 
 export default function Headers({
   setToggleMenu,
@@ -18,11 +19,14 @@ export default function Headers({
   const [toggleDarkMode, setToggleDarkMode] = useState(
     colorTheme === "light" ? true : false
   );
+  const [setThemeContext] = useContext(ThemeContext);
+
   const [toggleAvatarMenu, setToggleAvatarMenu] = useState(false);
 
   const handleDarkMode = () => {
     setTheme(colorTheme);
     setToggleDarkMode((prev) => !prev);
+    setThemeContext(colorTheme);
   };
 
   return (

@@ -2,7 +2,7 @@ import { CabinTable } from "../features/cars/CabinTable.js";
 import Form from "../features/cars/Form.js";
 import { useState } from "react";
 import Modal from "../ui/modals/Modal.js";
-import { Filter } from "../features/cars/Filter.js";
+import Filter from "../features/cars/Filter.js";
 import PageHeader from "../ui/headers/PageHeader.js";
 import { MdAssignmentAdd, MdHdrPlus, MdPlusOne } from "react-icons/md";
 
@@ -10,7 +10,7 @@ const Cars = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <>
+    <main>
       <PageHeader
         header="Available cars"
         paragraph="See and manage schedule bookings of all guests."
@@ -49,7 +49,7 @@ const Cars = () => {
           </Modal>
         )}
       </section>
-    </>
+    </main>
   );
 };
 

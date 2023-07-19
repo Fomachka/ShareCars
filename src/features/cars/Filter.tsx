@@ -7,14 +7,14 @@ export interface AllFilters {
   category: string;
 }
 
-export const Filter = ({
+const Filter = ({
   currentFilter,
   allFilters,
   allSorting,
 }: {
   currentFilter: string;
   allFilters: AllFilters[];
-  allSorting: AllFilters[];
+  allSorting?: AllFilters[];
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentlyActive = searchParams.get(currentFilter || allFilters[0].value);
@@ -56,11 +56,15 @@ export const Filter = ({
           </button>
         ))}
       </div>
-      <FilterCriteria
-        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => handleChange(event)}
-        currentSelectFilter={selectFilterActive}
-        allFilters={allSorting}
-      />
+      {allSorting && (
+        <FilterCriteria
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>) => handleChange(event)}
+          currentSelectFilter={selectFilterActive}
+          allFilters={allSorting}
+        />
+      )}
     </div>
   );
 };
+
+export default Filter;

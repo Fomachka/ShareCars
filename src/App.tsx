@@ -15,6 +15,8 @@ import { SingleBooking } from "./pages/SingleBooking.js";
 import Cars from "./pages/Cars.js";
 import { CheckIn } from "./pages/CheckIn.js";
 import UserSettings from "./pages/UserSettings.js";
+import { useState } from "react";
+import { ThemeContext } from "./hooks/useContext.js";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,28 +27,32 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  const [themeContext, setThemeContext] = useState(localStorage.theme || "light");
+
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <div className="font-roboto ">
-        <BrowserRouter>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route path="/" element={<Navigate replace to="dashboard" />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="bookings" element={<Bookings />} />
-              <Route path="bookings/:id" element={<SingleBooking />} />
-              <Route path="cars" element={<Cars />} />
-              <Route path="confirmation/:id" element={<CheckIn />} />
-              <Route path="users" element={<Users />} />
-              <Route path="settings" element={<Settings />} />
-              <Route path="user/:id" element={<UserSettings />} />
-            </Route>
-            <Route path="login" element={<Login />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <ThemeContext.Provider value={[themeContext, setThemeContext]}>
+        <div className="font-roboto ">
+          <BrowserRouter>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route path="/" element={<Navigate replace to="dashboard" />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="bookings" element={<Bookings />} />
+                <Route path="bookings/:id" element={<SingleBooking />} />
+                <Route path="cars" element={<Cars />} />
+                <Route path="confirmation/:id" element={<CheckIn />} />
+                <Route path="users" element={<Users />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="user/:id" element={<UserSettings />} />
+              </Route>
+              <Route path="login" element={<Login />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </ThemeContext.Provider>
       <Toaster
         position="top-center"
         gutter={12}
