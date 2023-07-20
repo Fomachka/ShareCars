@@ -1,5 +1,6 @@
 import { Loading } from "../../ui/Loading";
 import DashboardFilter from "./DashboardFilter";
+import DurationChart from "./DurationChart";
 import SalesChart from "./SalesChart";
 import Stats from "./Stats";
 import useRecentBookings from "./useRecentBookings";
@@ -13,23 +14,19 @@ export interface BookingStats {
 
 const DashboardLayout = () => {
   const { bookings, isLoading } = useRecentBookings();
-  const { stays, confirmedStays, isLoading: isLoadingStays, numDays } = useRecentStays();
-  console.log(confirmedStays);
+  const { renters, paidRenters, isLoading: isLoadingStays, numDays } = useRecentStays();
+  console.log(renters && renters);
 
   if (isLoading || isLoadingStays) return <Loading />;
 
   return (
     <div>
       <DashboardFilter />
-      {bookings && confirmedStays && (
-        <Stats bookings={bookings} confirmedStays={confirmedStays} />
-      )}
-      <div className="grid grid-cols-[1fr_1fr_1fr_1fr] grid-rows-[auto_34rem_auto] gap-10 overflow-auto">
-        <div>Statistics</div>
-        <div>Today&apos;s activity</div>
-        <div>Chart Stay duration</div>
-        <div>Chart of sales</div>
-      </div>
+      {bookings && renters && <Stats bookings={bookings} renters={renters} />}
+      <section className="flex gap-6 w-full">
+        {renters && <DurationChart renters={renters} numOfDays={numDays} />}
+        {renters && <DurationChart renters={renters} numOfDays={numDays} />}
+      </section>
       {bookings && <SalesChart bookings={bookings} numOfDays={numDays} />}
     </div>
   );

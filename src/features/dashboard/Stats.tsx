@@ -5,19 +5,19 @@ import { MdCalendarToday, MdCarRental, MdMonetizationOn, MdPeople } from "react-
 
 function Stats({
   bookings,
-  confirmedStays,
+  renters,
 }: {
   bookings: BookingStats[];
-  confirmedStays: BookingFull[];
+  renters: BookingFull[];
 }) {
-  const numBookings = bookings?.length;
+  const numOfBookings = bookings?.length;
 
   const sales = bookings.reduce((acc, cur) => acc + cur.totalPrice, 0);
 
-  const activeRenters = confirmedStays.length;
+  const activeRenters = renters.length;
 
   const averageNumOfNights = (
-    confirmedStays.reduce((acc, cur) => acc + cur.numOfNights, 0) / numBookings
+    renters.reduce((acc, cur) => acc + cur.numOfNights, 0) / numOfBookings
   ).toFixed(1);
 
   return (
@@ -25,7 +25,7 @@ function Stats({
       <Stat
         title="Bookings"
         icon={<MdCalendarToday className="w-6 h-6" />}
-        value={numBookings}
+        value={numOfBookings}
         ending="active bookings"
         color="#2563eb"
       />
@@ -37,10 +37,10 @@ function Stats({
         color="#22c55e"
       />
       <Stat
-        title="Confirmed Renters"
+        title="Currently Renting"
         icon={<MdPeople className="w-6 h-6" />}
         value={activeRenters}
-        ending="confirmed payments"
+        ending="active renters"
         color="#14b8a6"
       />
       <Stat

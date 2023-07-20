@@ -19,7 +19,7 @@ export default function Headers({
   const [toggleDarkMode, setToggleDarkMode] = useState(
     colorTheme === "light" ? true : false
   );
-  const [setThemeContext] = useContext(ThemeContext);
+  const [themeContext, setThemeContext] = useContext(ThemeContext);
 
   const [toggleAvatarMenu, setToggleAvatarMenu] = useState(false);
 

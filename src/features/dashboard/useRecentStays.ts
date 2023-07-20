@@ -27,16 +27,14 @@ const useRecentStays = () => {
 
   const queryDate = subDays(new Date(), numDays).toISOString();
 
-  const { isLoading, data: stays } = useQuery({
+  const { isLoading, data: renters } = useQuery({
     queryFn: () => getStaysAfterDate(queryDate),
-    queryKey: ["stays", `last-${numDays}`],
+    queryKey: ["renters", `last-${numDays}`],
   });
 
-  const confirmedStays = stays?.filter(
-    (stay) => stay.status === "paid" || stay.status === "not-paid"
-  );
+  const paidRenters = renters?.filter((renter) => renter.status !== "not-paid");
 
-  return { isLoading, stays, confirmedStays, numDays };
+  return { isLoading, renters, paidRenters, numDays };
 };
 
 export default useRecentStays;

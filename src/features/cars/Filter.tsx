@@ -17,11 +17,13 @@ const Filter = ({
   allSorting?: AllFilters[];
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentlyActive = searchParams.get(currentFilter || allFilters[0].value);
+  const currentlyActive = searchParams.get(
+    currentFilter ? currentFilter : allFilters[0].value
+  );
   const selectFilterActive = searchParams.get("select") || "";
 
   useEffect(() => {
-    handleClick(allFilters[0].value);
+    if (!searchParams.get(currentFilter)) handleClick(allFilters[0].value);
   }, []);
 
   const handleClick = (value: string) => {

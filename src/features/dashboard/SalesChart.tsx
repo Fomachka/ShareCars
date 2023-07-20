@@ -1,5 +1,5 @@
 import { eachDayOfInterval, format, isDate, isSameDay, subDays } from "date-fns";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import {
   Area,
   AreaChart,
@@ -39,18 +39,28 @@ function SalesChart({
   });
 
   return (
-    <div className="bg-white py-8 rounded-md dark:bg-slate-900 ">
+    <div className="bg-white py-8 pb-6 px-4 rounded-md dark:bg-slate-900 ">
+      <h4 className="text-lg md:text-xl font-semibold text-slate-700 dark:text-gray-300  mb-6 ml-8">
+        Earnings from {format(allDates.at(0) as Date, "MMM dd yyyy")} &mdash;{" "}
+        {format(allDates.at(-1) as Date, "MMM dd yyyy")}
+      </h4>
       <ResponsiveContainer height={300} width="100%">
         <AreaChart data={data}>
           <XAxis
             dataKey="label"
             tick={{
-              fill: `${themeContext === "light" ? "#1e293b" : "#e5e7eb"}`,
+              fill: `${themeContext === "light" ? "#334155" : "#d1d5db"}`,
             }}
             tickLine={{ stroke: `${themeContext === "light" ? "black" : "white"}` }}
           />
-          <YAxis unit="$" />
-          <CartesianGrid strokeDasharray="5" />
+          <YAxis
+            unit="$"
+            tick={{
+              fill: `${themeContext === "light" ? "#334155" : "#d1d5db"}`,
+            }}
+            tickLine={{ stroke: `${themeContext === "light" ? "black" : "white"}` }}
+          />
+          <CartesianGrid strokeDasharray="3" />
           <Tooltip
             contentStyle={{
               backgroundColor: `${themeContext === "light" ? "white" : "#0f172a"}`,
@@ -70,7 +80,7 @@ function SalesChart({
           <Area
             dataKey="extraPrice"
             type="monotone"
-            stroke={themeContext === "light" ? "#6ee7b7" : "#14b8a6"}
+            stroke={themeContext === "light" ? "#10b981" : "#14b8a6"}
             fill={themeContext === "light" ? "#a7f3d0" : "#059669"}
             strokeWidth={1}
             name="Gas card added"
