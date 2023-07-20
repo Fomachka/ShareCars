@@ -23,11 +23,15 @@ function DurationChart({
   const createChartData = () => {
     const finalResult = [
       {
-        name: "0 - 5 days",
+        name: "0 - 3 days",
         value: 0,
       },
       {
-        name: "More than 5 days",
+        name: "4 to 7 days",
+        value: 0,
+      },
+      {
+        name: "More than 7 days",
         value: 0,
       },
     ];
@@ -37,10 +41,12 @@ function DurationChart({
       const endingDate = parseISO(rent.checkOutDate);
       const difference = differenceInDays(startingDate, endingDate);
 
-      if (Math.abs(difference) > 5) {
-        return { name: "More than 5 days", value: Math.abs(difference) };
-      } else if (Math.abs(difference) <= 5) {
-        return { name: "0-5 days", value: Math.abs(difference) };
+      if (Math.abs(difference) > 3 && Math.abs(difference) <= 7) {
+        return { name: "4 to 7 days", value: Math.abs(difference) };
+      } else if (Math.abs(difference) <= 3) {
+        return { name: "0 - 3 days", value: Math.abs(difference) };
+      } else if (Math.abs(difference) > 7) {
+        return { name: "More than 7 days", value: Math.abs(difference) };
       }
 
       return { name: Math.abs(difference) + " days", value: Math.abs(difference) };
@@ -51,10 +57,12 @@ function DurationChart({
     ) as ResultProps[];
 
     result.forEach((result) => {
-      if (result.value > 5) {
-        finalResult[1].value += result.value;
-      } else {
+      if (result.value <= 3) {
         finalResult[0].value += result.value;
+      } else if (result.value > 3 && result.value <= 7) {
+        finalResult[1].value += result.value;
+      } else if (result.value > 7) {
+        finalResult[2].value += result.value;
       }
     });
 
@@ -111,43 +119,50 @@ function DurationChart({
     <div
       className={`${
         themeContext === "light" ? "bg-white" : "bg-slate-900"
-      } mb-8 basis-1/2 rounded-md`}
+      } mb-8 rounded-md w-full `}
     >
-      <h4 className="text-lg md:text-xl font-semibold text-slate-700 dark:text-gray-300 my-6 ml-8">
-        Days rented
+      <h4 className="text-lg md:text-xl font-semibold text-slate-700 dark:text-gray-300 mt-6 mx-6 ">
+        Average renting days
       </h4>
-      <ResponsiveContainer width="100%" height={240}>
-        <PieChart>
-          <Pie
-            data={createChartData()}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            label={renderCustomizedLabel}
-            outerRadius={80}
-            fill="#8884d8"
-            dataKey="value"
-          >
-            {createChartData().map((_, index) => (
-              <Cell
-                key={`cell-${index}`}
-                stroke={themeContext === "light" ? "white" : "#0f172a"}
-                strokeWidth={2}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-          <Tooltip />
-          <Legend
-            verticalAlign="middle"
-            align="right"
-            width={300}
-            layout="vertical"
-            iconSize={15}
-            iconType="circle"
-          />
-        </PieChart>
-      </ResponsiveContainer>
+      <div className="w-full h-[250px] overflow-auto">
+        <ResponsiveContainer>
+          <PieChart>
+            <Pie
+              data={createChartData()}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              label={renderCustomizedLabel}
+              outerRadius={80}
+              fill="#8884d8"
+              dataKey="value"
+            >
+              {createChartData().map((_, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  stroke={themeContext === "light" ? "white" : "#0f172a"}
+                  strokeWidth={2}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+            <Tooltip
+              contentStyle={{
+                backgroundColor: `${themeContext === "light" ? "white" : "#0f172a"}`,
+                color: "red",
+                borderRadius: "5px",
+              }}
+            />
+            <Legend
+              verticalAlign="bottom"
+              align="right"
+              layout="vertical"
+              iconSize={10}
+              iconType="circle"
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }

@@ -23,8 +23,7 @@ const DashboardLayout = () => {
     <div>
       <DashboardFilter />
       {bookings && renters && <Stats bookings={bookings} renters={renters} />}
-      <section className="flex gap-6 w-full">
-        {renters && <DurationChart renters={renters} numOfDays={numDays} />}
+      <section className="flex gap-6 w-full flex-wrap">
         {renters && <DurationChart renters={renters} numOfDays={numDays} />}
       </section>
       {bookings && <SalesChart bookings={bookings} numOfDays={numDays} />}
