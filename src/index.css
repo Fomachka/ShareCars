@@ -10,6 +10,10 @@
   button {
     -webkit-tap-highlight-color: transparent;
   }
+
+  .recharts-wrapper {
+    position: absolute;
+  }
 }
 
 @layer components {

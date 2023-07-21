@@ -12,7 +12,7 @@ export interface BookingFull {
   created_at: Date;
   extraPrice: number;
   guestId: number;
-  guests: { firstName: string };
+  guests: { firstName: string; lastName?: string; email?: string };
   id: number;
   numOfNights: number;
   placeId: number;

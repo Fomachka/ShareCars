@@ -5,9 +5,9 @@ const DashboardFilter = () => {
     <Filter
       currentFilter="last"
       allFilters={[
-        { value: "7", category: "Last 7d" },
-        { value: "30", category: "Last 30d" },
-        { value: "90", category: "Last 90d" },
+        { value: "7", category: "7 days" },
+        { value: "30", category: "30 days" },
+        { value: "90", category: "90 days" },
       ]}
     />
   );

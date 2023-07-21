@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { formatCurrency } from "../../utils/helpers";
 
-function Stat({
+const SingleInfo = ({
   icon,
   title,
   value,
@@ -13,7 +13,7 @@ function Stat({
   value: number;
   ending: string;
   color: string;
-}) {
+}) => {
   return (
     <div
       className={`flex flex-col w-full gap-6 items-start bg-white dark:bg-slate-900  py-6 px-6 rounded-md`}
@@ -32,6 +32,6 @@ function Stat({
       </div>
     </div>
   );
-}
+};
 
-export default Stat;
+export default SingleInfo;

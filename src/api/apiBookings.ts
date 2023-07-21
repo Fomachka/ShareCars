@@ -92,12 +92,12 @@ export async function getStaysAfterDate(date: string) {
   return data;
 }
 
-export async function getStaysTodayActivity() {
+export async function getDashboardOverview() {
   const { data, error } = await supabase
     .from("bookings")
-    .select("*, guests(fullName, nationality, countryFlag)")
+    .select("*, guests(firstName, lastName, email)")
     .or(
-      `and(status.eq.unconfirmed,startDate.eq.${getToday()}),and(status.eq.not-paid,endDate.eq.${getToday()})`
+      `and(status.eq.not-paid,checkInDate.eq.${getToday()}),and(status.eq.paid,checkOutDate.eq.${getToday()})`
     )
     .order("created_at");
 

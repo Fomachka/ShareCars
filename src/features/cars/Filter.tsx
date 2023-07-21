@@ -43,11 +43,11 @@ const Filter = ({
 
   return (
     <div className="flex items-center gap-6 mb-8 flex-1 flex-wrap 2xl:mb-9">
-      <div className="bg-white dark:bg-slate-900 shadow-sm rounded-md py-2 px-3 flex gap-2 justify-evenly flex-1 md:flex-none text-sm xsm:text-base">
+      <div className="bg-white dark:bg-slate-900 shadow-sm rounded-md py-2 px-2 xsm:px-3 flex gap-2 justify-evenly flex-1 md:flex-none text-sm xsm:text-base">
         {allFilters.map((filter, index) => (
           <button
             key={index}
-            className={`border-none rounded-md font-semi 2xl:text-lg py-1 px-4 transition-all text-slate-400 dark:text-slate-300/80 hover:bg-blue-700 dark:hover:bg-blue-600 hover:text-white dark:hover:text-slate-100 disabled:cursor-no-drop w-full whitespace-nowrap ${
+            className={`border-none rounded-md font-semi 2xl:text-lg py-1 px-2 xsm:px-4 transition-all text-slate-400 dark:text-slate-300/80 hover:bg-blue-700 dark:hover:bg-blue-600 hover:text-white dark:hover:text-slate-100 disabled:cursor-no-drop w-full whitespace-nowrap ${
               filter.value === currentlyActive &&
               "bg-blue-700 dark:bg-blue-600 !text-white"
             }`}

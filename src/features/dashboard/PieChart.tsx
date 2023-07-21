@@ -1,9 +1,8 @@
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 import { ThemeContext } from "../../hooks/useContext";
-import { useContext, useEffect } from "react";
-import { BookingFull } from "./useRecentStays";
-import { differenceInDays, eachDayOfInterval, format, parseISO, subDays } from "date-fns";
+import { useContext } from "react";
+import { differenceInDays, parseISO } from "date-fns";
 import { Booking } from "../bookings/BookingTable";
 
 type ResultProps = {
@@ -11,13 +10,7 @@ type ResultProps = {
   value: number;
 };
 
-function DurationChart({
-  renters,
-  numOfDays,
-}: {
-  renters: Booking[];
-  numOfDays: number;
-}) {
+function DurationChart({ renters }: { renters: Booking[] }) {
   const [themeContext] = useContext(ThemeContext);
 
   const createChartData = () => {
@@ -36,7 +29,7 @@ function DurationChart({
       },
     ];
 
-    const difference = renters.map((rent: any) => {
+    const difference = renters.map((rent) => {
       const startingDate = parseISO(rent.checkInDate);
       const endingDate = parseISO(rent.checkOutDate);
       const difference = differenceInDays(startingDate, endingDate);
@@ -88,7 +81,6 @@ function DurationChart({
     innerRadius,
     outerRadius,
     percent,
-    index,
   }: {
     cx: number;
     cy: number;
@@ -119,13 +111,13 @@ function DurationChart({
     <div
       className={`${
         themeContext === "light" ? "bg-white" : "bg-slate-900"
-      } mb-8 rounded-md w-full `}
+      } mb-8 rounded-md xl:max-w-[400px] w-full p-6 max-w-none`}
     >
-      <h4 className="text-lg md:text-xl font-semibold text-slate-700 dark:text-gray-300 mt-6 mx-6 ">
+      <h4 className="text-lg md:text-xl font-semibold text-slate-700 dark:text-gray-300 ">
         Average renting days
       </h4>
-      <div className="w-full h-[250px] overflow-auto">
-        <ResponsiveContainer>
+      <div className="w-[100%] h-[250px]  overflow-auto ">
+        <ResponsiveContainer minWidth={340}>
           <PieChart>
             <Pie
               data={createChartData()}
@@ -146,18 +138,12 @@ function DurationChart({
                 />
               ))}
             </Pie>
-            <Tooltip
-              contentStyle={{
-                backgroundColor: `${themeContext === "light" ? "white" : "#0f172a"}`,
-                color: "red",
-                borderRadius: "5px",
-              }}
-            />
+            <Tooltip />
             <Legend
               verticalAlign="bottom"
               align="right"
               layout="vertical"
-              iconSize={10}
+              iconSize={8}
               iconType="circle"
             />
           </PieChart>

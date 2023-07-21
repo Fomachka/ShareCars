@@ -10,13 +10,7 @@ import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteBooking } from "../../api/apiBookings";
 import useDeleteBooking from "./hooks/useDeleteBooking";
-import {
-  MdCheck,
-  MdCheckBox,
-  MdOutlineMoreVert,
-  MdPriceCheck,
-  MdRemoveRedEye,
-} from "react-icons/md";
+import { MdCheckBox, MdOutlineMoreVert, MdRemoveRedEye } from "react-icons/md";
 import { formatCurrency } from "../../utils/helpers";
 
 export const BookingRow = ({
@@ -88,7 +82,7 @@ export const BookingRow = ({
             booking.status === "not-paid" && "bg-red-400"
           } ${booking.status === "paid" && "bg-green-500"}`}
         >
-          <div className="h-1.5 w-1.5 rounded-full bg-white font-sm"></div>
+          <div className="h-1.5 w-1.5 rounded-full bg-white"></div>
           <div className="text-sm ">{payStatus()}</div>
         </td>
 

@@ -1,10 +1,11 @@
 import { Loading } from "../../ui/Loading";
 import DashboardFilter from "./DashboardFilter";
-import DurationChart from "./DurationChart";
-import SalesChart from "./SalesChart";
-import Stats from "./Stats";
+import DurationChart from "./PieChart";
+import SalesChart from "./GraphChart";
+import Stats from "./HeaderInfo";
 import useRecentBookings from "./useRecentBookings";
 import useRecentStays from "./useRecentStays";
+import DashboardOverview from "./overview/DashboardOverview";
 
 export interface BookingStats {
   created_at: Date;
@@ -23,8 +24,9 @@ const DashboardLayout = () => {
     <div>
       <DashboardFilter />
       {bookings && renters && <Stats bookings={bookings} renters={renters} />}
-      <section className="flex gap-6 w-full flex-wrap">
-        {renters && <DurationChart renters={renters} numOfDays={numDays} />}
+      <section className="flex gap-x-6 w-full flex-wrap">
+        <DashboardOverview />
+        {renters && <DurationChart renters={renters} />}
       </section>
       {bookings && <SalesChart bookings={bookings} numOfDays={numDays} />}
     </div>

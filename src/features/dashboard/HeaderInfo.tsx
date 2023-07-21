@@ -1,15 +1,15 @@
-import Stat from "./Stat";
 import { BookingStats } from "./DashboardLayout";
 import { BookingFull } from "./useRecentStays";
 import { MdCalendarToday, MdCarRental, MdMonetizationOn, MdPeople } from "react-icons/md";
+import SingleInfo from "./SingleInfo";
 
-function Stats({
+const HeaderInfo = ({
   bookings,
   renters,
 }: {
   bookings: BookingStats[];
   renters: BookingFull[];
-}) {
+}) => {
   const numOfBookings = bookings?.length;
 
   const sales = bookings.reduce((acc, cur) => acc + cur.totalPrice, 0);
@@ -22,28 +22,28 @@ function Stats({
 
   return (
     <div className="grid 2xl:grid-cols-4 sm:grid-cols-2 gap-6 w-full mb-8">
-      <Stat
+      <SingleInfo
         title="Bookings"
         icon={<MdCalendarToday className="w-6 h-6" />}
         value={numOfBookings}
         ending="active bookings"
         color="#2563eb"
       />
-      <Stat
+      <SingleInfo
         title="Sales"
         icon={<MdMonetizationOn className="w-6 h-6" />}
         value={sales}
         ending="earned"
         color="#22c55e"
       />
-      <Stat
+      <SingleInfo
         title="Currently Renting"
         icon={<MdPeople className="w-6 h-6" />}
         value={activeRenters}
         ending="active renters"
         color="#14b8a6"
       />
-      <Stat
+      <SingleInfo
         title="Days rented"
         icon={<MdCarRental className="w-6 h-6" />}
         value={+averageNumOfNights}
@@ -52,6 +52,6 @@ function Stats({
       />
     </div>
   );
-}
+};
 
-export default Stats;
+export default HeaderInfo;
