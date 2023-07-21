@@ -26,7 +26,7 @@ export interface Booking {
   placeId: number;
   guestId: number;
   cars: Places;
-  guests: Guests;
+  guests?: Guests;
 }
 
 export const BookingTable = () => {
@@ -36,7 +36,11 @@ export const BookingTable = () => {
   if (isLoading) return <Loading />;
 
   if (!bookings?.length) {
-    return <div className="text-2xl text-gray-700">No Bookings could be found.</div>;
+    return (
+      <div className="text-slate-700 dark:text-gray-200 text-xl xl:text-2xl">
+        No Bookings could be found.
+      </div>
+    );
   }
   return (
     <table className=" bg-white dark:bg-slate-900 rounded-md overflow-x-auto w-full table-auto">

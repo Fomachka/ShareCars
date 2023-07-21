@@ -48,6 +48,14 @@ function BookingDetail() {
 
   if (isLoading || isLoadingSettings) return <Loading />;
 
+  if (!booking) {
+    return (
+      <div className="text-xl text-slate-700 dark:text-gray-200 xl:text-2xl flex justify-center items-center h-full">
+        No bookings could be found.
+      </div>
+    );
+  }
+
   const handleDeleteModal = () => {
     setShowModal((prev) => !prev);
   };

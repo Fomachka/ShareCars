@@ -12,7 +12,11 @@ export const CabinTable = () => {
   if (isLoading) return <Loading />;
 
   if (!cars?.length) {
-    return <div className="text-2xl text-gray-700">No Bookings could be found.</div>;
+    return (
+      <div className="text-slate-700 dark:text-gray-200 text-xl xl:text-2xl">
+        No cars could be found.
+      </div>
+    );
   }
 
   const filterParams = searchParams.get("type") || "all";
