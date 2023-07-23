@@ -1,17 +1,14 @@
-import { HiOutlineHomeModern } from "react-icons/hi2";
 import useBooking from "../../hooks/useSingleBooking";
 import { format, isToday } from "date-fns";
 import { formatCurrency, formatDistanceFromNow } from "../../utils/helpers";
-import useNavigateBack from "../../hooks/useNavigateBack";
 import { useNavigate } from "react-router-dom";
-import useCheckoutData from "../../hooks/useCheckoutData";
 import { useState } from "react";
 import DeleteModal from "../../ui/modals/DeleteModal";
 import useDeleteBooking from "./hooks/useDeleteBooking";
 import PageHeader from "../../ui/headers/PageHeader";
 import { MdAccessTimeFilled, MdCarRental, MdCheckCircle } from "react-icons/md";
 import useSettings from "../../hooks/useSettingsData";
-import useCheckinData from "../../hooks/useCheckinData";
+import useDetailsConfirmation from "../../hooks/useDetailsConfirmation";
 import { Loading } from "../../ui/Loading";
 
 function BookingDetail() {
@@ -21,7 +18,7 @@ function BookingDetail() {
 
   const navigate = useNavigate();
   const { booking, isLoading } = useBooking();
-  const { checkIn, isLoading: isCheckingIn } = useCheckinData();
+  const { checkIn, isLoading: isCheckingIn } = useDetailsConfirmation();
   const { settings, isLoading: isLoadingSettings } = useSettings();
   const { isLoading: isDeleting, mutate: deleteBooking } = useDeleteBooking();
 
@@ -263,7 +260,6 @@ function BookingDetail() {
             navigateTo={() => navigate("/bookings")}
           />
         )}
-        {/* <button onClick={navigateBack}>Back</button> */}
       </section>
     </div>
   );

@@ -1,12 +1,11 @@
 import { HiTrash } from "react-icons/hi2";
-import { Booking, Guests, Places } from "./BookingTable";
+import { Booking } from "./BookingTable";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { format, isToday } from "date-fns";
+import { format } from "date-fns";
 
-import useCheckoutData from "../../hooks/useCheckoutData";
+import usePaymentConfirmation from "../../hooks/usePaymentConfirmation";
 import DeleteModal from "../../ui/modals/DeleteModal";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useDeleteBooking from "./hooks/useDeleteBooking";
 import { MdCheckBox, MdOutlineMoreVert, MdRemoveRedEye } from "react-icons/md";
 import { formatCurrency } from "../../utils/helpers";
@@ -26,8 +25,7 @@ export const BookingRow = ({
   const [showModal, setShowModal] = useState(false);
   const [showSidemenu, setShowSidemenu] = useState(false);
   const navigate = useNavigate();
-  const { checkOut, isCheckingOut } = useCheckoutData();
-  const queryClient = useQueryClient();
+  const { checkOut, isCheckingOut } = usePaymentConfirmation();
 
   const payStatus = () => {
     if (booking?.status === "not-paid") {
@@ -39,7 +37,7 @@ export const BookingRow = ({
     }
   };
 
-  const { isLoading: isDeleting, mutate: deleteBooking } = useDeleteBooking();
+  const { mutate: deleteBooking } = useDeleteBooking();
 
   const handleSideMenu = () => {
     setCurrentMenu(index);
@@ -52,12 +50,10 @@ export const BookingRow = ({
 
   const handleDeleteModal = () => {
     setShowModal((prev) => !prev);
-    // () => mutate(place.id)
   };
 
   return (
     <>
-      {/* // [&:not(:last-child)]:border-b-2 [&:not(:last-child)]:border-gray-100 */}
       <div className="grid grid-cols-[2fr_2fr_2.4fr_1.4fr_1fr_3.2rem] gap-20 items-center tracking-wide text-gray-600 dark:text-gray-100 py-6 px-10 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-slate-900 border-spacing-[20px] m-2 hover:rounded-md 2xl:text-lg ">
         <div className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px]wordspace-none flex flex-col gap-2 ">
           <span>{guests?.firstName + " " + guests?.lastName} </span>

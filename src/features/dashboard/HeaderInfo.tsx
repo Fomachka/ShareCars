@@ -1,5 +1,5 @@
 import { BookingStats } from "./DashboardLayout";
-import { BookingFull } from "./useRecentStays";
+import { BookingFull } from "./hooks/useFilteredUsers";
 import { MdCalendarToday, MdCarRental, MdMonetizationOn, MdPeople } from "react-icons/md";
 import SingleInfo from "./SingleInfo";
 

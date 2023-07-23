@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { subDays } from "date-fns";
 import { useSearchParams } from "react-router-dom";
-import { getRentersFilteredByDate } from "../../api/apiBookings";
+import { getRentersFilteredByDate } from "../../../api/apiBookings";
 
 export interface BookingFull {
   addedGasCard: boolean;
@@ -20,7 +20,7 @@ export interface BookingFull {
   totalPrice: number;
 }
 
-const useRecentStays = () => {
+const useFilteredUsers = () => {
   const [searchParams] = useSearchParams();
 
   const numDays = !searchParams.get("last") ? 7 : Number(searchParams.get("last"));
@@ -37,4 +37,4 @@ const useRecentStays = () => {
   return { isLoading, renters, paidRenters, numDays };
 };
 
-export default useRecentStays;
+export default useFilteredUsers;

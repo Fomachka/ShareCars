@@ -1,5 +1,5 @@
-import CheckinBooking from "../features/check-in-out/CheckinBooking";
+import ConfirmPayment from "../features/confirmation/ConfirmPayment";
 
 export const CheckIn = () => {
-  return <CheckinBooking />;
+  return <ConfirmPayment />;
 };

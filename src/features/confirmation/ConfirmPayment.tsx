@@ -4,16 +4,16 @@ import { Loading } from "../../ui/Loading";
 import { useNavigate } from "react-router-dom";
 import { format, isToday } from "date-fns";
 import { formatCurrency, formatDistanceFromNow } from "../../utils/helpers";
-import useCheckinData from "../../hooks/useCheckinData";
+import useDetailsConfirmation from "../../hooks/useDetailsConfirmation";
 import useSettings from "../../hooks/useSettingsData";
 import { MdAccessTimeFilled, MdCarRental, MdCheckCircle } from "react-icons/md";
 import PageHeader from "../../ui/headers/PageHeader";
 
-const CheckinBooking = () => {
+const ConfirmPayment = () => {
   const { booking, isLoading } = useBooking();
   const [payConfirm, setPayConfirm] = useState(false);
   const [addGasCard, setAddGasCard] = useState(false);
-  const { checkIn, isLoading: isCheckingIn } = useCheckinData();
+  const { checkIn, isLoading: isCheckingIn } = useDetailsConfirmation();
   const { settings, isLoading: isLoadingSettings } = useSettings();
   const navigate = useNavigate();
 
@@ -80,13 +80,6 @@ const CheckinBooking = () => {
               </p>
             </div>
           </div>
-          {/* <footer>
-          {booking && (
-            <p>
-              Booked on {format(new Date(booking?.checkInDate), "EEE, MMM dd yyyy, p")}
-            </p>
-          )}
-        </footer> */}
         </div>
         <div className="bg-white dark:bg-slate-900 py-4 px-8 text-white rounded-md flex items-center gap-6 h-full flex-wrap">
           <img
@@ -223,72 +216,9 @@ const CheckinBooking = () => {
             )}
           </div>
         </div>
-
-        {/* <button onClick={navigateBack}>Back</button> */}
       </section>
     </div>
   );
 };
 
-export default CheckinBooking;
-
-{
-  /* {!booking?.addedGasCard && (
-  <div className="flex gap-4">
-    <input
-      type="checkbox"
-      checked={addGasCard}
-      id="gas"
-      onChange={() => {
-        setAddGasCard((prev: boolean) => !prev);
-        setPayConfirm(false);
-      }}
-      className="w-5 h-auto checked:bg-blue-400 checked:accent-blue-600"
-    />
-    <label className="text-2xl" htmlFor="gas">
-      I confirm that client wants to add an additional gas card{" "}
-      {formatCurrency(choosesToBuyCard)}{" "}
-      <span className="text-lg text-gray-500">
-        ({formatCurrency(settings.gasCardPrice)} per person *{" "}
-        {booking?.numOfGuests} guests)
-      </span>
-    </label>
-  </div>
-)} */
-}
-{
-  /* <button onClick={navigateBack}>Back</button> */
-}
-{
-  /* <div className="flex gap-4">
-  <input
-    type="checkbox"
-    checked={payConfirm}
-    disabled={payConfirm || isCheckingIn}
-    id="confirm"
-    onChange={() => setPayConfirm((prev: boolean) => !prev)}
-    className="w-5 h-auto checked:bg-blue-400 checked:accent-pink-600"
-  />
-  <label className="text-2xl" htmlFor="confirm">
-    I confirm that {booking?.guests?.firstName} has payed the total amount{" "}
-    {addGasCard ? (
-      <>
-        <span>{formatCurrency(booking?.totalPrice + choosesToBuyCard)} </span>
-        <span className="text-lg text-gray-500">
-          ({formatCurrency(booking?.totalPrice)} +{" "}
-          {formatCurrency(choosesToBuyCard)})
-        </span>
-      </>
-    ) : (
-      formatCurrency(booking?.totalPrice)
-    )}
-  </label>
-</div>
-<button
-  className="text-xl py-2 px-4 bg-blue-400 rounded-md text-white disabled:cursor-not-allowed"
-  disabled={!payConfirm || isCheckingIn}
-  onClick={handleCheckIn}
->
-  Check in booking #{booking?.id}
-</button> */
-}
+export default ConfirmPayment;

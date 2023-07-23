@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 
-export default function useDarkMode() {
+const useDarkMode = () => {
   const [theme, setTheme] = useState(localStorage.theme);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const colorTheme: any = theme === "dark" ? "light" : "dark";
+  const colorTheme = theme === "dark" ? "light" : "dark";
 
   useEffect(() => {
     const root: HTMLElement = window.document.documentElement;
@@ -12,5 +11,7 @@ export default function useDarkMode() {
     localStorage.setItem("theme", theme);
   }, [theme, colorTheme]);
 
-  return [colorTheme, setTheme];
-}
+  return [colorTheme, setTheme] as const;
+};
+
+export default useDarkMode;

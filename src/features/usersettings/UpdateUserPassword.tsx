@@ -24,7 +24,7 @@ const UpdateUserPassword = () => {
 
   return (
     <article>
-      <h3 className="dark:text-white ml-1  text-gray-500 mb-4">Change Password</h3>
+      <h3 className="dark:text-white ml-1 text-gray-500 mb-4">Change Password</h3>
       <div className="dark:bg-slate-900 bg-white rounded-md">
         <form className="py-8 px-6 space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>

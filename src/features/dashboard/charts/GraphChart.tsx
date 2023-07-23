@@ -1,4 +1,4 @@
-import { eachDayOfInterval, format, isDate, isSameDay, subDays } from "date-fns";
+import { eachDayOfInterval, format, isSameDay, subDays } from "date-fns";
 import { useContext } from "react";
 import {
   Area,
@@ -9,8 +9,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { ThemeContext } from "../../hooks/useContext";
-import { BookingStats } from "./DashboardLayout";
+import { ThemeContext } from "../../../hooks/useContext";
+import { BookingStats } from "../DashboardLayout";
 
 function SalesChart({
   bookings,

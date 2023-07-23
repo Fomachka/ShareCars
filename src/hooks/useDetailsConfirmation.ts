@@ -14,7 +14,7 @@ export interface ExtraDetails {
   totalPrice?: number;
 }
 
-const useCheckinData = () => {
+const useDetailsConfirmation = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -36,4 +36,4 @@ const useCheckinData = () => {
   return { checkIn, isLoading };
 };
 
-export default useCheckinData;
+export default useDetailsConfirmation;

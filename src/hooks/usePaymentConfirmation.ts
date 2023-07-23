@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateBooking } from "../api/apiBookings";
 import toast from "react-hot-toast";
 
-const useCheckoutData = () => {
+const usePaymentConfirmation = () => {
   const queryClient = useQueryClient();
 
   const { mutate: checkOut, isLoading: isCheckingOut } = useMutation({
@@ -12,9 +12,7 @@ const useCheckoutData = () => {
       }),
     onSuccess: (data) => {
       toast.success(`Payment for reservation #${data.id} successfully confirmed `);
-      // {
-      //   active: true;
-      // }
+
       queryClient.invalidateQueries({ queryKey: ["booking", `${data.id}`] });
     },
 
@@ -24,4 +22,4 @@ const useCheckoutData = () => {
   return { checkOut, isCheckingOut };
 };
 
-export default useCheckoutData;
+export default usePaymentConfirmation;

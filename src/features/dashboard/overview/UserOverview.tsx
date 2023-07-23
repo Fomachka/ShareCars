@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { BookingFull } from "../useRecentStays";
+import { BookingFull } from "../hooks/useFilteredUsers";
 
 const UserOverview = ({ info }: { info: BookingFull }) => {
   const navigate = useNavigate();

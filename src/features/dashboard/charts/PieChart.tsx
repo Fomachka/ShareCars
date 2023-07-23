@@ -1,9 +1,9 @@
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
-import { ThemeContext } from "../../hooks/useContext";
+import { ThemeContext } from "../../../hooks/useContext";
 import { useContext } from "react";
 import { differenceInDays, parseISO } from "date-fns";
-import { Booking } from "../bookings/BookingTable";
+import { Booking } from "../../bookings/BookingTable";
 
 type ResultProps = {
   name: string;

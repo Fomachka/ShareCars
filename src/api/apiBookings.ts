@@ -1,5 +1,5 @@
 import { AllFilters } from "../features/cars/Filter";
-import { UpdatedBooking } from "../hooks/useCheckinData";
+import { UpdatedBooking } from "../hooks/useDetailsConfirmation";
 import { itemsPerPage } from "../utils/globalValues";
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";

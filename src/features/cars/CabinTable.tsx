@@ -1,7 +1,7 @@
 import { Loading } from "../../ui/Loading";
 import { SingleCar } from "./SingleCar";
 import useQueryData from "../../hooks/useQueryData";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export const CabinTable = () => {

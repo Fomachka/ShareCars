@@ -23,15 +23,18 @@ function LoginForm() {
   };
 
   return (
-    <form className="w-[500px] p-8 bg-white rounded-lg" onSubmit={handleSubmit}>
+    <form
+      className="w-[80vw] md:w-[550px] p-8 bg-white rounded-lg shadow-lg"
+      onSubmit={handleSubmit}
+    >
       <div className="mb-6">
-        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">
+        <label htmlFor="email" className="block mb-3 text-sm font-medium text-gray-900 ">
           Your email
         </label>
         <input
           type="email"
           id="email"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
           autoComplete="username"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -40,17 +43,17 @@ function LoginForm() {
           disabled={isLogin}
         />
       </div>
-      <div className="mb-6">
+      <div className="mb-8">
         <label
           htmlFor="password"
-          className="block mb-2 text-sm font-medium text-gray-900 "
+          className="block mb-3 text-sm font-medium text-gray-900 "
         >
           Your password
         </label>
         <input
           type="password"
           id="password"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

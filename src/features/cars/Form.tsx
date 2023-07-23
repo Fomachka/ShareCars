@@ -24,7 +24,7 @@ const Form = ({
   const { id: editId, ...editValues } = editCar;
   const isEditSession = Boolean(editId);
   const queryClient = useQueryClient();
-  const { register, handleSubmit, reset, getValues, formState } = useForm({
+  const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
   const { errors } = formState;
