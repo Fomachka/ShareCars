@@ -8,8 +8,6 @@ const DashboardOverview = () => {
   const [themeContext] = useContext(ThemeContext);
   const { isLoading, overview } = useDashboardOverview();
 
-  console.log(overview);
-
   return (
     <div
       className={`${
@@ -20,12 +18,20 @@ const DashboardOverview = () => {
         Recent Activities
       </h4>
       {isLoading && <Loading />}
-      <ul className="flex flex-col gap-6 max-h-[240px] overflow-auto">
-        {!isLoading &&
-          overview &&
-          overview.length > 0 &&
-          overview.map((info, index) => <UserOverview info={info} key={index} />)}
-      </ul>
+      {!isLoading && overview?.length === 0 ? (
+        <div className="min-h-[240px] flex justify-center items-center bg-gray-100 dark:bg-gray-800 rounded-md">
+          <p className=" text-gray-400 text-lg lg:text-xl">
+            --- No recent activities ---
+          </p>
+        </div>
+      ) : (
+        <ul className="flex flex-col gap-6 max-h-[240px] overflow-auto">
+          {!isLoading &&
+            overview &&
+            overview.length > 0 &&
+            overview.map((info, index) => <UserOverview info={info} key={index} />)}
+        </ul>
+      )}
     </div>
   );
 };

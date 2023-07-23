@@ -6,9 +6,7 @@ import { format, isToday } from "date-fns";
 
 import useCheckoutData from "../../hooks/useCheckoutData";
 import DeleteModal from "../../ui/modals/DeleteModal";
-import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteBooking } from "../../api/apiBookings";
 import useDeleteBooking from "./hooks/useDeleteBooking";
 import { MdCheckBox, MdOutlineMoreVert, MdRemoveRedEye } from "react-icons/md";
 import { formatCurrency } from "../../utils/helpers";
@@ -24,7 +22,7 @@ export const BookingRow = ({
   currentMenu: number;
   index: number;
 }) => {
-  const { cars, guests }: { cars: Places; guests: Guests } = booking;
+  const { cars, guests } = booking;
   const [showModal, setShowModal] = useState(false);
   const [showSidemenu, setShowSidemenu] = useState(false);
   const navigate = useNavigate();
@@ -60,33 +58,33 @@ export const BookingRow = ({
   return (
     <>
       {/* // [&:not(:last-child)]:border-b-2 [&:not(:last-child)]:border-gray-100 */}
-      <tr className="grid grid-cols-[2fr_2fr_2.4fr_1.4fr_1fr_3.2rem] gap-20 items-center tracking-wide text-gray-600 dark:text-gray-100 py-6 px-10 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-slate-900 border-spacing-[20px] m-2 hover:rounded-md 2xl:text-lg ">
-        <td className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px]wordspace-none flex flex-col gap-2">
-          <span>{guests.firstName + " " + guests.lastName} </span>
+      <div className="grid grid-cols-[2fr_2fr_2.4fr_1.4fr_1fr_3.2rem] gap-20 items-center tracking-wide text-gray-600 dark:text-gray-100 py-6 px-10 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-slate-900 border-spacing-[20px] m-2 hover:rounded-md 2xl:text-lg ">
+        <div className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px]wordspace-none flex flex-col gap-2 ">
+          <span>{guests?.firstName + " " + guests?.lastName} </span>
           <span className="text-sm text-gray-400/80 dark:text-gray-400 ">
-            {guests.email}
+            {guests?.email}
           </span>
-        </td>
-        <td className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px] ">
+        </div>
+        <div className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px] table-cell">
           {cars.name}
-        </td>
-        <td className=" text-[0.85rem] whitespace-nowrap  w-fit rounded-md border-2 px-3 py-2">
+        </div>
+        <div className=" text-[0.85rem] whitespace-nowrap  w-fit rounded-md border px-3 py-2 table-cell">
           {format(new Date(booking.checkInDate), "MMM dd yyyy")} &mdash;{" "}
           {format(new Date(booking.checkOutDate), "MMM dd yyyy")}
-        </td>
-        <td className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px]">
+        </div>
+        <div className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px] table-cell">
           {formatCurrency(booking.totalPrice)}
-        </td>
-        <td
+        </div>
+        <div
           className={`flex justify-center items-center gap-2 font-medium min-w-[100px] overflow-hidden text-ellipsis max-w-[100px] rounded-full py-1.5 px-2 text-gray-50  ${
             booking.status === "not-paid" && "bg-red-400"
           } ${booking.status === "paid" && "bg-green-500"}`}
         >
-          <div className="h-1.5 w-1.5 rounded-full bg-white"></div>
-          <div className="text-sm ">{payStatus()}</div>
-        </td>
+          <div className="h-1.5 w-1.5 rounded-full bg-white table-cell"></div>
+          <div className="text-sm table-cell">{payStatus()}</div>
+        </div>
 
-        <td className="text-right relative">
+        <div className="text-right relative table-cell">
           <button
             className={`${
               currentMenu === index && showSidemenu
@@ -131,21 +129,7 @@ export const BookingRow = ({
                   Confirm Payment
                 </button>
               )}
-              {/* {booking?.status === "unconfirmed" && (
-                <button
-                  type="button"
-                  className="relative inline-flex items-center w-full px-5 py-3 text-sm font-medium rounded-b-lg hover:bg-gray-100 hover:text-slate-800 focus:z-10 focus:ring-1 focus:ring-blue-700 focus:text-blue-700"
-                  onClick={() => {
-                    navigate(`/checkin/${booking.id}`);
-                    setShowSidemenu(false);
-                  }}
-                >
-                  <span className="mr-2">
-                    <HiArrowDownOnSquare className="text-gray-500 dark:text-gray-400 hover:text-gray-800" />
-                  </span>
-                  Confirm payment
-                </button>
-              )} */}
+
               <button
                 type="button"
                 className="relative inline-flex items-center w-full px-5 py-3 text-sm font-medium hover:text-slate-800 rounded-b-lg hover:bg-gray-100 focus:z-10 dark:text-gray-300  dark:hover:bg-gray-700"
@@ -161,8 +145,8 @@ export const BookingRow = ({
               </button>
             </div>
           )}
-        </td>
-      </tr>
+        </div>
+      </div>
       {showModal && (
         <DeleteModal
           closeModal={() => setShowModal(false)}
