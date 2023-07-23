@@ -6,9 +6,7 @@ const useSignup = () => {
   const { mutate: signup, isLoading } = useMutation({
     mutationFn: SignUp,
 
-    onSuccess: (user) => {
-      console.log(user);
-
+    onSuccess: () => {
       toast.success("User successfully created! Please verify your email.");
     },
   });

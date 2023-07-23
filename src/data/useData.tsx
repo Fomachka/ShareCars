@@ -2,9 +2,9 @@ import { isFuture, isPast, isToday } from "date-fns";
 import { useState } from "react";
 import supabase from "../api/supabase";
 import { subtractDates } from "../utils/helpers";
-import { bookings } from "./data-bookings";
-import { cars } from "./data-cabins";
-import { guests } from "./data-guests";
+import { bookings } from "./dummy_bookings";
+import { cars } from "./dummy-cars";
+import { guests } from "./dummy-users";
 import { MdCloudUpload, MdSettings } from "react-icons/md";
 
 // const originalSettings = {
@@ -14,48 +14,52 @@ import { MdCloudUpload, MdSettings } from "react-icons/md";
 //   breakfastPrice: 15,
 // };
 
-async function deleteGuests() {
+async function deleteUsers() {
   const { error } = await supabase.from("guests").delete().gt("id", 0);
-  if (error) console.log(error.message);
+  if (error) {
+    throw new Error(error.message);
+  }
 }
 
-async function deleteCabins() {
+async function deleteCars() {
   const { error } = await supabase.from("cars").delete().gt("id", 0);
-  if (error) console.log(error.message);
+  if (error) {
+    throw new Error(error.message);
+  }
 }
 
 async function deleteBookings() {
   const { error } = await supabase.from("bookings").delete().gt("id", 0);
-  if (error) console.log(error.message);
+  if (error) {
+    throw new Error(error.message);
+  }
 }
 
 async function createGuests() {
   const { error } = await supabase.from("guests").insert(guests);
-  if (error) console.log(error.message);
+  if (error) {
+    throw new Error(error.message);
+  }
 }
 
 async function createCars() {
   const { error } = await supabase.from("cars").insert(cars);
-  if (error) console.log(error.message);
+  if (error) {
+    throw new Error(error.message);
+  }
 }
 
 async function createBookings() {
-  // Bookings need a guestId and a cabinId. We can't tell Supabase IDs for each object, it will calculate them on its own. So it might be different for different people, especially after multiple uploads. Therefore, we need to first get all guestIds and cabinIds, and then replace the original IDs in the booking data with the actual ones from the DB
   const { data: guestsIds } = await supabase.from("guests").select("id").order("id");
   const allGuestIds = guestsIds?.map((car) => car.id);
   const { data: cabinsIds } = await supabase.from("cars").select("id").order("id");
   const allCabinIds = cabinsIds?.map((car) => car.id);
 
-  console.log(allCabinIds, "cabins");
-
-  console.log(bookings, "bookings");
-
   const finalBookings = bookings.map((booking) => {
-    // Here relying on the order of cabins, as they don't have and ID yet
     const car = cars.at(booking.placeId);
     const numOfNights = subtractDates(booking.checkOutDate, booking.checkInDate);
     const carPrice = car && numOfNights * car?.price;
-    const extraPrice = booking.addedGasCard ? numOfNights * 60 : 0; // hardcoded breakfast price
+    const extraPrice = booking.addedGasCard ? numOfNights * 60 : 0;
     const totalPrice = carPrice && carPrice + extraPrice;
 
     let status;
@@ -87,17 +91,19 @@ async function createBookings() {
   });
 
   const { error } = await supabase.from("bookings").insert(finalBookings);
-  if (error) console.log(error.message);
+  if (error) {
+    throw new Error(error.message);
+  }
 }
 
-export const Uploader = () => {
+export const UploadData = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   async function uploadAll() {
     setIsLoading(true);
     await deleteBookings();
-    await deleteGuests();
-    await deleteCabins();
+    await deleteUsers();
+    await deleteCars();
 
     await createGuests();
     await createCars();

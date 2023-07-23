@@ -34,8 +34,6 @@ export const deleteCars = async (id: number) => {
 };
 
 export const createNewCar = async (car?: FormValuesApi, id?: number) => {
-  console.log(car, id);
-
   let imageName;
   let hasImagePath;
 

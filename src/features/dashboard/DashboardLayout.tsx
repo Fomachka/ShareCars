@@ -16,7 +16,6 @@ export interface BookingStats {
 const DashboardLayout = () => {
   const { bookings, isLoading } = useRecentBookings();
   const { renters, paidRenters, isLoading: isLoadingStays, numDays } = useRecentStays();
-  console.log(renters && renters);
 
   if (isLoading || isLoadingStays) return <Loading />;
 

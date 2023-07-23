@@ -88,7 +88,6 @@ export const updateUserSettings = async ({
   if (error) throw new Error(error.message);
   if (!avatar) return data;
 
-  // upload avatar image
   const fileName = `${data.user.email}-${data.user.id}-${Math.random()}`;
 
   const { error: uploadingError } = await supabase.storage

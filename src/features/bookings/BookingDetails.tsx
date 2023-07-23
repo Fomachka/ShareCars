@@ -151,7 +151,7 @@ function BookingDetail() {
               <p className="text-gray-400 dark:text-gray-400/90">Subtotal:</p>
               <p className="text-gray-500/70 dark:text-gray-500">
                 {formatCurrency(
-                  `${booking?.totalPrice - settings?.gasCardPrice * booking?.numOfNights}`
+                  booking?.totalPrice - settings?.gasCardPrice * booking?.numOfNights
                 )}{" "}
                 {booking?.addedGasCard && "(including gas card)"}
               </p>
@@ -159,7 +159,7 @@ function BookingDetail() {
             <div className="flex flex-wrap justify-between items-center sm:text-lg text-base">
               <p className="text-gray-400 dark:text-gray-400/90">Gas card:</p>
               <p className="text-gray-500/70 dark:text-gray-500">
-                {formatCurrency(`${settings?.gasCardPrice * booking?.numOfNights}`)}{" "}
+                {formatCurrency(settings?.gasCardPrice * booking?.numOfNights)}{" "}
                 {booking?.addedGasCard &&
                   `(${formatCurrency(settings?.gasCardPrice)} x ${
                     booking?.numOfNights
@@ -171,7 +171,7 @@ function BookingDetail() {
           <div className="flex flex-wrap justify-between items-center text-slate-700 dark:text-gray-300 sm:text-lg text-base">
             <p>Total price:</p>
             <p>
-              {formatCurrency(`${booking?.totalPrice}`)}{" "}
+              {formatCurrency(booking?.totalPrice)}{" "}
               {booking?.addedGasCard && "(including gas card)"}
             </p>
           </div>

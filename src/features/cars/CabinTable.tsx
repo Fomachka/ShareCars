@@ -33,7 +33,7 @@ export const CabinTable = () => {
   const filterSelect = searchParams.get("select") || "name-asc";
   const [filterName, ascOrDesc] = filterSelect.split("-");
   const modifier = ascOrDesc === "asc" ? 1 : -1;
-  console.log(filteredCars);
+
   let selectedCars = filteredCars?.sort(
     (a, b) => (a[filterName] - b[filterName]) * modifier
   );

@@ -38,7 +38,6 @@ export async function getBookings({
   const { data, error, count } = await query;
 
   if (error) {
-    console.error(error);
     throw new Error("Bookings could not be loaded");
   }
 
@@ -53,14 +52,13 @@ export async function getBooking(id: number) {
     .single();
 
   if (error) {
-    console.error(error);
     throw new Error("Booking not found");
   }
 
   return data;
 }
 
-export async function getBookingsAfterDate(date: string) {
+export async function getBookingsFilteredByDate(date: string) {
   const { data, error } = await supabase
     .from("bookings")
     .select("created_at, totalPrice, extraPrice")
@@ -68,24 +66,20 @@ export async function getBookingsAfterDate(date: string) {
     .lte("created_at", getToday({ end: true }));
 
   if (error) {
-    console.error(error);
     throw new Error("Bookings could not get loaded");
   }
 
   return data;
 }
 
-// Returns all STAYS that are were created after the given date
-export async function getStaysAfterDate(date: string) {
+export async function getRentersFilteredByDate(date: string) {
   const { data, error } = await supabase
     .from("bookings")
-    // .select("*")
     .select("*, guests(firstName)")
     .gte("checkInDate", date)
     .lte("checkInDate", getToday());
 
   if (error) {
-    console.error(error);
     throw new Error("Bookings could not get loaded");
   }
 
