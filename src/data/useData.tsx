@@ -6,6 +6,7 @@ import { bookings } from "./dummy_bookings";
 import { cars } from "./dummy-cars";
 import { guests } from "./dummy-users";
 import { MdCloudUpload } from "react-icons/md";
+import { getDashboardOverview } from "../api/apiBookings";
 
 // const originalSettings = {
 //   minBookingLength: 3,
@@ -116,6 +117,7 @@ export const UploadData = () => {
     setIsLoading(true);
     await deleteBookings();
     await createBookings();
+    await getDashboardOverview();
     setIsLoading(false);
   }
 

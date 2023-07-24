@@ -12,8 +12,8 @@ const usePaymentConfirmation = () => {
       }),
     onSuccess: (data) => {
       toast.success(`Payment for reservation #${data.id} successfully confirmed `);
-
       queryClient.invalidateQueries({ queryKey: ["booking", `${data.id}`] });
+      queryClient.invalidateQueries({ queryKey: ["bookings"] });
     },
 
     onError: () => toast.error("There was an error confirming the payment"),
