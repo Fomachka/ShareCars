@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { formatCurrency } from "../../utils/helpers.ts";
+import { formatPrice } from "../../utils/helpers.ts";
 import { deleteCars } from "../../api/apiCars.ts";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
@@ -154,7 +154,7 @@ export const SingleCar = ({
         </div>
         <div>
           <p className="text-2xl text-gray-700 dark:text-gray-200 font-bold">
-            {formatCurrency(car?.price)}
+            {formatPrice(car?.price)}
             <span className="text-lg text-gray-500/70 dark:text-gray-400 font-normal">
               /day
             </span>

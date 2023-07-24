@@ -1,6 +1,4 @@
 import { Outlet } from "react-router-dom";
-import Header from "./headers/Header";
-import Sidebar from "./sidebar/Sidebar";
 import ProtectedRoute from "./ProtectedRoute";
 import { Navigation } from "./Navigation";
 

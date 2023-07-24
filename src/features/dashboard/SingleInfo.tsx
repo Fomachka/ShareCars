@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { formatCurrency } from "../../utils/helpers";
+import { formatPrice } from "../../utils/helpers";
 
 const SingleInfo = ({
   icon,
@@ -27,7 +27,7 @@ const SingleInfo = ({
       <div className="text-gray-600 dark:text-gray-300 space-y-1">
         <h5 className="text-lg uppercase tracking-wide font-bold">{title}</h5>
         <p className="text-[14px] text-gray-500/80 dark:text-gray-400/95 tracking-wide">
-          {title === "Sales" ? formatCurrency(value) : value} {ending}
+          {title === "Sales" ? formatPrice(value) : value} {ending}
         </p>
       </div>
     </div>

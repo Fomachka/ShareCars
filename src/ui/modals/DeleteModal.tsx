@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
-import { MdOutlineError, MdOutlineErrorOutline } from "react-icons/md";
+import { MdOutlineErrorOutline } from "react-icons/md";
 
 const DeleteModal = ({
   closeModal,

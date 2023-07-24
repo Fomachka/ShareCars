@@ -4,7 +4,7 @@ import { useState } from "react";
 import Modal from "../ui/modals/Modal.js";
 import Filter from "../features/cars/Filter.js";
 import PageHeader from "../ui/headers/PageHeader.js";
-import { MdAssignmentAdd, MdHdrPlus, MdPlusOne } from "react-icons/md";
+import { MdAssignmentAdd } from "react-icons/md";
 
 const Cars = () => {
   const [showModal, setShowModal] = useState(false);

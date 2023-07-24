@@ -1,6 +1,9 @@
 export const Loading = () => {
   return (
-    <div role="status" className="w-full h-screen flex justify-center items-center">
+    <div
+      role="status"
+      className="w-full h-screen flex justify-center items-center dark:bg-slate-900 bg-white"
+    >
       <svg
         aria-hidden="true"
         className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"

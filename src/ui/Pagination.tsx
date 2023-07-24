@@ -1,11 +1,9 @@
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import { useSearchParams } from "react-router-dom";
 import { itemsPerPage } from "../utils/globalValues";
 import { MdOutlineChevronLeft, MdOutlineChevronRight } from "react-icons/md";
 
 export const Pagination = ({ numOfResults }: { numOfResults: number }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  // Magic number
   const currentPage = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
   const numOfPages = Math.ceil(numOfResults / itemsPerPage);
 

@@ -56,7 +56,6 @@ export default function Headers({
                   ></path>
                 </svg>
               </button>
-              {/* Icon and Project Name */}
               <a href="https://flowbite.com" className="flex ml-2 md:mr-24">
                 <img
                   src="https://flowbite.com/docs/images/logo.svg"

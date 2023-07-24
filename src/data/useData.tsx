@@ -1,11 +1,11 @@
 import { isFuture, isPast, isToday } from "date-fns";
 import { useState } from "react";
 import supabase from "../api/supabase";
-import { subtractDates } from "../utils/helpers";
+import { findDifferenceInDayss } from "../utils/helpers";
 import { bookings } from "./dummy_bookings";
 import { cars } from "./dummy-cars";
 import { guests } from "./dummy-users";
-import { MdCloudUpload, MdSettings } from "react-icons/md";
+import { MdCloudUpload } from "react-icons/md";
 
 // const originalSettings = {
 //   minBookingLength: 3,
@@ -57,7 +57,7 @@ async function createBookings() {
 
   const finalBookings = bookings.map((booking) => {
     const car = cars.at(booking.placeId);
-    const numOfNights = subtractDates(booking.checkOutDate, booking.checkInDate);
+    const numOfNights = findDifferenceInDayss(booking.checkOutDate, booking.checkInDate);
     const carPrice = car && numOfNights * car?.price;
     const extraPrice = booking.addedGasCard ? numOfNights * 60 : 0;
     const totalPrice = carPrice && carPrice + extraPrice;

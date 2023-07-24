@@ -1,6 +1,5 @@
 import { BookingTable } from "../features/bookings/BookingTable";
 import Filter from "../features/cars/Filter";
-import Headers from "../ui/headers/Header";
 import PageHeader from "../ui/headers/PageHeader";
 
 const Bookings = () => {

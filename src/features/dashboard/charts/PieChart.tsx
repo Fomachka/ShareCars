@@ -109,14 +109,13 @@ function DurationChart({ renters }: { renters: Booking[] }) {
 
   return (
     <div
-      className={`${
-        themeContext === "light" ? "bg-white" : "bg-slate-900"
-      } mb-8 rounded-md xl:max-w-[400px] w-full p-6 max-w-none`}
+      className="bg-white dark:bg-slate-900
+       mb-8 rounded-md xl:max-w-[400px] w-full p-6 max-w-none"
     >
       <h4 className="text-lg md:text-xl font-semibold text-slate-700 dark:text-gray-300 ">
         Average renting days
       </h4>
-      <div className="w-[100%] h-[250px]  overflow-auto ">
+      <div className="w-[100%] h-[250px] overflow-auto ">
         <ResponsiveContainer minWidth={340}>
           <PieChart>
             <Pie

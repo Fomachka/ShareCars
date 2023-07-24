@@ -3,7 +3,7 @@ import useBooking from "../../hooks/useSingleBooking";
 import { Loading } from "../../ui/Loading";
 import { useNavigate } from "react-router-dom";
 import { format, isToday } from "date-fns";
-import { formatCurrency, formatDistanceFromNow } from "../../utils/helpers";
+import { formatPrice, formatDistanceFromNow } from "../../utils/helpers";
 import useDetailsConfirmation from "../../hooks/useDetailsConfirmation";
 import useSettings from "../../hooks/useSettingsData";
 import { MdAccessTimeFilled, MdCarRental, MdCheckCircle } from "react-icons/md";
@@ -125,7 +125,7 @@ const ConfirmPayment = () => {
             <div className="flex flex-wrap justify-between items-center sm:text-lg text-base">
               <p className="text-gray-400 dark:text-gray-400/90">Subtotal:</p>
               <p className="text-gray-500/70 dark:text-gray-500">
-                {formatCurrency(
+                {formatPrice(
                   booking?.totalPrice - settings?.gasCardPrice * booking?.numOfNights
                 )}{" "}
                 {booking?.addedGasCard && "(including gas card)"}
@@ -134,9 +134,9 @@ const ConfirmPayment = () => {
             <div className="flex flex-wrap justify-between items-center sm:text-lg text-base">
               <p className="text-gray-400 dark:text-gray-400/90">Gas card:</p>
               <p className="text-gray-500/70 dark:text-gray-500">
-                {formatCurrency(settings?.gasCardPrice * booking?.numOfNights)}{" "}
+                {formatPrice(settings?.gasCardPrice * booking?.numOfNights)}{" "}
                 {booking?.addedGasCard &&
-                  `(${formatCurrency(settings?.gasCardPrice)} x ${
+                  `(${formatPrice(settings?.gasCardPrice)} x ${
                     booking?.numOfNights
                   } days)`}
               </p>
@@ -146,7 +146,7 @@ const ConfirmPayment = () => {
           <div className="flex flex-wrap justify-between items-center text-slate-700 dark:text-gray-300 sm:text-lg text-base">
             <p>Total price:</p>
             <p>
-              {formatCurrency(booking?.totalPrice)}{" "}
+              {formatPrice(booking?.totalPrice)}{" "}
               {booking?.addedGasCard && "(including gas card)"}
             </p>
           </div>
@@ -167,7 +167,7 @@ const ConfirmPayment = () => {
               <label htmlFor="gas">
                 I confirm a client wants to add an additional gas card{" "}
                 <span className=" text-gray-500">
-                  ({formatCurrency(settings.gasCardPrice)} x {booking?.numOfNights} days)
+                  ({formatPrice(settings.gasCardPrice)} x {booking?.numOfNights} days)
                 </span>
               </label>
             </div>
@@ -185,14 +185,13 @@ const ConfirmPayment = () => {
               I confirm that {booking?.guests?.firstName} has payed the total amount of{" "}
               {addGasCard ? (
                 <>
-                  <span>{formatCurrency(booking?.totalPrice + choosesToBuyCard)} </span>
+                  <span>{formatPrice(booking?.totalPrice + choosesToBuyCard)} </span>
                   <span className=" text-gray-400">
-                    ({formatCurrency(booking?.totalPrice)} +{" "}
-                    {formatCurrency(choosesToBuyCard)})
+                    ({formatPrice(booking?.totalPrice)} + {formatPrice(choosesToBuyCard)})
                   </span>
                 </>
               ) : (
-                formatCurrency(booking?.totalPrice)
+                formatPrice(booking?.totalPrice)
               )}
             </label>
           </div>

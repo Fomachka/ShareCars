@@ -8,7 +8,7 @@ import usePaymentConfirmation from "../../hooks/usePaymentConfirmation";
 import DeleteModal from "../../ui/modals/DeleteModal";
 import useDeleteBooking from "./hooks/useDeleteBooking";
 import { MdCheckBox, MdOutlineMoreVert, MdRemoveRedEye } from "react-icons/md";
-import { formatCurrency } from "../../utils/helpers";
+import { formatPrice } from "../../utils/helpers";
 
 export const BookingRow = ({
   booking,
@@ -55,8 +55,8 @@ export const BookingRow = ({
   return (
     <>
       <div className="grid grid-cols-[2fr_2fr_2.4fr_1.4fr_1fr_3.2rem] gap-20 items-center tracking-wide text-gray-600 dark:text-gray-100 py-6 px-10 hover:bg-gray-100 dark:hover:bg-gray-800/50 hover:text-slate-900 border-spacing-[20px] m-2 hover:rounded-md 2xl:text-lg ">
-        <div className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px]wordspace-none flex flex-col gap-2 ">
-          <span>{guests?.firstName + " " + guests?.lastName} </span>
+        <div className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px] flex flex-col gap-2">
+          <span>{guests?.firstName + " " + guests?.lastName}</span>
           <span className="text-sm text-gray-400/80 dark:text-gray-400 ">
             {guests?.email}
           </span>
@@ -69,7 +69,7 @@ export const BookingRow = ({
           {format(new Date(booking.checkOutDate), "MMM dd yyyy")}
         </div>
         <div className="min-w-[100px] overflow-hidden text-ellipsis max-w-[100px] table-cell">
-          {formatCurrency(booking.totalPrice)}
+          {formatPrice(booking.totalPrice)}
         </div>
         <div
           className={`flex justify-center items-center gap-2 font-medium min-w-[100px] overflow-hidden text-ellipsis max-w-[100px] rounded-full py-1.5 px-2 text-gray-50  ${

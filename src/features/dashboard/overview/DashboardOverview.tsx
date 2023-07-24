@@ -10,9 +10,8 @@ const DashboardOverview = () => {
 
   return (
     <div
-      className={`${
-        themeContext === "light" ? "bg-white" : "bg-slate-900"
-      } mb-8 rounded-md w-full p-6 h-full  flex-1`}
+      className="bg-white dark:bg-slate-900
+       mb-8 rounded-md w-full p-6 h-full flex-1"
     >
       <h4 className="text-lg md:text-xl font-semibold text-slate-700 dark:text-gray-300 mb-6 ">
         Recent Activities

@@ -2,9 +2,8 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Dashboard from "./pages/Dashboard";
 import Bookings from "./pages/Bookings.jsx";
-import Account from "./pages/UserSettings.js";
 import Login from "./pages/Login.js";
-import PageNotFound from "./pages/PageNotFound.js";
+import NotFoundError from "./pages/NotFoundError.js";
 import Settings from "./pages/Settings.js";
 import Users from "./pages/Users.js";
 import { Layout } from "./ui/Layout.js";
@@ -48,7 +47,7 @@ function App() {
                 <Route path="user/:id" element={<UserSettings />} />
               </Route>
               <Route path="login" element={<Login />} />
-              <Route path="*" element={<PageNotFound />} />
+              <Route path="*" element={<NotFoundError />} />
             </Routes>
           </BrowserRouter>
         </div>
