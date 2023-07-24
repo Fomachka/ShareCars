@@ -1,11 +1,8 @@
-import { useContext } from "react";
-import { ThemeContext } from "../../../hooks/useContext";
 import useDashboardOverview from "../../../hooks/useDashboardOverview";
 import { Loading } from "../../../ui/Loading";
 import UserOverview from "./UserOverview";
 
 const DashboardOverview = () => {
-  const [themeContext] = useContext(ThemeContext);
   const { isLoading, overview } = useDashboardOverview();
 
   return (

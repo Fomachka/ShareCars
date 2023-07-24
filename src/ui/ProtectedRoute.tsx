@@ -4,7 +4,7 @@ import { Loading } from "./Loading";
 import { useEffect } from "react";
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const { user, isLoading, isAuthenticated } = useUser();
+  const { isLoading, isAuthenticated } = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {

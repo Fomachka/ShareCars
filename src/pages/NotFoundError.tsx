@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import useDarkMode from "../hooks/useDarkMode";
 
 const NotFoundError = () => {
-  const [colorTheme, setTheme] = useDarkMode();
+  const [, setTheme] = useDarkMode();
 
   useEffect(() => {
     setTheme(localStorage.theme || "light");
