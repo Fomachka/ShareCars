@@ -35,7 +35,7 @@ const CreateUser = () => {
 
   return (
     <form
-      className="space-y-8 p-8 py-8 rounded-lg w-full bg-white dark:border-gray-500  border-gray-400 dark:bg-slate-900 shadow-sm"
+      className="space-y-8 p-8 rounded-lg w-full bg-white dark:border-gray-500  border-gray-400 dark:bg-slate-900 shadow-sm"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div>

@@ -32,7 +32,7 @@ const userSettings = () => {
         Personal Information
       </h3>
       <div className="dark:bg-slate-900 bg-white rounded-md shadow-sm">
-        <form className="py-8 px-6 space-y-6" onSubmit={handleSubmit}>
+        <form className="p-8 space-y-8" onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="email"
