@@ -35,13 +35,13 @@ const CreateUser = () => {
 
   return (
     <form
-      className="space-y-6 p-6 rounded-lg max-w-[750px]"
+      className="space-y-8 p-8 py-8 rounded-lg w-full bg-white dark:border-gray-500  border-gray-400 dark:bg-slate-900 shadow-sm"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div>
         <label
           htmlFor="firstName"
-          className="block mb-2 text-sm xl:text-base font-medium text-gray-900 dark:text-gray-100 "
+          className="block mb-3 text-sm xl:text-base font-medium text-gray-900 dark:text-gray-100"
         >
           First name{" "}
           <span className="float-right text-red-700">
@@ -62,7 +62,7 @@ const CreateUser = () => {
       <div>
         <label
           htmlFor="lastName"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100 xl:text-base"
+          className="block mb-3 text-sm font-medium text-gray-900 dark:text-gray-100 xl:text-base"
         >
           Last name{" "}
           <span className="float-right text-red-700 ">
@@ -83,7 +83,7 @@ const CreateUser = () => {
       <div>
         <label
           htmlFor="email"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100 xl:text-base "
+          className="block mb-3 text-sm font-medium text-gray-900 dark:text-gray-100 xl:text-base "
         >
           Email{" "}
           <span className="float-right text-red-700 ">
@@ -102,14 +102,14 @@ const CreateUser = () => {
               message: "Please provide a valid email address",
             },
           })}
-          autoComplete="off"
+          autoComplete="email"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
         />
       </div>
       <div>
         <label
           htmlFor="password"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100 xl:text-base "
+          className="block mb-3 text-sm font-medium text-gray-900 dark:text-gray-100 xl:text-base "
         >
           Password
           <span className="float-right text-red-700 ">
@@ -134,7 +134,7 @@ const CreateUser = () => {
       <div>
         <label
           htmlFor="confirmPassword"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100 xl:text-base"
+          className="block mb-3 text-sm font-medium text-gray-900 dark:text-gray-100 xl:text-base"
         >
           Repeat password
           <span className="float-right text-red-700 ">
@@ -159,14 +159,15 @@ const CreateUser = () => {
       <div className="space-y-4">
         <button
           type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1 "
           disabled={isLoading}
+          className=" text-gray-100  py-3.5 px-6 bg-blue-500 rounded-md  bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:outline-none  dark:focus:ring-blue-800 text-center disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed sm:w-auto flex-1 w-full text-sm xl:text-base"
         >
           Create New User
         </button>
         <button
           type="reset"
-          className="text-gray-900 bg-gray-100 sm:ml-5 hover:bg-gray-200 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1 "
+          disabled={isLoading}
+          className=" text-gray-900  py-3.5 px-6 rounded-md bg-gray-100 hover:bg-gray-200 focus:outline-none  dark:focus:ring-blue-800 text-center disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed sm:w-auto flex-1 w-full sm:ml-5 text-sm xl:text-base"
         >
           Cancel
         </button>

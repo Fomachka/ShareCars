@@ -110,7 +110,7 @@ function DurationChart({ renters }: { renters: Booking[] }) {
   return (
     <div
       className="bg-white dark:bg-slate-900
-       mb-8 rounded-md xl:max-w-[400px] w-full p-6 max-w-none"
+       mb-8 rounded-md xl:max-w-[400px] w-full p-6 max-w-none shadow-sm"
     >
       <h4 className="text-lg md:text-xl font-semibold text-slate-700 dark:text-gray-300 ">
         Average renting days

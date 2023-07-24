@@ -15,11 +15,9 @@ const SingleInfo = ({
   color: string;
 }) => {
   return (
-    <div
-      className={`flex flex-col w-full gap-6 items-start bg-white dark:bg-slate-900  py-6 px-6 rounded-md`}
-    >
+    <div className="flex flex-col w-full gap-6 items-start bg-white dark:bg-slate-900  py-6 px-6 rounded-md shadow-sm">
       <div
-        className={`rounded-md object-center object-contain flex justify-center items-center text-white p-4 w-fit`}
+        className="rounded-md object-center object-contain flex justify-center items-center text-white p-4 w-fit"
         style={{ backgroundColor: `${color}` }}
       >
         {icon}

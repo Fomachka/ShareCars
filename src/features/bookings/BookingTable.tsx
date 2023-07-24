@@ -43,7 +43,7 @@ export const BookingTable = () => {
     );
   }
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-md overflow-x-auto w-full table-auto table">
+    <div className="bg-white dark:bg-slate-900 rounded-md overflow-x-auto w-full table-auto table shadow-sm">
       <div className="table-header-group">
         <div className="grid grid-cols-[2fr_2fr_2.4fr_1.4fr_1fr_3.2rem] gap-20 items-center tracking-wide text-slate-500 dark:text-gray-100  py-6 px-10 text-left m-2 xl:text-reg">
           <p className="min-w-[100px] table-cell">Name</p>

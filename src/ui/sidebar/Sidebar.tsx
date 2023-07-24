@@ -8,6 +8,7 @@ import {
   MdDirectionsCar,
 } from "react-icons/md";
 import { UploadData } from "../../data/useData";
+import useUser from "../../features/authentication/hooks/useUser";
 
 const Sidebar = ({
   toggleMenu,
@@ -16,6 +17,9 @@ const Sidebar = ({
   toggleMenu: boolean;
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const { user } = useUser();
+  const { firstName, lastName } = user?.user_metadata || {};
+
   return (
     <aside
       id="logo-sidebar"
@@ -51,7 +55,10 @@ const Sidebar = ({
             </NavLink>
           </li>
           <li onClick={() => setToggleMenu((prev) => !prev)}>
-            <NavLink className="navigation-menu" to="/settings">
+            <NavLink
+              className="navigation-menu"
+              to={`/user/${firstName + "" + lastName}`}
+            >
               <MdSettings className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75" />
               <span>Settings</span>
             </NavLink>

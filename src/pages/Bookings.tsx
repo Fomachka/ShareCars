@@ -28,7 +28,7 @@ const Bookings = () => {
           ]}
         />
       </section>
-      <section className="overflow-x-auto pb-10">
+      <section className="overflow-x-auto pb-10 ">
         <BookingTable />
       </section>
     </main>

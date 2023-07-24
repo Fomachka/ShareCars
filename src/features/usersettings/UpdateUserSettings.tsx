@@ -28,8 +28,8 @@ const userSettings = () => {
 
   return (
     <article className="mb-8">
-      <h3 className="dark:text-white ml-1 text-gray-400 mb-4">Personal Information</h3>
-      <div className="dark:bg-slate-900 bg-white rounded-md">
+      <h3 className="dark:text-white ml-1 text-slate-900 mb-4">Personal Information</h3>
+      <div className="dark:bg-slate-900 bg-white rounded-md  shadow-sm">
         <form className="py-8 px-6 space-y-6" onSubmit={handleSubmit}>
           <div>
             <label

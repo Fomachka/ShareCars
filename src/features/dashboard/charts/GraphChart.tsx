@@ -39,7 +39,7 @@ function SalesChart({
   });
 
   return (
-    <div className="bg-white py-8 pb-6 px-6 rounded-md dark:bg-slate-900 ">
+    <div className="bg-white py-8 pb-6 px-6 rounded-md dark:bg-slate-900 shadow-sm">
       <h4 className="text-lg md:text-xl font-semibold text-slate-700 dark:text-gray-300  mb-8 px-2 ">
         Earnings from {format(allDates.at(0) as Date, "MMM dd yyyy")} &mdash;{" "}
         {format(allDates.at(-1) as Date, "MMM dd yyyy")}
