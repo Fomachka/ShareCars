@@ -28,13 +28,15 @@ const userSettings = () => {
 
   return (
     <article className="mb-8">
-      <h3 className="dark:text-white ml-1 text-slate-900 mb-4">Personal Information</h3>
-      <div className="dark:bg-slate-900 bg-white rounded-md  shadow-sm">
+      <h3 className="dark:text-white ml-1 text-slate-900 mb-4 xl:text-lg">
+        Personal Information
+      </h3>
+      <div className="dark:bg-slate-900 bg-white rounded-md shadow-sm">
         <form className="py-8 px-6 space-y-6" onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+              className="block mb-3 text-sm font-medium text-gray-900 dark:text-gray-100 xl:text-base"
             >
               Email{" "}
             </label>
@@ -50,7 +52,7 @@ const userSettings = () => {
           <div>
             <label
               htmlFor="firstName"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+              className="block mb-3 text-sm font-medium text-gray-900 dark:text-gray-100 xl:text-base"
             >
               First name{" "}
             </label>
@@ -67,7 +69,7 @@ const userSettings = () => {
           <div>
             <label
               htmlFor="lastName"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+              className="block mb-3 text-sm font-medium text-gray-900 dark:text-gray-100 xl:text-base"
             >
               Last name{" "}
             </label>
@@ -83,7 +85,7 @@ const userSettings = () => {
           <div>
             <label
               htmlFor="image"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100 "
+              className="block mb-3 text-sm font-medium text-gray-900 dark:text-gray-100 xl:text-base"
             >
               Image
             </label>
@@ -104,14 +106,14 @@ const userSettings = () => {
           <div className="space-y-4">
             <button
               type="submit"
-              className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:outline-none  dark:focus:ring-blue-800 rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1 disabled:bg-gray-200 disabled:cursor-not-allowed"
+              className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:outline-none  dark:focus:ring-blue-800 rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1 disabled:bg-gray-200 disabled:cursor-not-allowed xl:text-base"
               disabled={isUpdating}
             >
               Apply changes
             </button>
             <button
               type="reset"
-              className="text-gray-900 bg-gray-100 sm:ml-5  hover:bg-gray-200 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1"
+              className="text-gray-900 bg-gray-100 sm:ml-5  hover:bg-gray-200 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-6 py-3 text-center flex-1 xl:text-base"
             >
               Cancel
             </button>

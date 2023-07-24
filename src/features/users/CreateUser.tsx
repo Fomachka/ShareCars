@@ -160,14 +160,14 @@ const CreateUser = () => {
         <button
           type="submit"
           disabled={isLoading}
-          className=" text-gray-100  py-3.5 px-6 bg-blue-500 rounded-md  bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:outline-none  dark:focus:ring-blue-800 text-center disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed sm:w-auto flex-1 w-full text-sm xl:text-base"
+          className=" text-gray-100  py-3 px-6 bg-blue-500 rounded-md  bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:outline-none  dark:focus:ring-blue-800 text-center disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed sm:w-auto flex-1 w-full text-sm xl:text-base"
         >
           Create New User
         </button>
         <button
           type="reset"
           disabled={isLoading}
-          className=" text-gray-900  py-3.5 px-6 rounded-md bg-gray-100 hover:bg-gray-200 focus:outline-none  dark:focus:ring-blue-800 text-center disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed sm:w-auto flex-1 w-full sm:ml-5 text-sm xl:text-base"
+          className=" text-gray-900  py-3 px-6 rounded-md bg-gray-100 hover:bg-gray-200 focus:outline-none  dark:focus:ring-blue-800 text-center disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed sm:w-auto flex-1 w-full sm:ml-5 text-sm xl:text-base"
         >
           Cancel
         </button>
