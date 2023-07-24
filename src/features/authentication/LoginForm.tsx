@@ -3,8 +3,8 @@ import useLogin from "./hooks/useLogin";
 import { BiLoaderAlt } from "react-icons/bi";
 
 function LoginForm() {
-  const [email, setEmail] = useState("test@mail.com");
-  const [password, setPassword] = useState("123456");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { login, isLogin } = useLogin();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
