@@ -4,7 +4,6 @@ import Dashboard from "./pages/Dashboard";
 import Bookings from "./pages/Bookings.jsx";
 import Login from "./pages/Login.js";
 import NotFoundError from "./pages/NotFoundError.js";
-import Settings from "./pages/Settings.js";
 import Users from "./pages/Users.js";
 import { Layout } from "./ui/Layout.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -43,7 +42,6 @@ function App() {
                 <Route path="cars" element={<Cars />} />
                 <Route path="confirmation/:id" element={<CheckIn />} />
                 <Route path="users" element={<Users />} />
-                <Route path="settings" element={<Settings />} />
                 <Route path="user/:id" element={<UserSettings />} />
               </Route>
               <Route path="login" element={<Login />} />

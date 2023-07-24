@@ -56,13 +56,14 @@ export default function Headers({
                   ></path>
                 </svg>
               </button>
-              <a href="https://flowbite.com" className="flex ml-2 md:mr-24">
+              <a href="/" className="flex ml-2 md:mr-24 items-center ">
                 <img
-                  src="https://flowbite.com/docs/images/logo.svg"
-                  className="h-8 mr-3"
-                  alt="FlowBite Logo"
+                  src="/images/logo.png"
+                  className="h-8 mr-3 bg-none"
+                  alt="ShareCars Logo"
                 />
-                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+
+                <span className="self-center text-xl font-semibold sm:text-2xl  whitespace-nowrap dark:text-gray-100 text-slate-700 align-top">
                   ShareCars
                 </span>
               </a>
