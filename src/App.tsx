@@ -11,7 +11,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import { SingleBooking } from "./pages/SingleBooking.js";
 import Cars from "./pages/Cars.js";
-import { CheckIn } from "./pages/CheckIn.js";
 import UserSettings from "./pages/UserSettings.js";
 import { useState } from "react";
 import { ThemeContext } from "./hooks/useContext.js";
