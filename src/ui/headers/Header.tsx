@@ -79,12 +79,15 @@ export default function Headers({
                 <div>
                   <button
                     type="button"
-                    className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                    className={`flex text-sm outline-none rounded-full hover:scale-105 ${
+                      toggleAvatarMenu &&
+                      "focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                    }`}
                     onClick={() => setToggleAvatarMenu((prev) => !prev)}
                   >
                     <span className="sr-only">Open user menu</span>
                     <img
-                      className="w-8 h-8 rounded-full active-none"
+                      className="w-8 h-8 rounded-full "
                       src={avatar || "/images/default-user.png"}
                       alt="current user photo"
                       width={72}
