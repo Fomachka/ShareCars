@@ -8,7 +8,7 @@ const DashboardOverview = () => {
   return (
     <div
       className="bg-white dark:bg-slate-900
-       mb-8 rounded-md w-full p-6 h-full flex-1 shadow-sm"
+       mb-8 rounded-md w-full p-6 h-full flex-1 shadow-sm xl:min-h-[326px]"
     >
       <h4 className="text-lg md:text-xl font-semibold text-slate-700 dark:text-gray-300 mb-6 ">
         Recent Activities

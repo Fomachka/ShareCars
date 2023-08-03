@@ -85,8 +85,10 @@ export default function Headers({
                     <span className="sr-only">Open user menu</span>
                     <img
                       className="w-8 h-8 rounded-full active-none"
-                      src={avatar || "/public/images/default-user.jpg"}
+                      src={avatar || "/images/default-user.png"}
                       alt="current user photo"
+                      width={72}
+                      height={72}
                     />
                   </button>
                 </div>
@@ -97,9 +99,15 @@ export default function Headers({
                   id="dropdown-user"
                 >
                   <div className="px-4 py-3" role="none">
-                    <p className="text-sm text-gray-900 dark:text-white" role="none">
-                      {firstName + " " + lastName || "User"}
-                    </p>
+                    {firstName && lastName ? (
+                      <p className="text-sm text-gray-900 dark:text-white" role="none">
+                        {firstName + " " + lastName || "User"}
+                      </p>
+                    ) : (
+                      <p className="text-sm text-gray-900 dark:text-white" role="none">
+                        Test User
+                      </p>
+                    )}
                     <p
                       className="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
                       role="none"
@@ -128,7 +136,7 @@ export default function Headers({
                       <button
                         onClick={handleDarkMode}
                         disabled={isLoginOut}
-                        className="px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 w-full dark:hover:bg-gray-600 dark:hover:text-white flex items-center justify-between"
+                        className="px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 w-full dark:hover:bg-gray-600 dark:hover:text-white flex items-center justify-between gap-4"
                       >
                         Switch Mode
                         {toggleDarkMode ? <MdToggleOff /> : <MdOutlineToggleOn />}

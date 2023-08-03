@@ -46,7 +46,7 @@ const HeaderInfo = ({
       <SingleInfo
         title="Days rented"
         icon={<MdCarRental className="w-6 h-6" />}
-        value={+averageNumOfNights}
+        value={+averageNumOfNights || 0}
         ending="days / person"
         color="#eab308"
       />

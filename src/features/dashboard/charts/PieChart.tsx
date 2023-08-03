@@ -13,6 +13,8 @@ type ResultProps = {
 function DurationChart({ renters }: { renters: Booking[] }) {
   const [themeContext] = useContext(ThemeContext);
 
+  console.log(renters);
+
   const createChartData = () => {
     const finalResult = [
       {
@@ -113,40 +115,44 @@ function DurationChart({ renters }: { renters: Booking[] }) {
        mb-8 rounded-md xl:max-w-[400px] w-full p-6 max-w-none shadow-sm"
     >
       <h4 className="text-lg md:text-xl font-semibold text-slate-700 dark:text-gray-300 ">
-        Average renting days
+        {renters.length === 0
+          ? "No recent data. Upload Cars Info below and refresh the page"
+          : "Average renting days"}
       </h4>
       <div className="w-[100%] h-[250px] overflow-auto ">
-        <ResponsiveContainer minWidth={340}>
-          <PieChart>
-            <Pie
-              data={createChartData()}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              label={renderCustomizedLabel}
-              outerRadius={80}
-              fill="#8884d8"
-              dataKey="value"
-            >
-              {createChartData().map((_, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  stroke={themeContext === "light" ? "white" : "#0f172a"}
-                  strokeWidth={2}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-            <Tooltip />
-            <Legend
-              verticalAlign="bottom"
-              align="right"
-              layout="vertical"
-              iconSize={8}
-              iconType="circle"
-            />
-          </PieChart>
-        </ResponsiveContainer>
+        {renters.length > 0 && (
+          <ResponsiveContainer minWidth={340}>
+            <PieChart>
+              <Pie
+                data={createChartData()}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={renderCustomizedLabel}
+                outerRadius={80}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {createChartData().map((_, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    stroke={themeContext === "light" ? "white" : "#0f172a"}
+                    strokeWidth={2}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend
+                verticalAlign="bottom"
+                align="right"
+                layout="vertical"
+                iconSize={8}
+                iconType="circle"
+              />
+            </PieChart>
+          </ResponsiveContainer>
+        )}
       </div>
     </div>
   );

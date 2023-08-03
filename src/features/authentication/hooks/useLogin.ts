@@ -16,8 +16,8 @@ const useLogin = () => {
       navigate("/dashboard");
     },
 
-    onError: () => {
-      toast.error("Incorrect login credentials");
+    onError: (error: Error) => {
+      toast.error(`Something went wrong: ${error.message}`);
     },
   });
 
