@@ -126,6 +126,8 @@ export const SingleCar = ({
           className="object-cover object-center w-full max-w-[240px] h-fit mx-auto mt-6"
           src={car?.image}
           alt={car?.modelName}
+          width={261}
+          height={174}
         />
 
         <div className="bg-gray-200/60 dark:bg-gray-200/10 w-full h-0.5 mt-6"></div>

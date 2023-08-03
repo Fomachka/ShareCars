@@ -40,7 +40,6 @@ function App() {
                 <Route path="bookings" element={<Bookings />} />
                 <Route path="bookings/:id" element={<SingleBooking />} />
                 <Route path="cars" element={<Cars />} />
-                <Route path="confirmation/:id" element={<CheckIn />} />
                 <Route path="users" element={<Users />} />
                 <Route path="user/:id" element={<UserSettings />} />
               </Route>

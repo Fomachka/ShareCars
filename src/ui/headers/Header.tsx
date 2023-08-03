@@ -57,11 +57,17 @@ export default function Headers({
                 </svg>
               </button>
               <a href="/" className="flex ml-2 md:mr-24 items-center ">
-                <img
-                  src="/images/logo.png"
-                  className="h-8 mr-3 bg-none"
-                  alt="ShareCars Logo"
-                />
+                <picture>
+                  <source type="image/webp" srcSet="/images/logo.webp" />
+                  <source type="image/png" srcSet="/images/logo.png" />
+                  <img
+                    src="/images/logobig.png"
+                    alt="ShareCars Logo"
+                    width={32}
+                    height={32}
+                    className="h-8 mr-3 bg-none"
+                  />
+                </picture>
 
                 <span className="self-center text-xl font-semibold sm:text-2xl  whitespace-nowrap dark:text-gray-100 text-slate-700 align-top">
                   ShareCars

@@ -100,7 +100,9 @@ function BookingDetail() {
           <img
             src={booking?.cars?.image}
             alt={`${booking?.cars.name} car`}
-            className=" sm:w-24 sm:h-24 object-contain "
+            className="sm:w-24 sm:h-24 object-contain"
+            width={261}
+            height={174}
           />
           <div className="border-[1px] dark:border-gray-700 border-gray-200 h-[100px] hidden sm:block"></div>
 
