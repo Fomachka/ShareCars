@@ -13,8 +13,6 @@ type ResultProps = {
 function DurationChart({ renters }: { renters: Booking[] }) {
   const [themeContext] = useContext(ThemeContext);
 
-  console.log(renters);
-
   const createChartData = () => {
     const finalResult = [
       {
@@ -136,7 +134,11 @@ function DurationChart({ renters }: { renters: Booking[] }) {
                 {createChartData().map((_, index) => (
                   <Cell
                     key={`cell-${index}`}
-                    stroke={themeContext === "light" ? "white" : "#0f172a"}
+                    stroke={
+                      themeContext === "light" || themeContext === "undefined"
+                        ? "white"
+                        : "#0f172a"
+                    }
                     strokeWidth={2}
                     fill={COLORS[index % COLORS.length]}
                   />

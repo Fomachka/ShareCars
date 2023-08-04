@@ -61,11 +61,11 @@ export default function Headers({
                   <source type="image/webp" srcSet="/images/logo.webp" />
                   <source type="image/png" srcSet="/images/logo.png" />
                   <img
-                    src="/images/logobig.png"
+                    src="/images/logo.png"
                     alt="ShareCars Logo"
                     width={32}
                     height={32}
-                    className="h-8 mr-3 bg-none"
+                    className="h-auto mr-3 bg-none"
                   />
                 </picture>
 
