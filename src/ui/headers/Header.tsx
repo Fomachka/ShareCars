@@ -6,11 +6,7 @@ import { MdOutlineToggleOn, MdToggleOff } from "react-icons/md";
 import useDarkMode from "../../hooks/useDarkMode";
 import { ThemeContext } from "../../hooks/useContext";
 
-export default function Headers({
-  setToggleMenu,
-}: {
-  setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+export default function Headers({ handleToggleMenu }: { handleToggleMenu: () => void }) {
   const { user } = useUser();
   const { avatar, firstName, lastName } = user?.user_metadata || {};
   const { logout, isLoginOut } = useLogout();
@@ -36,7 +32,7 @@ export default function Headers({
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
               <button
-                onClick={() => setToggleMenu((prev) => !prev)}
+                onClick={() => handleToggleMenu()}
                 aria-controls="logo-sidebar"
                 type="button"
                 className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"

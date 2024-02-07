@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-
 import {
   MdPieChart,
   MdCalendarMonth,
@@ -12,10 +11,10 @@ import useUser from "../../features/authentication/hooks/useUser";
 
 const Sidebar = ({
   toggleMenu,
-  setToggleMenu,
+  handleToggleMenu,
 }: {
   toggleMenu: boolean;
-  setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  handleToggleMenu: () => void;
 }) => {
   const { user } = useUser();
   const { firstName, lastName } = user?.user_metadata || {};
@@ -30,31 +29,31 @@ const Sidebar = ({
     >
       <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-900 flex flex-col justify-between">
         <ul className="space-y-5">
-          <li onClick={() => setToggleMenu((prev) => !prev)}>
+          <li onClick={() => handleToggleMenu()}>
             <NavLink className="navigation-menu" to="/dashboard">
               <MdPieChart className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
               <span className="mt-0.5">Dashboard</span>
             </NavLink>
           </li>
-          <li onClick={() => setToggleMenu((prev) => !prev)}>
+          <li onClick={() => handleToggleMenu()}>
             <NavLink className="navigation-menu" to="/bookings">
               <MdCalendarMonth className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
               <span className="">Bookings</span>
             </NavLink>
           </li>
-          <li onClick={() => setToggleMenu((prev) => !prev)}>
+          <li onClick={() => handleToggleMenu()}>
             <NavLink className="navigation-menu" to="/cars">
               <MdDirectionsCar className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
               <span>Cars</span>
             </NavLink>
           </li>
-          <li onClick={() => setToggleMenu((prev) => !prev)}>
+          <li onClick={() => handleToggleMenu()}>
             <NavLink className="navigation-menu" to="/users">
               <MdGroup className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
               <span>Members</span>
             </NavLink>
           </li>
-          <li onClick={() => setToggleMenu((prev) => !prev)}>
+          <li onClick={() => handleToggleMenu()}>
             <NavLink
               className="navigation-menu"
               to={`/user/${firstName + "" + lastName}`}
