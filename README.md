@@ -1,5 +1,6 @@
 # ShareCars
-![Uploading 2024-04-10 19.06.19.gif…]()
+![2024-04-10 19 06 19](https://github.com/Fomachka/ShareCars/assets/47694895/d7e7759c-a617-4d3f-ac52-579e8020183c)
+
 
 ShareCars is a web application built with React.js and Supabase that allows managers and website administrators to monitor information about clients and the inventory. It provides an administrator platform for managers to connect and supervise their employees, different vehicles, and clients in a single application.
 
