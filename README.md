@@ -54,6 +54,3 @@ git clone ```https://github.com/Fomachka/ShareCars.git```
 
 - Access the application in your web browser at `http://localhost:3000`.
 
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
