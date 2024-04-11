@@ -12,8 +12,7 @@ ShareCars is a web application built with React.js and Supabase that allows mana
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Features
 
