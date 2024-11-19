@@ -6,7 +6,15 @@ import { MdOutlineToggleOn, MdToggleOff } from "react-icons/md";
 import useDarkMode from "../../hooks/useDarkMode";
 import { ThemeContext } from "../../hooks/useContext";
 
-export default function Headers({ handleToggleMenu }: { handleToggleMenu: () => void }) {
+export default function Headers({
+  toggleAvatarMenu,
+  handleToggleMenu,
+  handleAvatarToggleMenu,
+}: {
+  toggleAvatarMenu: boolean;
+  handleToggleMenu: () => void;
+  handleAvatarToggleMenu: () => void;
+}) {
   const { user } = useUser();
   const { avatar, firstName, lastName } = user?.user_metadata || {};
   const { logout, isLoginOut } = useLogout();
@@ -17,7 +25,7 @@ export default function Headers({ handleToggleMenu }: { handleToggleMenu: () => 
   );
   const [, setThemeContext] = useContext(ThemeContext);
 
-  const [toggleAvatarMenu, setToggleAvatarMenu] = useState(false);
+  // const [toggleAvatarMenu, setToggleAvatarMenu] = useState(false);
 
   const handleDarkMode = () => {
     setTheme(colorTheme);
@@ -79,7 +87,7 @@ export default function Headers({ handleToggleMenu }: { handleToggleMenu: () => 
                       toggleAvatarMenu &&
                       "focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                     }`}
-                    onClick={() => setToggleAvatarMenu((prev) => !prev)}
+                    onClick={() => handleAvatarToggleMenu()}
                   >
                     <span className="sr-only">Open user menu</span>
                     <img
@@ -115,7 +123,7 @@ export default function Headers({ handleToggleMenu }: { handleToggleMenu: () => 
                     </p>
                   </div>
                   <ul className="py-1" role="none">
-                    <li onClick={() => setToggleAvatarMenu((prev) => !prev)}>
+                    <li onClick={() => handleAvatarToggleMenu()}>
                       <NavLink
                         to="/dashboard"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -123,7 +131,7 @@ export default function Headers({ handleToggleMenu }: { handleToggleMenu: () => 
                         Dashboard
                       </NavLink>
                     </li>
-                    <li onClick={() => setToggleAvatarMenu((prev) => !prev)}>
+                    <li onClick={() => handleAvatarToggleMenu()}>
                       <NavLink
                         to={`/user/${firstName + "" + lastName}`}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -131,7 +139,7 @@ export default function Headers({ handleToggleMenu }: { handleToggleMenu: () => 
                         Settings
                       </NavLink>
                     </li>
-                    <li onClick={() => setToggleAvatarMenu((prev) => !prev)}>
+                    <li onClick={() => handleAvatarToggleMenu()}>
                       <button
                         onClick={handleDarkMode}
                         disabled={isLoginOut}

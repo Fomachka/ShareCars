@@ -3,14 +3,20 @@ import useLogin from "./hooks/useLogin";
 import { BiLoaderAlt } from "react-icons/bi";
 
 function LoginForm() {
-  const [email, setEmail] = useState("test@mail.com");
-  const [password, setPassword] = useState("123456");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { login, isLogin } = useLogin();
+
+  const handleTest = () => {
+    setEmail("test@mail.com");
+    setPassword("123456");
+  };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!email || !password) return;
+
     login(
       { email, password },
       {
@@ -49,7 +55,7 @@ function LoginForm() {
       <div className="mb-8">
         <label
           htmlFor="password"
-          className="block mb-3 text-sm font-medium text-gray-900 lg:text-base"
+          className="block mb-3 text-lg font-medium text-gray-900 lg:text-base"
         >
           Your password
         </label>
@@ -67,10 +73,18 @@ function LoginForm() {
 
       <button
         type="submit"
-        className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm lg:text-base w-full px-5 py-3 text-center flex justify-center items-center"
+        className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm lg:text-base w-full px-5 py-3 text-center flex justify-center items-center "
         disabled={isLogin}
       >
         {!isLogin ? "Login" : <BiLoaderAlt className="w-6 h-6 animate-spin" />}
+      </button>
+      <button
+        type="submit"
+        className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm lg:text-base w-full px-5 py-3 mt-3 text-center flex justify-center items-center"
+        disabled={isLogin}
+        onClick={() => handleTest()}
+      >
+        {!isLogin ? "Test Application" : <BiLoaderAlt className="w-6 h-6 animate-spin" />}
       </button>
     </form>
   );
