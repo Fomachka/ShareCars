@@ -7,13 +7,7 @@ import { cars } from "./dummy-cars";
 import { guests } from "./dummy-users";
 import { MdCloudUpload } from "react-icons/md";
 import { getDashboardOverview } from "../api/apiBookings";
-
-// const originalSettings = {
-//   minBookingLength: 3,
-//   maxBookingLength: 30,
-//   maxGuestsPerBooking: 10,
-//   breakfastPrice: 15,
-// };
+import { useQueryClient } from "@tanstack/react-query";
 
 async function deleteUsers() {
   const { error } = await supabase.from("guests").delete().gt("id", 0);
@@ -99,6 +93,7 @@ async function createBookings() {
 
 export const UploadData = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
 
   async function uploadAll() {
     setIsLoading(true);
@@ -118,6 +113,9 @@ export const UploadData = () => {
     await deleteBookings();
     await createBookings();
     await getDashboardOverview();
+
+    queryClient.invalidateQueries(["overview"]);
+
     setIsLoading(false);
   }
 
