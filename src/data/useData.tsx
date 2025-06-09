@@ -105,6 +105,8 @@ export const UploadData = () => {
     await createCars();
     await createBookings();
 
+    queryClient.invalidateQueries(["cars"]);
+
     setIsLoading(false);
   }
 

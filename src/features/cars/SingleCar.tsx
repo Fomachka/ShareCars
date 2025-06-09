@@ -8,6 +8,7 @@ import { HiPencil, HiTrash } from "react-icons/hi2";
 import DeleteModal from "../../ui/modals/DeleteModal.tsx";
 import Modal from "../../ui/modals/Modal.tsx";
 import { MdOutlineMoreVert, MdPerson, MdSettings, MdWaterDrop } from "react-icons/md";
+import { useOutsideClick } from "../../utils/useOutsideClick.ts";
 
 export interface PlaceProps {
   created_at: string;
@@ -62,6 +63,10 @@ export const SingleCar = ({
     }
   };
 
+  const sideMenuRef = useOutsideClick(() => {
+    setShowSidemenu(false);
+  });
+
   return (
     <article
       className={`p-6 bg-white dark:bg-gray-900 rounded-lg flex flex-col justify-between shadow-sm max-w-lg ${
@@ -71,18 +76,16 @@ export const SingleCar = ({
       <div>
         <div className="flex justify-between mb-1 text-gray-700 dark:text-gray-200 relative">
           <span className="text-2xl font-bold">{car?.name}</span>
-          <div className="text-right">
+          <div className="text-right" ref={sideMenuRef}>
             <button
+              onClick={handleSideMenu}
               className={`${
                 currentMenu === index && showSidemenu
                   ? "border-2 rounded-sm border-blue-500"
                   : "border-2 border-transparent"
               } hover:bg-gray-100 dark:hover:bg-slate-700 align-middle h-full`}
             >
-              <MdOutlineMoreVert
-                onClick={handleSideMenu}
-                className="w-6 h-6 text-gray-600 dark:text-gray-300"
-              />
+              <MdOutlineMoreVert className="w-6 h-6 text-gray-600 dark:text-gray-300" />
             </button>
             {currentMenu === index && showSidemenu && (
               <div className="w-30 text-gray-900 bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-700 rounded-lg absolute right-10 top-0 rounded-tr-none">

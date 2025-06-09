@@ -27,7 +27,7 @@ export const deleteCars = async (id: number) => {
 
   if (error) {
     console.error(error);
-    throw new Error("Car could not be delete");
+    throw new Error("Deletion failed: the car is currently booked.");
   }
 
   return cars;
